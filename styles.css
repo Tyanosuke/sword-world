@@ -8,6 +8,7 @@
   --font-color: rgb(64, 32, 12);
   --bg-color: rgb(255, 240, 220);
   --strong-color: rgb(50, 100, 200);
+  --sub-color: rgb(200, 100, 50);
 }
 
 /* 基本設定 */
@@ -19,11 +20,18 @@ body
   color: var(--font-color);
 }
 
-/**/
+/* 入力欄 */
 input
 {
   border: solid 1px var(--font-color);
   border-radius: 4px;
+}
+
+/* チェックボックス */
+input[type="checkbox"]
+{
+  width: 30px;
+  height: 30px;
 }
 
 /* ボタン */
@@ -68,6 +76,12 @@ h2
   margin-top: 20px;
 }
 
+/* 工事中 */
+.hidden
+{
+  display: none;
+}
+
 /* -------------------------------------------------- */
 /* アコーディオン
 /* -------------------------------------------------- */
@@ -75,7 +89,7 @@ h2
 /* エリア */
 .acordionArea
 {
-  border: solid 2px var(--strong-color);
+  border: solid 2px var(--sub-color);
   border-radius: 4px;
 }
 
@@ -102,7 +116,7 @@ h2
 {
   display: flex;
 
-  background: var(--strong-color);
+  background: var(--sub-color);
 
   padding: 4px 8px;
 }
@@ -110,9 +124,6 @@ h2
 /* 「開閉」ボタン */
 .acordionTitleRow > button
 {
-  color: var(--strong-color);
-  background: #fff;
-
   margin-left: auto;
 }
 
@@ -171,6 +182,45 @@ h2
   font-size: 20px;
   font-weight: bold;
   align-items: center;
+}
+
+/* 技能レベル／ボーナス値 */
+.bonusValue
+{
+  font-size: 25px;
+  font-weight: bold;
+
+  margin-left: 10px;
+}
+
+/* 技能レベル */
+.categoryTitle > .bonusValue
+{
+  color: #fff;
+
+  background-color: var(--font-color);
+  border-radius: 4px;
+
+  margin: 4px 10px;
+  padding: 0 8px;
+}
+
+/* 平目 */
+.flat
+{
+  background-color: #888 !important;
+}
+
+/* 技能エリア間隔 */
+.acordionArea > [id^="category_"] + [id^="category_"]
+{
+  margin-top: 10px;
+}
+
+/* タイトル内チェックボックス */
+.categoryTitle > input[type="checkbox"] {
+  margin-left: 9px;
+  margin-right: 10px;
 }
 
 /* サプリメントラベル */
@@ -233,9 +283,8 @@ h2
   background-color: var(--font-color);
   border-radius: 4px;
 
-  height: 100%;
   margin-left: 8px;
-  padding: 2px 8px;
+  padding: 0 8px;
 
   color: #fff;
   font-size: 15px;
@@ -281,25 +330,34 @@ h2
   background-color: rgb(64, 128, 64);
 }
 
+/* 追加効果 */
+.extraEffect
+{
+  font-size: 15px;
+
+  margin-left: 4px;
+}
+
 /* 条件付き */
 .condition
 {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 25px;
-  height: 25px;
+  position: relative;
 
   color: var(--font-color);
   font-size: 15px;
-  font-weight: bold;
 
-  background: rgb(255, 128, 128);
-  border: solid 2px var(--font-color);
-  border-radius: 50%;
+  background: rgb(255, 255, 128);
+  border-radius: 4px;
 
+  padding: 4px 8px;
   margin-left: 8px;
+}
+.condition.alert
+{
+  background: rgb(255, 128, 128);
 }
 
 /* -------------------------------------------------- */
