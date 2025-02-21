@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+	  <script src="script.js"></script>
+    <title>ソードワールド2.5 ココフォリア用駒生成</title>
+  </head>
+
+  <body>
+    <h1>ソードワールド2.5 ココフォリア用駒生成</h1>
+
+    <!------------------------------------------------------>
+    <!-- ■ 読み込みエリア -->
+    <!------------------------------------------------------>
+
+    <div id="area_read">
+      <h2>キャラクターシート読み取り</h2>
+
+      <div class="row_read">
+        <div class="inputLabel">URL</div>
+        <input id="input_url" value="https://yutorize.2-d.jp/ytsheet/sw2.5/?id=RLMPnl">
+        <button onclick='onClickButtonRead()'>読み取り</button>
+      </div>
+    </div>
+
+    <!------------------------------------------------------>
+    <!-- ■ 技能エリア -->
+    <!------------------------------------------------------>
+
+    <div id="area_skill">
+      <h2>技能</h2>
+
+      <!------------------------------------------------------>
+      <!-- ★戦士系 -->
+      <!------------------------------------------------------>
+
+      <div id="category_warrior" class="acordionArea">
+
+        <div class="acordionTitleRow">
+          <h3>戦士系</h3>
+          <button onclick='toggleAcordion("category_warrior")'>開閉</button>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_fighter">
+          <div class="categoryTitle">
+            ファイター
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">命中力</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">回避力</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_grappler">
+          <div class="categoryTitle">
+            グラップラー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">命中力</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">回避力</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_fencer">
+          <div class="categoryTitle">
+            フェンサー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">命中力</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">回避力</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_shooter">
+          <div class="categoryTitle">
+            シューター
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">命中力</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill skillDisabled">
+              <input type="checkbox" disabled>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                回避力
+              </div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_battleDancer">
+          <div class="categoryTitle">
+            <label class="labelSupplement">BM</label>
+            バトルダンサー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">命中力</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">回避力</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+      </div>
+
+      <!------------------------------------------------------>
+      <!-- ★魔法使い系 -->
+      <!------------------------------------------------------>
+
+      <div id="category_wizard" class="acordionArea">
+
+        <div class="acordionTitleRow">
+          <h3>魔法使い系</h3>
+          <button onclick='toggleAcordion("category_wizard")'>開閉</button>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            ソーサラー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            コンジャラー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            プリースト
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            マギテック
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            <label class="labelSupplement">Ⅱ</label>
+            フェアリーテイマー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            <label class="labelSupplement">ML</label>
+            ドルイド
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            <label class="labelSupplement">ML</label>
+            デーモンルーラー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            <label class="labelSupplement">AB</label>
+            アビスゲイザー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔法行使</div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+      </div>
+
+      <!------------------------------------------------------>
+      <!-- ★その他系 -->
+      <!------------------------------------------------------>
+
+      <div id="category_other" class="acordionArea">
+
+        <div class="acordionTitleRow">
+          <h3>その他系</h3>
+          <button onclick='toggleAcordion("category_other")'>開閉</button>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_scout">
+          <div class="categoryTitle">
+            スカウト
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">隠蔽</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">解除</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">スリ</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">変装</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">罠設置</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">受け身</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">隠密</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">軽業</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">先制</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">尾行</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">足跡追跡</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">異常感知</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">聞き耳</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">危険感知</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">探索</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">地図作成</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">天候予測</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">宝物鑑定</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">罠回避</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_ranger">
+          <div class="categoryTitle">
+            レンジャー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">隠蔽</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">応急手当</div>
+              <div class="statusBonus_tec">器用度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">解除</div>
+              <div class="statusBonus_tec">器用度</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">罠設置</div>
+              <div class="statusBonus_tec">器用度</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">受け身</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">隠密</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">軽業</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">尾行</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">足跡追跡</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">異常感知</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">聞き耳</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">危険感知</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">探索</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">地図作成</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">天候予測</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">罠回避</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sage">
+          <div class="categoryTitle">
+            セージ
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">見識</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">地図作成</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">病気知識</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">文明鑑定</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">宝物鑑定</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔物知識</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">薬品学</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sage">
+          <div class="categoryTitle">
+            <label class="labelSupplement">Ⅱ</label>
+            エンハンサー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_bard">
+          <div class="categoryTitle">
+            <label class="labelSupplement">Ⅱ</label>
+            バード
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">見識</div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                演奏
+              </div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_rider">
+          <div class="categoryTitle">
+            <label class="labelSupplement">Ⅲ</label>
+            ライダー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">受け身</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅲ</label>
+                騎乗
+              </div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">足跡追跡</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">異常感知</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">危険感知</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">探索</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">地図作成</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">魔物知識</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">罠回避</div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅲ</label>
+                弱点隠蔽
+              </div>
+              <div class="statusBonus_int">知力</div>
+              <div class="condition">!</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sage">
+          <div class="categoryTitle">
+            <label class="labelSupplement">Ⅲ</label>
+            アルケミスト
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅲ</label>
+                賦術
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sage">
+          <div class="categoryTitle">
+            <label class="labelSupplement">MA</label>
+            ジオマンサー
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sage">
+          <div class="categoryTitle">
+            <label class="labelSupplement">BB</label>
+            フィジカルマスター
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+          </div>
+        </div>
+
+      <!------------------------------------------------------>
+
+      </div>
+
+      <!------------------------------------------------------>
+      <!-- ★冒険者判定 -->
+      <!------------------------------------------------------>
+
+      <div id="category_traveler" class="acordionArea">
+
+        <div class="acordionTitleRow">
+          <h3>冒険者判定</h3>
+          <button onclick='toggleAcordion("category_traveler")'>開閉</button>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_sorcerer">
+          <div class="categoryTitle">
+            冒険者レベル
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">跳躍</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">登攀</div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                水泳
+              </div>
+              <div class="statusBonus_agi">敏捷度</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">登攀</div>
+              <div class="statusBonus_str">筋力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">腕力</div>
+              <div class="statusBonus_str">筋力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">生死</div>
+              <div class="statusBonus_vit">生命力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">生命抵抗力</div>
+              <div class="statusBonus_vit">生命力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                真偽
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                <label class="labelSupplement">Ⅱ</label>
+                聞き込み
+              </div>
+              <div class="statusBonus_int">知力</div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="skillName">
+                精神抵抗力
+              </div>
+              <div class="statusBonus_mnd">精神力</div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+      </div>
+
+      <!------------------------------------------------------>
+
+    </div>
+
+    <!------------------------------------------------------>
+    <!-- ■ エリア -->
+    <!------------------------------------------------------>
+
+    <div id="">
+    </div>
+
+  </body>
+</html>

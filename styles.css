@@ -1,0 +1,308 @@
+/* -------------------------------------------------- */
+/* 汎用
+/* -------------------------------------------------- */
+
+/* 基本設定 */
+:root
+{
+  --font-color: rgb(64, 32, 12);
+  --bg-color: rgb(255, 240, 220);
+  --strong-color: rgb(50, 100, 200);
+}
+
+/* 基本設定 */
+body
+{
+  padding: 10px;
+  background: var(--bg-color);
+
+  color: var(--font-color);
+}
+
+/**/
+input
+{
+  border: solid 1px var(--font-color);
+  border-radius: 4px;
+}
+
+/* ボタン */
+button
+{
+  color: #fff;
+
+  background: var(--strong-color);
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+h1
+{
+  margin: 0;
+}
+
+h2
+{
+  color: var(--bg-color);
+  background: var(--font-color);
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* 行 */
+[class^="row_"]
+{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 50px;
+}
+
+/* エリア間隔 */
+[id^="area"] + [id^="area"]
+{
+  margin-top: 20px;
+}
+
+/* -------------------------------------------------- */
+/* アコーディオン
+/* -------------------------------------------------- */
+
+/* エリア */
+.acordionArea
+{
+  border: solid 2px var(--strong-color);
+  border-radius: 4px;
+}
+
+.acordionArea h3
+{
+  color: #fff;
+  margin: 0;
+}
+
+/* エリア間隔 */
+.acordionArea + .acordionArea
+{
+  margin-top: 8px;
+}
+
+/* 閉じる */
+.acordionArea.close > [id^="category_"]
+{
+  display: none;
+}
+
+/* タイトル */
+.acordionTitleRow
+{
+  display: flex;
+
+  background: var(--strong-color);
+
+  padding: 4px 8px;
+}
+
+/* 「開閉」ボタン */
+.acordionTitleRow > button
+{
+  color: var(--strong-color);
+  background: #fff;
+
+  margin-left: auto;
+}
+
+/* 中身 */
+.acordionArea > [id^="category_"]
+{
+  padding: 8px;
+}
+
+/* -------------------------------------------------- */
+/* 読み取りエリア
+/* -------------------------------------------------- */
+
+/* ラベル */
+.row_read > .inputLabel
+{
+  display: flex;
+  background-color: var(--font-color);
+  border-radius: 4px;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 4px 16px;
+
+  color: var(--bg-color);
+}
+
+/* インプット */
+.row_read > input
+{
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* ボタン */
+.row_read > button
+{
+  width: 8em;
+  height: 100%;
+}
+
+/* -------------------------------------------------- */
+/* 技能エリア
+/* -------------------------------------------------- */
+
+/* タイトル */
+.categoryTitle
+{
+  display: flex;
+
+  width: 100%;
+  border-bottom: solid 2px var(--font-color);
+
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+}
+
+/* サプリメントラベル */
+.labelSupplement
+{
+  background-color: var(--font-color);
+  border-radius: 4px;
+
+  color: #fff;
+  font-size: 15px;
+
+  padding: 0 4px;
+  margin-right: 4px;
+}
+
+/* カード置き場 */
+.skills
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* カード */
+.card_skill
+{
+  display: flex;
+  align-items: center;
+
+  border: solid 1px var(--font-color);
+  border-radius: 4px;
+
+  padding: 8px 4px;
+}
+.card_skill.skillDisabled
+{
+  background-color: #ccc;
+}
+
+/* 技能名 */
+.skillName
+{
+  margin-left: 8px;
+
+  font-weight: bold;
+}
+.skillDisabled .skillName
+{
+  opacity: 0.5;
+}
+
+/* 能力値ボーナス */
+[class^="statusBonus"]
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--font-color);
+  border-radius: 4px;
+
+  height: 100%;
+  margin-left: 8px;
+  padding: 2px 8px;
+
+  color: #fff;
+  font-size: 15px;
+}
+.skillDisabled [class^="statusBonus"]
+{
+  opacity: 0.5;
+}
+
+/* 能力値ボーナス：器用度 */
+.statusBonus_tec
+{
+  background-color: rgb(128, 0, 128);
+}
+
+/* 能力値ボーナス：敏捷度 */
+.statusBonus_agi
+{
+  background-color: rgb(64, 64, 128);
+}
+
+/* 能力値ボーナス：筋力 */
+.statusBonus_str
+{
+  background-color: rgb(128, 64, 64);
+}
+
+/* 能力値ボーナス：生命力 */
+.statusBonus_vit
+{
+  background-color: rgb(128, 128, 0);
+}
+
+/* 能力値ボーナス：知力 */
+.statusBonus_int
+{
+  background-color: rgb(0, 128, 128);
+}
+
+/* 能力値ボーナス：精神力 */
+.statusBonus_mnd
+{
+  background-color: rgb(64, 128, 64);
+}
+
+/* 条件付き */
+.condition
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  color: var(--font-color);
+  font-size: 15px;
+  font-weight: bold;
+
+  background: rgb(255, 128, 128);
+  border: solid 2px var(--font-color);
+  border-radius: 50%;
+
+  margin-left: 8px;
+}
+
+/* -------------------------------------------------- */
+/* エリア
+/* -------------------------------------------------- */
+
