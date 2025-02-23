@@ -12,28 +12,34 @@
     <h1>ソードワールド2.5 ココフォリア用駒生成ツール</h1>
 
     <!------------------------------------------------------>
-    <!-- ■ 読み込みエリア -->
+    <!-- ■ 設定 -->
     <!------------------------------------------------------>
 
     <div id="area_read">
-      <h2>キャラクターシート読み取り</h2>
+      <h2>設定</h2>
 
-      <div class="row_read">
-        <div class="inputLabel">URL</div>
-        <input id="input_url" value="https://yutorize.2-d.jp/ytsheet/sw2.5/?id=RLMPnl">
+      対応サイト　⇒　<a href="https://yutorize.2-d.jp/ytsheet/sw2.5/">ゆとシートⅡ for SW2.5</a>
+
+      <div id="input_url" class="row_input">
+        <div class="inputLabel">
+          キャラクターシートURL
+        </div>
+
+        <input value="https://yutorize.2-d.jp/ytsheet/sw2.5/?id=GYwVqv">
+
         <button onclick='buttonRead()'>読み取り</button>
       </div>
     </div>
 
     <!------------------------------------------------------>
-    <!-- ■ 技能エリア -->
+    <!-- ■ 非戦闘用 -->
     <!------------------------------------------------------>
 
     <div id="area_skill">
-      <h2>技能</h2>
+      <h2>非戦闘用</h2>
 
       <!------------------------------------------------------>
-      <!-- ★戦士系 -->
+      <!-- ★ 戦士系 -->
       <!------------------------------------------------------>
 
       <div id="category_warrior" class="acordionArea">
@@ -53,28 +59,6 @@
           </div>
 
           <div class="skills">
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>命中力</span>
-              </div>
-              <div class="statusBonus_tec">
-                <span>器用度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>回避力</span>
-              </div>
-              <div class="statusBonus_agi">
-                <span>敏捷度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
             <div class="card_skill">
               <input type="checkbox" checked>
               <div class="skillName">
@@ -102,28 +86,6 @@
             <div class="card_skill">
               <input type="checkbox" checked>
               <div class="skillName">
-                <span>命中力</span>
-              </div>
-              <div class="statusBonus_tec">
-                <span>器用度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>回避力</span>
-              </div>
-              <div class="statusBonus_agi">
-                <span>敏捷度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
                 <label class="labelSupplement">Ⅱ</label>
                 <span>聞き込み</span>
               </div>
@@ -145,28 +107,6 @@
           </div>
 
           <div class="skills">
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>命中力</span>
-              </div>
-              <div class="statusBonus_tec">
-                <span>器用度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>回避力</span>
-              </div>
-              <div class="statusBonus_agi">
-                <span>敏捷度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
             <div class="card_skill">
               <input type="checkbox" checked>
               <div class="skillName">
@@ -194,33 +134,6 @@
             <div class="card_skill">
               <input type="checkbox" checked>
               <div class="skillName">
-                <span>命中力</span>
-              </div>
-              <div class="statusBonus_tec">
-                <span>器用度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
-              <div class="skillName">
-                <label class="labelSupplement">Ⅱ</label>
-                <span>回避力</span>
-              </div>
-              <div class="statusBonus_agi">
-                <span>敏捷度</span>
-                <span class="bonusValue">0</span>
-              </div>
-              <div class="condition alert"
-              >
-                《射手の体術》(Ⅱ-P.227)が必要
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
                 <label class="labelSupplement">Ⅱ</label>
                 <span>聞き込み</span>
               </div>
@@ -234,7 +147,7 @@
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_battleDancer">
+        <!--<div id="category_skill_battleDancer">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">BM</label>
@@ -246,28 +159,6 @@
             <div class="card_skill">
               <input type="checkbox" checked>
               <div class="skillName">
-                <span>命中力</span>
-              </div>
-              <div class="statusBonus_tec">
-                <span>器用度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>回避力</span>
-              </div>
-              <div class="statusBonus_agi">
-                <span>敏捷度</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
                 <label class="labelSupplement">Ⅱ</label>
                 <span>聞き込み</span>
               </div>
@@ -277,14 +168,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
       </div>
 
       <!------------------------------------------------------>
-      <!-- ★魔法使い系 -->
+      <!-- ★ 魔法使い系 -->
       <!------------------------------------------------------>
 
       <div id="category_wizard" class="acordionArea">
@@ -401,7 +292,7 @@
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_Magitech">
+        <div id="category_skill_magitech">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <span>マギテック</span>
@@ -472,7 +363,7 @@
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_druid">
+        <!--<div id="category_skill_druid">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">ML</label>
@@ -504,11 +395,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_daemonRuler">
+        <!--<div id="category_skill_daemonRuler">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">ML</label>
@@ -540,11 +431,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_abyssGazer">
+        <!--<div id="category_skill_abyssGazer">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">AB</label>
@@ -576,14 +467,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
       </div>
 
       <!------------------------------------------------------>
-      <!-- ★その他系 -->
+      <!-- ★ その他系 -->
       <!------------------------------------------------------>
 
       <div id="category_other" class="acordionArea">
@@ -1251,8 +1142,8 @@
               </div>
             </div>
 
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
+            <div class="card_skill cond_rider skillDisabled">
+              <input type="checkbox">
               <div class="skillName">
                 <span>足跡追跡</span>
               </div>
@@ -1261,12 +1152,12 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition alert">
-                【索敵指令】(Ⅲ-P.195)が必要
+                【探索指令】(Ⅲ-P.195)が必要
               </div>
             </div>
 
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
+            <div class="card_skill cond_rider skillDisabled">
+              <input type="checkbox">
               <div class="skillName">
                 <span>異常感知</span>
               </div>
@@ -1275,12 +1166,12 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition alert">
-                【索敵指令】(Ⅲ-P.195)が必要
+                【探索指令】(Ⅲ-P.195)が必要
               </div>
             </div>
 
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
+            <div class="card_skill cond_rider skillDisabled">
+              <input type="checkbox">
               <div class="skillName">
                 <span>危険感知</span>
               </div>
@@ -1289,12 +1180,12 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition alert">
-                【索敵指令】(Ⅲ-P.195)が必要
+                【探索指令】(Ⅲ-P.195)が必要
               </div>
             </div>
 
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
+            <div class="card_skill cond_rider skillDisabled">
+              <input type="checkbox">
               <div class="skillName">
                 <span>探索</span>
               </div>
@@ -1303,7 +1194,7 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition alert">
-                【索敵指令】(Ⅲ-P.195)が必要
+                【探索指令】(Ⅲ-P.195)が必要
               </div>
             </div>
 
@@ -1328,12 +1219,12 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition">
-                弱点獲得に条件あり
+                弱点獲得に条件あり(Ⅲ-P.84)
               </div>
             </div>
 
-            <div class="card_skill skillDisabled">
-              <input type="checkbox" disabled>
+            <div class="card_skill cond_rider skillDisabled">
+              <input type="checkbox">
               <div class="skillName">
                 <span>罠回避</span>
               </div>
@@ -1342,7 +1233,7 @@
                 <span class="bonusValue">0</span>
               </div>
               <div class="condition alert">
-                【索敵指令】(Ⅲ-P.195)が必要
+                【探索指令】(Ⅲ-P.195)が必要
               </div>
             </div>
 
@@ -1411,7 +1302,7 @@
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_geomancer">
+        <!--<div id="category_skill_geomancer">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">MA</label>
@@ -1432,11 +1323,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_warLeader">
+        <!--<div id="category_skill_warLeader">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <label class="labelSupplement">MA</label>
@@ -1457,14 +1348,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_darkHunter">
+        <!--<div id="category_skill_darkHunter">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
-            <label class="labelSupplement">MA</label>
+            <label class="labelSupplement">AB</label>
             <span>ダークハンター</span>
             <span class="bonusValue">0</span>
           </div>
@@ -1482,14 +1373,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_physicalMaster">
+        <!--<div id="category_skill_physicalMaster">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
-            <label class="labelSupplement">BB</label>
+            <label class="labelSupplement">BR</label>
             <span>フィジカルマスター</span>
             <span class="bonusValue">0</span>
           </div>
@@ -1507,14 +1398,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
       <!------------------------------------------------------>
 
       </div>
 
       <!------------------------------------------------------>
-      <!-- ★冒険者判定 -->
+      <!-- ★ 冒険者判定 -->
       <!------------------------------------------------------>
 
       <div id="category_traveler" class="acordionArea">
@@ -1645,134 +1536,20 @@
     </div>
 
     <!------------------------------------------------------>
-    <!-- ■ 威力表エリア -->
+    <!-- ■ 戦闘用：武器 -->
     <!------------------------------------------------------>
 
-    <div id="area_damage" class="hidden">
-      <h2>威力表</h2>
+    <div id="area_damage" >
+      <h2>戦闘用：武器</h2>
+      <div class="addArea"></div>
+    </div>
 
-      <!------------------------------------------------------>
-      <!-- ★武器 -->
-      <!------------------------------------------------------>
+    <!------------------------------------------------------>
+    <!-- ■ 戦闘用：魔法 -->
+    <!------------------------------------------------------>
 
-      <div id="category_wearpon" class="acordionArea">
-
-        <div class="acordionTitleRow">
-          <h3>武器</h3>
-          <button onclick='toggleAcordion("category_wearpon")'>開閉</button>
-        </div>
-
-        <!------------------------------------------------------>
-
-        <div id="category_skill_wearpon_fighter">
-          <div class="categoryTitle">
-            <input type="checkbox" checked onclick='bulkCheck(this)'>
-            <span>ファイター</span>
-          </div>
-
-          <div class="skills">
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>ナイフ</span>
-              </div>
-              <div class="statusBonus">
-                威力表
-                <span class="bonusValue">3</span>
-              </div>
-              <div class="statusBonus">
-                Ｃ値
-                <span class="bonusValue">10</span>
-              </div>
-              <div class="statusBonus_str">
-                <span>筋力</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>ナイフ＋《必殺攻撃Ⅰ》</span>
-              </div>
-              <div class="statusBonus">
-                威力表
-                <span class="bonusValue">3</span>
-                <span class="extraEffect">(出目+1)</span>
-              </div>
-              <div class="statusBonus">
-                Ｃ値
-                <span class="bonusValue">10</span>
-              </div>
-              <div class="statusBonus_str">
-                <span>筋力</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!------------------------------------------------------>
-
-        <div id="category_skill_wearpon_fencer">
-          <div class="categoryTitle">
-            <input type="checkbox" checked onclick='bulkCheck(this)'>
-            <span>フェンサー</span>
-          </div>
-
-          <div class="skills">
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>ナイフ</span>
-              </div>
-              <div class="statusBonus">
-                威力表
-                <span class="bonusValue">3</span>
-              </div>
-              <div class="statusBonus">
-                Ｃ値
-                <span class="bonusValue">9</span>
-              </div>
-              <div class="statusBonus_str">
-                <span>筋力</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-            <div class="card_skill">
-              <input type="checkbox" checked>
-              <div class="skillName">
-                <span>ナイフ＋《必殺攻撃Ⅰ》</span>
-              </div>
-              <div class="statusBonus">
-                威力表
-                <span class="bonusValue">3</span>
-                <span class="extraEffect">(出目+1)</span>
-              </div>
-              <div class="statusBonus">
-                Ｃ値
-                <span class="bonusValue">9</span>
-              </div>
-              <div class="statusBonus_str">
-                <span>筋力</span>
-                <span class="bonusValue">0</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!------------------------------------------------------>
-
-      </div>
-
-      <!------------------------------------------------------>
-      <!-- ★魔法 -->
-      <!------------------------------------------------------>
+    <div id="area_magic" >
+      <h2>戦闘用：魔法</h2>
 
       <div id="category_magic" class="acordionArea">
 
@@ -1783,25 +1560,22 @@
 
         <!------------------------------------------------------>
 
-        <div id="category_skill_magic_1">
+        <div id="category_magic_sorcerer">
           <div class="categoryTitle">
             <input type="checkbox" checked onclick='bulkCheck(this)'>
             <span>ソーサラー</span>
+            <span class="bonusValue">0</span>
           </div>
 
           <div class="skills">
-
             <div class="card_skill">
               <input type="checkbox" checked>
-              <div class="skillName">
-                <span>エネルギー・ボルト</span>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">0</span>
               </div>
-              <div class="statusBonus">
-                威力表
-                <span class="bonusValue">10</span>
-              </div>
-              <div class="statusBonus">
-                Ｃ値
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
                 <span class="bonusValue">10</span>
               </div>
               <div class="statusBonus_int">
@@ -1810,6 +1584,358 @@
               </div>
             </div>
 
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">20</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">30</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_magic_conjurer">
+          <div class="categoryTitle">
+            <input type="checkbox" checked onclick='bulkCheck(this)'>
+            <span>コンジャラー</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">20</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">30</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_magic_priest">
+          <div class="categoryTitle">
+            <input type="checkbox" checked onclick='bulkCheck(this)'>
+            <span>プリースト</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">20</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">30</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_magic_magitech">
+          <div class="categoryTitle">
+            <input type="checkbox" checked onclick='bulkCheck(this)'>
+            <span>マギテック</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">20</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">30</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_magic_fairyTamer">
+          <div class="categoryTitle">
+            <input type="checkbox" checked onclick='bulkCheck(this)'>
+            <label class="labelSupplement">Ⅱ</label>
+            <span>フェアリーテイマー</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">20</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+
+            <div class="card_skill">
+              <input type="checkbox" checked>
+              <div class="statusBonus value_rate fixed">
+                <span>威力表</span>
+                <span class="bonusValue">30</span>
+              </div>
+              <div class="statusBonus value_cit fixed">
+                <span>Ｃ値</span>
+                <span class="bonusValue">10</span>
+              </div>
+              <div class="statusBonus_int">
+                <span>知力</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1819,18 +1945,226 @@
     </div>
 
     <!------------------------------------------------------>
-    <!-- ■ エリア -->
+    <!-- ■ 戦闘用：回避 -->
+    <!------------------------------------------------------>
+
+    <div id="area_dodge">
+      <h2>戦闘用：回避</h2>
+
+      <!------------------------------------------------------>
+
+      <div id="category_dodge" class="acordionArea">
+
+        <div class="acordionTitleRow">
+          <h3>回避</h3>
+          <button onclick='toggleAcordion("category_dodge")'>開閉</button>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_dodge_fighter">
+          <div class="categoryTitle">
+            <input type="checkbox" checked>
+            <span>ファイター</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <div class="skillName">
+                <span>回避力</span>
+              </div>
+              <div class="statusBonus_agi">
+                <span>敏捷度</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus">
+                <span>修正</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_dodge_fencer">
+          <div class="categoryTitle">
+            <input type="checkbox" checked>
+            <span>フェンサー</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <div class="skillName">
+                <span>回避力</span>
+              </div>
+              <div class="statusBonus_agi">
+                <span>敏捷度</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus">
+                <span>修正</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_dodge_grappler">
+          <div class="categoryTitle">
+            <input type="checkbox" checked>
+            <span>グラップラー</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill">
+              <div class="skillName">
+                <span>回避力</span>
+              </div>
+              <div class="statusBonus_agi">
+                <span>敏捷度</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus">
+                <span>修正</span>
+                <span class="bonusValue">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+        <div id="category_dodge_shooter">
+          <div class="categoryTitle">
+            <input type="checkbox">
+            <span>シューター</span>
+            <span class="bonusValue">0</span>
+          </div>
+
+          <div class="skills">
+            <div class="card_skill cond_shooter skillDisabled">
+              <div class="skillName">
+                <span>回避力</span>
+              </div>
+              <div class="statusBonus_agi">
+                <span>敏捷度</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="statusBonus">
+                <span>修正</span>
+                <span class="bonusValue">0</span>
+              </div>
+              <div class="condition alert">
+                《射手の体術》(Ⅱ-P.227)が必要
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------>
+
+      </div>
+    </div>
+
+    <!------------------------------------------------------>
+    <!-- ■ チャットパレットエリア -->
     <!------------------------------------------------------>
 
     <div id="">
-      <h2>（仮機能）チャットパレット出力</h2>
+      <h2>チャットパレット</h2>
 
-      <button onclick="outputChatPallet()">出力</button>
+      <div class="row_input">
+        <button onclick="outputChatPallet()">生成</button>
+      </div>
 
       <div class="flex">
         <textarea id="text_chatPallet" style="width: 100%; min-height: 300px; margin-top: 10px;"></textarea>
       </div>
     </div>
 
+    <!------------------------------------------------------>
+    <!-- ■ 駒データ生成エリア -->
+    <!------------------------------------------------------>
+
+    <div id="">
+      <h2>駒データ生成</h2>
+
+      <div class="row_input">
+        <button onclick="outputCharacter()">クリップボードにデータをコピー</button>
+      </div>
+    </div>
+
+    <!------------------------------------------------------>
+    <!-- ■ ローディングカバー -->
+    <!------------------------------------------------------>
+    <div id="loading" class="hidden">
+      <span>Loading...</span>
+    </div>
+
   </body>
+
+  <!------------------------------------------------------>
+  <!-- ■ テンプレート：武器 -->
+  <!------------------------------------------------------>
+
+  <template id="temp_category_weapon">
+    <div class="acordionArea">
+        <div class="acordionTitleRow">
+            <h3>（武器）</h3>
+            <button>開閉</button>
+        </div>
+
+        <div class="contents">
+            <div class="categoryTitle">
+              <input type="checkbox" checked>
+              <span>（技能）</span>
+              <span class="bonusValue">0</span>
+            </div>
+
+            <div class="skills attackSkills">
+            <div class="card_skill">
+                <div class="skillName">
+                  <span>命中力</span>
+                </div>
+                <div class="statusBonus_tec">
+                  <span>器用度</span>
+                  <span class="bonusValue">0</span>
+                </div>
+                <div class="statusBonus value_add">
+                  <span>修正</span>
+                  <span class="bonusValue">0</span>
+                </div>
+            </div>
+
+            <div class="card_skill">
+                <div class="skillName">
+                  <span>ダメージ</span>
+                </div>
+                <div class="statusBonus value_rate">
+                  威力表
+                  <span class="bonusValue">0</span>
+                  <span class="addRate"></span>
+                </div>
+                <div class="statusBonus value_crit">
+                  Ｃ値
+                  <span class="bonusValue">-</span>
+                </div>
+                <div class="statusBonus_str">
+                  <span>筋力</span>
+                  <span class="bonusValue">0</span>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </template>
+
+  <!------------------------------------------------------>
+
 </html>

@@ -32,6 +32,12 @@ input[type="checkbox"]
 {
   width: 30px;
   height: 30px;
+
+  cursor: pointer;
+}
+input[type="checkbox"]:disabled
+{
+  cursor: default;
 }
 
 /* ボタン */
@@ -61,6 +67,11 @@ h2
   margin-bottom: 10px;
 }
 
+h4
+{
+  margin: 0px;
+}
+
 /* 行 */
 [class^="row_"]
 {
@@ -79,7 +90,7 @@ h2
 /* 工事中 */
 .hidden
 {
-  display: none;
+  display: none !important;
 }
 
 /* -------------------------------------------------- */
@@ -134,14 +145,19 @@ h2
 }
 
 /* -------------------------------------------------- */
-/* 読み取りエリア
+/* 設定
 /* -------------------------------------------------- */
 
+.row_input + .row_input
+{
+  margin-top: 8px;
+}
+
 /* ラベル */
-.row_read > .inputLabel
+.row_input > .inputLabel
 {
   display: flex;
-  background-color: var(--font-color);
+  background-color: var(--sub-color);
   border-radius: 4px;
   align-items: center;
   box-sizing: border-box;
@@ -149,10 +165,11 @@ h2
   padding: 4px 16px;
 
   color: var(--bg-color);
+  white-space: nowrap;
 }
 
 /* インプット */
-.row_read > input
+.row_input > input
 {
   width: 100%;
   height: 100%;
@@ -161,10 +178,24 @@ h2
 }
 
 /* ボタン */
-.row_read > button
+.row_input > button
 {
   width: 8em;
   height: 100%;
+}
+
+/* 使用ルルブ */
+.settingItem
+{
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  border: solid 1px var(--font-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  padding: 0 8px;
 }
 
 /* -------------------------------------------------- */
@@ -209,12 +240,6 @@ h2
 .flat
 {
   background-color: #888 !important;
-}
-
-/* 技能エリア間隔 */
-.acordionArea > [id^="category_"] + [id^="category_"]
-{
-  margin-top: 10px;
 }
 
 /* タイトル内チェックボックス */
@@ -268,10 +293,6 @@ h2
 
   font-weight: bold;
 }
-.skillDisabled .skillName
-{
-  opacity: 0.5;
-}
 
 /* 能力値ボーナス */
 [class^="statusBonus"]
@@ -291,7 +312,7 @@ h2
 }
 .skillDisabled [class^="statusBonus"]
 {
-  opacity: 0.5;
+  background-color: #888;
 }
 
 /* 能力値ボーナス：器用度 */
@@ -357,10 +378,43 @@ h2
 }
 .condition.alert
 {
-  background: rgb(255, 128, 128);
+  background: rgb(192, 192, 255);
+}
+.skillDisabled .condition.alert
+{
+  background: rgb(255, 192, 192) !important;
 }
 
 /* -------------------------------------------------- */
-/* エリア
+/* 攻撃
 /* -------------------------------------------------- */
 
+.attackSkills
+{
+  margin-top: 12px;
+}
+
+
+/* -------------------------------------------------- */
+/* ローディング
+/* -------------------------------------------------- */
+
+#loading
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+
+  background: rgba(0, 0, 0, 0.5);
+}
