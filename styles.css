@@ -180,8 +180,9 @@ h4
 /* ボタン */
 .row_input > button
 {
-  width: 8em;
+  min-width: 8em;
   height: 100%;
+  padding: 0 8px;
 }
 
 /* 使用ルルブ */

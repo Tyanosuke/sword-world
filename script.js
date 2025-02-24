@@ -257,8 +257,11 @@ async function buttonRead() {
             prevWeapon = weapon;
         })
 
-        // テキストエリアに反映
-        document.querySelector("#text_chatPallet").value = "";
+        // --------------------------------------------------
+        // チャットパレットの生成
+        // --------------------------------------------------
+
+        outputChatPallet();
     })
     .catch(error => {
         console.error('通信失敗', error);
@@ -377,13 +380,166 @@ function checkBattleSkill(data, skillCategory, targetName) {
 }
 
 /**
+ * チャットパレット出力
+ */
+function outputChatPallet() {
+    let text = "";
+
+    // --------------------------------------------------
+    // 非戦闘用
+    // --------------------------------------------------
+
+    text += "🟢非戦闘用\r";
+
+    document.querySelectorAll("#area_skill .card_skill").forEach(skill => {
+        // チェックボックス
+        if (skill.querySelector('input[type="checkbox"]').checked == false) {
+            // チェックOFFの場合、無視
+            return;
+        }
+
+        // 技能
+        const nameSkill = skill.parentElement.parentElement.querySelector("span").textContent;
+
+        // 判定
+        const nameRoll = skill.querySelector(".skillName > span").textContent;
+
+        // ボーナス
+        const nameBonus = skill.querySelector('[class^="statusBonus_"] > span').textContent;
+
+        // ●平目
+        if (skill.parentElement.parentElement.querySelector(".bonusValue.flat")) {
+            // チャットコマンドを生成
+            text += `2d6　■${nameRoll}(平目)\r`;
+        }
+        // ●通常
+         else {
+            // チャットコマンドを生成
+            text += `2d6+{${nameSkill}}+{${nameBonus}}　■${nameRoll}(${nameSkill}+${nameBonus})\r`;
+        }
+    });
+
+    // --------------------------------------------------
+    // 戦闘用：武器
+    // --------------------------------------------------
+
+    text += "🔴戦闘用：武器\r";
+
+    document.querySelectorAll('#area_damage .acordionArea').forEach(weapon => {
+        // チェックボックス
+        if (weapon.querySelector('.categoryTitle > input[type="checkbox"]').checked == false) {
+            // チェックOFFの場合、無視
+            return;
+        }
+
+        // 技能
+        const nameWeapon = weapon.querySelector(".acordionTitleRow > h3").textContent;
+
+        // 判定
+        const nameSkill = weapon.querySelector(".categoryTitle > span").textContent;
+
+        // 命中力：修正
+        const valueTecAdd = weapon.querySelector(".value_add > .bonusValue").textContent;
+
+        // ダメージ：威力表
+        const valueRate = weapon.querySelector(".value_rate > .bonusValue").textContent;
+        const valueRateAdd = weapon.querySelector(".value_rate > .addRate").textContent;
+
+        // ダメージ：Ｃ値
+        const valueCrit = weapon.querySelector(".value_crit > .bonusValue").textContent;
+
+        // ●平目
+        if (weapon.parentElement.parentElement.querySelector(".value_rate.flat")) {
+            // チャットコマンドを生成
+            text += `2d6　■${nameWeapon}／命中力(平目)\r`;
+            text += `k${valueRate}@${valueCrit}　■${nameWeapon}／ダメージ(平目)\r`;
+        }
+        // ●通常
+         else {
+            // チャットコマンドを生成
+            text += `2d6+{${nameSkill}}+{器用度}+${valueTecAdd}+{命中修正}　■${nameWeapon}／命中力\r`;
+            text += `k${valueRate}@${valueCrit}+{${nameSkill}}+{筋力}${valueRateAdd}　■${nameWeapon}／ダメージ\r`;
+        }
+    });
+
+
+    // --------------------------------------------------
+    // 戦闘用：魔法
+    // --------------------------------------------------
+
+    text += "🔴戦闘用：魔法\r";
+
+    document.querySelectorAll("#area_magic .card_skill").forEach(magic => {
+        // チェックボックス
+        if (magic.querySelector('input[type="checkbox"]').checked == false) {
+            // チェックOFFの場合、無視
+            return;
+        }
+
+        // 技能
+        const nameSkill = magic.parentElement.parentElement.querySelector("span").textContent;
+
+        // 威力
+        const valueRate = magic.querySelector('.statusBonus.value_rate > .bonusValue').textContent;
+
+        // ボーナス能力名
+        const nameBonus = magic.querySelector('[class^="statusBonus_"] > span').textContent;
+
+        // ●平目
+        if (magic.parentElement.parentElement.querySelector(".bonusValue.flat")) {
+            // チャットコマンドを生成
+            text += `2d6　■${nameRoll}(平目)\r`;
+        }
+        // ●通常
+         else {
+            // チャットコマンドを生成
+            text += `k${valueRate}@10+{${nameSkill}}+{${nameBonus}}　■威力${valueRate}(${nameSkill}+${nameBonus})\r`;
+        }
+    });
+
+    // --------------------------------------------------
+    // 戦闘用：回避
+    // --------------------------------------------------
+
+    text += "🔴戦闘用：回避\r";
+
+    document.querySelectorAll('#area_dodge .card_skill').forEach(skill => {
+        // チェックボックス
+        if (skill.parentElement.parentElement.querySelector('input[type="checkbox"]').checked == false) {
+            // チェックOFFの場合、無視
+            return;
+        }
+
+        // 判定
+        const nameSkill = skill.parentElement.parentElement.querySelector(".categoryTitle > span").textContent;
+
+        // 命中力：修正
+        const valueTecAdd = skill.querySelector(".statusBonus_agi > .bonusValue").textContent;
+
+        // チャットコマンドを生成
+        text += `2d6+{${nameSkill}}+{敏捷度}+${valueTecAdd}+{回避修正}　■回避力(${nameSkill}+敏捷度)\r`;
+    });
+
+    // --------------------------------------------------
+
+    // テキストエリアに反映
+    document.querySelector("#text_chatPallet").value = text;
+}
+
+/**
  * コマデータ出力
  */
-function outputCharacter() {
+async function outputCharacter() {
+    // --------------------------------------------------
     // セッションストレージからデータを取得
+    // --------------------------------------------------
+
     let data = JSON.parse(sessionStorage.getItem("data"));
 
+    // --------------------------------------------------
     // データを生成
+    // --------------------------------------------------
+
     let characterData = {
         "kind": "character",
         "data": {
@@ -461,159 +617,115 @@ function outputCharacter() {
             "secret": false,
             "invisible": false,
             "hideStatus": false,
-            "commands": null,
+            "commands": document.querySelector("#text_chatPallet").value,
         }
     };
 
+    // --------------------------------------------------
+    // 技能レベルをセット
+    // --------------------------------------------------
+
+    // lvから始まるデータを取得
+    const array = Object.keys(data)
+        .map(
+            k => ({
+                key: k,
+                value: data[k]
+            })
+        )
+        .filter(
+            target => target.key.indexOf("lv") === 0
+        );
+
+    array.forEach(target => {
+        let skillName = "";
+        switch (target.key) {
+            case "lvFig" :
+                skillName ="ファイター";
+                break;
+            case "lvGra" :
+                skillName ="グラップラー";
+                break;
+            case "lvFen" :
+                skillName ="フェンサー";
+                break;
+            case "lvSho" :
+                skillName ="シューター";
+                break;
+            case "lvBat" :
+                skillName ="バトルダンサー";
+                break;
+            case "lvSor" :
+                skillName ="ソーサラー";
+                break;
+            case "lvCon" :
+                skillName ="コンジャラー";
+                break;
+            case "lvPri" :
+                skillName ="プリースト";
+                break;
+            case "lvFai" :
+                skillName ="フェアリーテイマー";
+                break;
+            case "lvMag" :
+                skillName ="マギテック";
+                break;
+            case "lvDru" :
+                skillName ="ドルイド";
+                break;
+            case "lvDem" :
+                skillName ="デーモンルーラー";
+                break;
+            case "lvSco" :
+                skillName ="スカウト";
+                break;
+            case "lvRan" :
+                skillName ="レンジャー";
+                break;
+            case "lvSag" :
+                skillName ="セージ";
+                break;
+            case "lvEnh" :
+                skillName ="エンハンサー";
+                break;
+            case "lvBar" :
+                skillName ="バード";
+                break;
+            case "lvRid" :
+                skillName ="ライダー";
+                break;
+            case "lvAlc" :
+                skillName ="アルケミスト";
+                break;
+            case "lvGeo" :
+                skillName ="ジオマンサー";
+                break;
+            case "lvWar" :
+                skillName ="ウォーリーダー";
+                break;
+            case "lvDark" :
+                skillName ="ダークハンター";
+                break;
+            case "lvPhy" :
+                skillName ="フィジカルマスター";
+                break;
+
+            // 上記以外の場合スキップ
+            default :
+                return;
+        }
+
+        characterData["data"]["params"].push(
+            {
+                "label": skillName,
+                "value": target.value,
+            },
+        );
+    })
+
+    // --------------------------------------------------
     // クリップボードにコピー
-    navigator.clipboard.writeText(JSON.stringify(characterData));
-}
-
-/**
- * チャットパレット出力
- */
-function outputChatPallet() {
-    let text = "";
-
-    // --------------------------------------------------
-    // 非戦闘用
     // --------------------------------------------------
 
-    text += "◆───　非戦闘用　───◆\r";
-
-    document.querySelectorAll("#area_skill .card_skill").forEach(skill => {
-        // チェックボックス
-        if (skill.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 技能
-        const nameSkill = skill.parentElement.parentElement.querySelector("span").textContent;
-
-        // 判定
-        const nameRoll = skill.querySelector(".skillName > span").textContent;
-
-        // ボーナス
-        const nameBonus = skill.querySelector('[class^="statusBonus_"] > span').textContent;
-
-        // ●平目
-        if (skill.parentElement.parentElement.querySelector(".bonusValue.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameRoll}(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `2d6+{${nameSkill}}+{${nameBonus}}　■${nameRoll}(${nameSkill}+${nameBonus})\r`;
-        }
-    });
-
-    // --------------------------------------------------
-    // 戦闘用：武器
-    // --------------------------------------------------
-
-    text += "◆───　戦闘用：武器　───◆\r";
-
-    document.querySelectorAll('#area_damage .acordionArea').forEach(weapon => {
-        // チェックボックス
-        if (weapon.querySelector('.categoryTitle > input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 技能
-        const nameWeapon = weapon.querySelector(".acordionTitleRow > h3").textContent;
-
-        // 判定
-        const nameSkill = weapon.querySelector(".categoryTitle > span").textContent;
-
-        // 命中力：修正
-        const valueTecAdd = weapon.querySelector(".value_add > .bonusValue").textContent;
-
-        // ダメージ：威力表
-        const valueRate = weapon.querySelector(".value_rate > .bonusValue").textContent;
-        const valueRateAdd = weapon.querySelector(".value_rate > .addRate").textContent;
-
-        // ダメージ：Ｃ値
-        const valueCrit = weapon.querySelector(".value_crit > .bonusValue").textContent;
-
-        // ●平目
-        if (weapon.parentElement.parentElement.querySelector(".value_rate.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameWeapon}／命中力(平目)\r`;
-            text += `k${valueRate}@${valueCrit}　■${nameWeapon}／ダメージ(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `2d6+{${nameSkill}}+{器用度}+${valueTecAdd}　■${nameWeapon}／命中力\r`;
-            text += `k${valueRate}@${valueCrit}+{${nameSkill}}+{筋力}${valueRateAdd}　■${nameWeapon}／ダメージ\r`;
-        }
-    });
-
-
-    // --------------------------------------------------
-    // 戦闘用：魔法
-    // --------------------------------------------------
-
-    text += "◆───　戦闘用：魔法　───◆\r";
-
-    document.querySelectorAll("#area_magic .card_skill").forEach(magic => {
-        // チェックボックス
-        if (magic.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 技能
-        const nameSkill = magic.parentElement.parentElement.querySelector("span").textContent;
-
-        // 威力
-        const valueRate = magic.querySelector('.statusBonus.value_rate > span').textContent;
-
-        // ボーナス
-        const nameBonus = magic.querySelector('[class^="statusBonus_"] > span').textContent;
-
-        // ●平目
-        if (magic.parentElement.parentElement.querySelector(".bonusValue.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameRoll}(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `k${valueRate}@10+{${nameSkill}}+{${nameBonus}}　■威力${valueRate}(${nameSkill}+${nameBonus})\r`;
-        }
-    });
-
-    // --------------------------------------------------
-    // 戦闘用：回避
-    // --------------------------------------------------
-
-    text += "◆───　戦闘用：回避　───◆\r";
-
-    document.querySelectorAll('#area_dodge .card_skill').forEach(skill => {
-        console.dir(skill);
-
-        // チェックボックス
-        if (skill.parentElement.parentElement.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 判定
-        const nameSkill = skill.parentElement.parentElement.querySelector(".categoryTitle > span").textContent;
-
-        // 命中力：修正
-        const valueTecAdd = skill.querySelector(".statusBonus_agi > .bonusValue").textContent;
-
-        // チャットコマンドを生成
-        text += `2d6+{${nameSkill}}+{敏捷度}${valueTecAdd}　■回避力(${nameSkill}+敏捷度)\r`;
-    });
-
-    // --------------------------------------------------
-
-    // テキストエリアに反映
-    document.querySelector("#text_chatPallet").value = text;
+    await navigator.clipboard.writeText(JSON.stringify(characterData));
 }
