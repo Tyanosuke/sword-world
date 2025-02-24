@@ -5,6 +5,17 @@ window.onload = function() {
 }
 
 /**
+ * ナビテキストの表示
+ */
+async function showNaviText(targetId) {
+    const naviText = document.getElementById(targetId);
+    naviText.classList.add("show");
+    window.setTimeout(() => {
+        naviText.classList.remove("show");
+    }, 1000);
+}
+
+/**
  * 「読み込み」ボタン
  */
 async function buttonRead() {
@@ -261,12 +272,22 @@ async function buttonRead() {
         // チャットパレットの生成
         // --------------------------------------------------
 
-        outputChatPallet();
+        outputChatPallet(false);
+
+        // --------------------------------------------------
+        // ナビテキストの表示
+        // --------------------------------------------------
+
+        showNaviText("navi_read");
+
     })
     .catch(error => {
-        console.error('通信失敗', error);
+        // ナビテキストの表示
+        showNaviText("navi_read_error");
+
         return;
     })
+
     .finally(() => {
         // --------------------------------------------------
         // ローディングOFF
@@ -382,7 +403,7 @@ function checkBattleSkill(data, skillCategory, targetName) {
 /**
  * チャットパレット出力
  */
-function outputChatPallet() {
+function outputChatPallet(navi = true) {
     let text = "";
 
     // --------------------------------------------------
@@ -524,6 +545,13 @@ function outputChatPallet() {
 
     // テキストエリアに反映
     document.querySelector("#text_chatPallet").value = text;
+
+    // --------------------------------------------------
+
+    // ナビテキストの表示
+    if (navi) {
+        showNaviText("navi_reset");
+    }
 }
 
 /**
@@ -728,4 +756,10 @@ async function outputCharacter() {
     // --------------------------------------------------
 
     await navigator.clipboard.writeText(JSON.stringify(characterData));
+
+    // --------------------------------------------------
+    // ナビテキストの表示
+    // --------------------------------------------------
+
+    showNaviText("navi_output");
 }

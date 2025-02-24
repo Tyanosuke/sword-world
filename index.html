@@ -20,7 +20,9 @@
     <div id="area_read">
       <h2>設定</h2>
 
-      対応サイト　⇒　<a href="https://yutorize.2-d.jp/ytsheet/sw2.5/">ゆとシートⅡ for SW2.5</a>
+      <div class="row_input">
+        対応サイト　⇒　<a href="https://yutorize.2-d.jp/ytsheet/sw2.5/">ゆとシートⅡ for SW2.5</a>
+      </div>
 
       <div id="input_url" class="row_input">
         <div class="inputLabel">
@@ -2087,6 +2089,7 @@
 
       <div class="row_input">
         <button onclick="outputChatPallet()">リセット</button>
+        <span id="navi_reset" class="navi_text">チャットパレットをリセットしました。</span>
       </div>
     </div>
 
@@ -2098,7 +2101,8 @@
       <h2>駒データ生成</h2>
 
       <div class="row_input">
-        <button onclick="outputCharacter()">クリップボードにデータをコピー</button>
+        <button onclick="outputCharacter()">生成</button>
+        <span id="navi_output" class="navi_text">クリップボードに駒データをコピーしました。</span>
       </div>
     </div>
 
