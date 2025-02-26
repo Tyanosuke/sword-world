@@ -5,14 +5,553 @@ window.onload = function() {
 }
 
 /**
- * ナビテキストの表示
+ * 定数
  */
-async function showNaviText(targetId) {
-    const naviText = document.getElementById(targetId);
-    naviText.classList.add("show");
-    window.setTimeout(() => {
-        naviText.classList.remove("show");
-    }, 1000);
+
+// 能力値ボーナス
+const listStatus = {
+    Dex: "器用度",
+    Agi: "敏捷度",
+    Str: "筋力",
+    Vit: "生命力",
+    Int: "知力",
+    Mnd: "精神力",
+}
+
+// 技能レベル
+const listSkill = {
+    // ●冒険者レベル
+    level: "冒険者レベル",
+
+    // ●戦士系
+    lvFig: "ファイター",
+    lvFen: "フェンサー",
+    lvGra: "グラップラー",
+    lvSho: "シューター",
+    // lvBat: "バトルダンサー",
+
+    // ●魔法使い系
+    lvSor: "ソーサラー",
+    lvCon: "コンジャラー",
+    lvPri: "プリースト",
+    lvMag: "マギテック",
+    lvFai: "フェアリーテイマー",
+    // lvDem: "デーモンルーラー",
+    // lvDru: "ドルイド",
+    // lvAby: "アビスゲイザー",
+
+    // ●その他系
+    lvSco: "スカウト",
+    lvRan: "レンジャー",
+    lvSag: "セージ",
+    lvEnh: "エンハンサー",
+    lvBar: "バード",
+    lvRid: "ライダー",
+    lvAlc: "アルケミスト",
+    // lvGeo: "ジオマンサー",
+    // lvWar: "ウォーリーダー",
+    // lvDar: "ダークハンター",
+    // lvPhy: "フィジカルマスター",
+};
+
+// 行為判定
+const listRoll = [
+    // --------------------------------------------------
+    {
+        name: "汎用",
+        roll: [
+            // 器用度
+            {
+                name: "隠蔽",
+                bonusId: "Dex",
+                skill: [
+                    { id:"lvSco" },
+                    { id:"lvRan" },
+                ]
+            },
+            {
+                name: "応急手当",
+                bonusId: "Dex",
+                skill: [
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "解除",
+                bonusId: "Dex",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然物を利用した罠のみ"
+                    },
+                ]
+            },
+            {
+                name: "スリ",
+                bonusId: "Dex",
+                skill: [
+                    { id: "lvSco" },
+                ]
+            },
+            {
+                name: "変装",
+                bonusId: "Dex",
+                skill: [
+                    { id: "lvSco" },
+                ]
+            },
+            {
+                name: "罠設置",
+                bonusId: "Dex",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然物を利用した罠のみ"
+                    },
+                ]
+            },
+            // 敏捷度
+            {
+                name: "受け身",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                    { id: "lvRid" },
+                ]
+            },
+            {
+                name: "隠密",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "軽業",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "先制",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                ]
+            },
+            {
+                name: "登攀",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "尾行",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                book: "Ⅲ",
+                name: "騎乗",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvRid" },
+                ]
+            },
+            // 知力
+            {
+                name: "足跡追跡",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                    {
+                        id: "lvRid",
+                        note: "要：【探索指令】(Ⅲ-P.195)",
+                        cond: {
+                            category: "craftRiding",
+                            target: "探索指令"
+                        }
+                    },
+                ]
+            },
+            {
+                name: "異常感知",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然環境のみ"
+                    },
+                    {
+                        id: "lvRid",
+                        note: "要：【探索指令】(Ⅲ-P.195)",
+                        cond: {
+                            category: "craftRiding",
+                            target: "探索指令"
+                        }
+                    },
+                ]
+            },
+            {
+                name: "聞き耳",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "危険感知",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                    {
+                        id: "lvRid",
+                        note: "要：【探索指令】(Ⅲ-P.195)",
+                        cond: {
+                            category: "craftRiding",
+                            target: "探索指令"
+                        }
+                    },
+                ]
+            },
+            {
+                name: "見識",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSag" },
+                    { id: "lvBar" },
+                    { id: "lvAlc" },
+                ]
+            },
+            {
+                name: "探索",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然環境のみ"
+                    },
+                    {
+                        id: "lvRid",
+                        note: "要：【探索指令】(Ⅲ-P.195)",
+                        cond: {
+                            category: "craftRiding",
+                            target: "探索指令"
+                        }
+                    },
+                ]
+            },
+            {
+                name: "地図作成",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然環境のみ"
+                    },
+                    { id: "lvSag" },
+                    { id: "lvRid" },
+                ]
+            },
+            {
+                name: "天候予測",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                ]
+            },
+            {
+                name: "病気知識",
+                bonusId: "Int",
+                skill: [
+                    {
+                        id: "lvRan",
+                        limit: "自然環境のみ"
+                    },
+                    { id: "lvSag" },
+                ]
+            },
+            {
+                name: "文献",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSag" },
+                ]
+            },
+            {
+                name: "文明鑑定",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSag" },
+                ]
+            },
+            {
+                name: "宝物鑑定",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    { id: "lvSag" },
+                ]
+            },
+            {
+                name: "魔法行使",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    { id: "lvFai" },
+                ]
+            },
+            {
+                name: "魔物知識",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSag" },
+                    {
+                        id: "lvRid",
+                        note: "弱点獲得に条件あり(Ⅲ-P.84)"
+                    },
+                ]
+            },
+            {
+                name: "薬品学",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvRan" },
+                    { id: "lvSag" },
+                    { id: "lvAlc" },
+                ]
+            },
+            {
+                name: "罠回避",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSco" },
+                    {
+                        id: "lvRan",
+                        limit: "自然物を利用した罠のみ"
+                    },
+                    {
+                        id: "lvRid",
+                        note: "要：【探索指令】(Ⅲ-P.195)",
+                        cond: {
+                            category: "craftRiding",
+                            target: "探索指令"
+                        }
+                    },
+                ]
+            },
+            {
+                book: "Ⅱ",
+                name: "聞き込み",
+                bonusId: "Int",
+            },
+            {
+                book: "Ⅲ",
+                name: "弱点隠蔽",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvRid" },
+                ]
+            },
+            {
+                book: "Ⅲ",
+                name: "賦術",
+                bonusId: "Int",
+                skill: [
+                    { id: "lvAlc" },
+                ]
+            },
+            {
+                book: "Ⅱ",
+                name: "演奏",
+                bonusId: "Mnd",
+                skill: [
+                    { id: "lvBar" },
+                ]
+            },
+        ]
+    },
+    // --------------------------------------------------
+    {
+        name: "冒険者判定",
+        roll: [
+            {
+                name: "跳躍",
+                bonusId: "Agi",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                book: "Ⅱ",
+                name: "水泳",
+                bonusId: "Agi",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "登攀",
+                bonusId: "Str",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "腕力",
+                bonusId: "Str",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "生死",
+                bonusId: "Vit",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "生命抵抗力",
+                bonusId: "Vit",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "真偽",
+                bonusId: "Int",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "精神抵抗力",
+                bonusId: "Int",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+        ]
+    },
+    // --------------------------------------------------
+    {
+        name: "戦闘用：武器",
+        type: "weapon",
+        roll: []
+    },
+    // --------------------------------------------------
+    {
+        name: "戦闘用：魔法",
+        type: "magic",
+        roll: [
+            {
+                rate : 0,
+                critical: 10,
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    { id: "lvFai" },
+                ]
+            },
+            {
+                rate : 10,
+                critical: 10,
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    { id: "lvFai" },
+                ]
+            },
+            {
+                rate : 20,
+                critical: 10,
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    { id: "lvFai" },
+                ]
+            },
+            {
+                rate : 30,
+                critical: 10,
+                bonusId: "Int",
+                skill: [
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    { id: "lvFai" },
+                ]
+            },
+        ]
+    },
+    // --------------------------------------------------
+    {
+        name: "戦闘用：回避",
+        type: "dodge",
+        roll: [
+            {
+                name: "回避",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvFig" },
+                    { id: "lvFen" },
+                    { id: "lvGra" },
+                    {
+                        id: "lvSho",
+                        note: "《射手の体術》(Ⅱ-P.227)が必要",
+                        cond: {
+                            category: "combatFeatsLv",
+                            target: "射手の体術"
+                        }
+                    },
+                ]
+            },
+        ]
+    },
+    // --------------------------------------------------
+];
+
+// ====================================================================================================
+// イベント
+// ====================================================================================================
+
+/**
+ * 「開閉」ボタン
+ */
+function toggleAcordion(targerId) {
+    document.getElementById(targerId).classList.toggle("close");
 }
 
 /**
@@ -30,11 +569,11 @@ async function buttonRead() {
     // キャラクターシートの読み込み
     // --------------------------------------------------
 
+    // 読み込み先ＵＲＬ
+    const url = getUrl();
+
     // 読み込み処理
-    fetch(
-        document.querySelector('#input_url input').value + "&mode=json",
-        { method: 'GET' }
-    )
+    fetch(url, { method: 'GET' })
     .then(response => {
         // 失敗時
         if (!response.ok) {
@@ -49,241 +588,27 @@ async function buttonRead() {
         // セッションストレージにデータを保存
         sessionStorage.setItem('data', JSON.stringify(data));
 
-        // --------------------------------------------------
-        // ボーナス値の描画
-        // --------------------------------------------------
+        // ステータスの描画
+        drawStatus(data);
 
-        // 器用度
-        document.querySelectorAll(".statusBonus_tec > .bonusValue").forEach(target => {
-            target.textContent = data.bonusDex;
-        });
+        // カードの描画
+        drawContents(data);
 
-        // 敏捷度
-        document.querySelectorAll(".statusBonus_agi > .bonusValue").forEach(target => {
-            target.textContent = data.bonusAgi;
-        });
+        // 出力エリアを表示
+        document.querySelector(".output_area").classList.remove("hidden");
 
-        // 筋力
-        document.querySelectorAll(".statusBonus_str > .bonusValue").forEach(target => {
-            target.textContent = data.bonusStr;
-        });
-
-        // 生命力
-        document.querySelectorAll(".statusBonus_vit > .bonusValue").forEach(target => {
-            target.textContent = data.bonusVit;
-        });
-
-        // 知力
-        document.querySelectorAll(".statusBonus_int > .bonusValue").forEach(target => {
-            target.textContent = data.bonusInt;
-        });
-
-        // 精神力
-        document.querySelectorAll(".statusBonus_mnd > .bonusValue").forEach(target => {
-            target.textContent = data.bonusMnd;
-        });
-
-        // --------------------------------------------------
-        // 条件付き
-        // --------------------------------------------------
-
-        // シューター
-        const resCheckShooter = checkBattleSkill(data, "combatFeatsLv", "射手の体術");
-        document.querySelectorAll(".cond_shooter").forEach(target => {
-            if (resCheckShooter) {
-                // グレーアウトを解除
-                target.classList.remove("skillDisabled");
-            } else {
-                // グレーアウトを設定
-                target.classList.add("skillDisabled");
-            }
-        });
-
-        // ライダー
-        const resCheckRider = checkBattleSkill(data, "craftRiding", "探索指令");
-        document.querySelectorAll(".cond_rider").forEach(target => {
-            if (resCheckRider) {
-                // グレーアウトを解除
-                target.classList.remove("skillDisabled");
-            } else {
-                // グレーアウトを設定
-                target.classList.add("skillDisabled");
-            }
-
-            // チェックボックスON
-            target.querySelector('input[type="checkbox"]').checked = resCheckRider;
-        });
-
-        // --------------------------------------------------
-        // 技能レベル
-        // --------------------------------------------------
-
-        // 一旦、平目を解除
-        document.querySelectorAll(".flat").forEach(target => {
-            target.classList.remove("flat");
-        });
-
-        // 冒険者レベル
-        flatRole(data.level, "category_skill_traveler");
-
-        // 戦士系
-        flatRole(data.lvFig, "category_skill_fighter");
-        flatRole(data.lvGra, "category_skill_grappler");
-        flatRole(data.lvFen, "category_skill_fencer");
-        flatRole(data.lvSho, "category_skill_shooter");
-        // flatRole(data.lvBat, "category_skill_battleDancer");
-
-        // 魔法使い系
-        flatRole(data.lvSor, "category_skill_sorcerer");
-        flatRole(data.lvCon, "category_skill_conjurer");
-        flatRole(data.lvPri, "category_skill_priest");
-        flatRole(data.lvMag, "category_skill_magitech");
-        flatRole(data.lvFai, "category_skill_fairyTamer");
-        // flatRole(data.lvDru, "category_skill_druid");
-        // flatRole(data.lvDem, "category_skill_daemonRuler");
-        // flatRole(data.lvAby, "category_skill_abyssGazer");
-
-        // その他系
-        flatRole(data.lvSco, "category_skill_scout");
-        flatRole(data.lvRan, "category_skill_ranger");
-        flatRole(data.lvSag, "category_skill_sage");
-        flatRole(data.lvEnh, "category_skill_enhancer");
-        flatRole(data.lvBar, "category_skill_bard");
-        flatRole(data.lvRid, "category_skill_rider");
-        flatRole(data.lvAlc, "category_skill_alchemist");
-        // flatRole(data.lvGeo, "category_skill_geomancer");
-        // flatRole(data.lvWar, "category_skill_warLeader");
-        // flatRole(data.lvDar, "category_skill_darkHunter");
-        // flatRole(data.lvPhy, "category_skill_physicalMaster");
-
-        // 魔法
-        flatRole(data.lvSor, "category_magic_sorcerer");
-        flatRole(data.lvCon, "category_magic_conjurer");
-        flatRole(data.lvPri, "category_magic_priest");
-        flatRole(data.lvMag, "category_magic_magitech");
-        flatRole(data.lvFai, "category_magic_fairyTamer");
-
-        // 回避
-        flatRole(data.lvFig, "category_dodge_fighter");
-        flatRole(data.lvGra, "category_dodge_grappler");
-        flatRole(data.lvFen, "category_dodge_fencer");
-        flatRole(data.lvSho, "category_dodge_shooter");
-
-        // --------------------------------------------------
-        // 攻撃用行為判定
-        // --------------------------------------------------
-
-        // キャラクターシートから武器データを取得
-        const weapons = getWeapons(data);
-        if (weapons == null) {
-            null;
-        }
-
-        // 要素を削除
-        document.querySelector("#area_damage > .addArea").innerHTML = "";
-
-        let prevWeapon = null;
-        let weapon_id = 1;
-        weapons.forEach(weapon => {
-            // --------------------------------------------------
-            // テンプレートを編集
-            // --------------------------------------------------
-
-            // テンプレートを読み込む
-            const template = document.querySelector("#temp_category_weapon");
-            const clone = template.content.cloneNode(true);
-
-            // ID
-            clone.querySelector(".contents").id = "category_weapon" + weapon_id;
-
-            // 武器名
-            clone.querySelector(".acordionTitleRow > h3").textContent = (weapon[0]) ? weapon[0] : prevWeapon[0] + ":" + weapon[7];
-            // if (weapon[6] != undefined) {
-            //     clone.querySelector(".acordionTitleRow > h3").textContent += `(${weapon[6]})`;
-            // }
-
-            if (weapon[1] == undefined) {
-                clone.querySelector(".categoryTitle > span").textContent = "平目";
-                clone.querySelector(".statusBonus_tec").classList.add("flat");
-                clone.querySelector(".statusBonus_str").classList.add("flat");
-            } else {
-                // 技能名
-                clone.querySelector(".categoryTitle > span").textContent = weapon[1];
-
-                // 技能レベル
-                let value = 0;
-                switch (weapon[1]) {
-                    case "ファイター" :
-                        value = data.lvFig;
-                        break;
-                    case "グラップラー" :
-                        value = data.lvGra;
-                        break;
-                    case "フェンサー" :
-                        value = data.lvFen;
-                        break;
-                    case "シューター" :
-                        value = data.lvSho;
-                        break;
-                }
-                clone.querySelector(".categoryTitle > .bonusValue").textContent = value;
-
-                // 命中率：器用度
-                clone.querySelector(".statusBonus_tec > .bonusValue").textContent = data.bonusDex;
-
-                // ダメージ：筋力
-                clone.querySelector(".statusBonus_str > .bonusValue").textContent = data.bonusStr;
-            }
-
-            // 命中力：器用度：修正
-            if (weapon[4] > 0) {
-                clone.querySelector(".value_add > .bonusValue").textContent = weapon[4];
-            }
-
-            // ダメージ：威力表
-            clone.querySelector(".value_rate > .bonusValue").textContent = (weapon[2]) ? weapon[2] : 0;
-
-            // ダメージ：威力表：修正
-            if (weapon[3] > 0) {
-                clone.querySelector(".value_rate > .addRate").textContent = "+" + weapon[3];
-            }
-
-            // ダメージ：C値
-            clone.querySelector(".value_crit > .bonusValue").textContent = (weapon[5]) ? weapon[5] : 0;
-
-            // --------------------------------------------------
-            // 要素を挿入
-            // --------------------------------------------------
-
-            document.querySelector("#area_damage > .addArea").appendChild(clone);
-
-            // --------------------------------------------------
-            // 次の準備
-            // --------------------------------------------------
-
-            // id
-            weapon_id++;
-
-            // 前の武器
-            prevWeapon = weapon;
-        })
-
-        // --------------------------------------------------
         // チャットパレットの生成
-        // --------------------------------------------------
+        outputChatPallet(data, false);
 
-        outputChatPallet(false);
-
-        // --------------------------------------------------
         // ナビテキストの表示
-        // --------------------------------------------------
-
-        showNaviText("navi_read");
+        // showNaviText("navi_read");
 
     })
     .catch(error => {
+        console.dir(error);
+
         // ナビテキストの表示
-        showNaviText("navi_read_error");
+        // showNaviText("navi_read_error");
 
         return;
     })
@@ -298,247 +623,149 @@ async function buttonRead() {
 }
 
 /**
- * 平目判定になる技能
- */
-function flatRole (skillLevel, targetId) {
-    // 技能レベル
-    const targetTitle = document.querySelector('#' + targetId + ' .categoryTitle > .bonusValue');
-
-    // チェックボックス
-    const targetCheckBox = document.querySelector('#' + targetId + ' .categoryTitle > input[type="checkbox"]');
-
-    // 習得していれば処理スキップ
-    if (skillLevel >= 1) {
-        // 技能レベルをセット
-        targetTitle.textContent = skillLevel;
-
-        // 一括チェックＯＮ
-        targetCheckBox.checked = true;
-        bulkCheck(targetCheckBox)
-    } else {
-        // 技能レベルをセット
-        targetTitle.textContent = 0;
-
-        // 技能レベルをグレーアウト
-        targetTitle.classList.add("flat");
-
-        // 一括チェックＯＦＦ
-        targetCheckBox.checked = false;
-        bulkCheck(targetCheckBox)
-
-        // ボーナス値を０にしてグレーアウト
-        document.querySelectorAll('#' + targetId + ' [class^="statusBonus"]:not(.fixed)').forEach(target => {
-            target.querySelector(".bonusValue").textContent = 0;
-            target.classList.add("flat");
-        });
-    }
-}
-
-/**
- * 「開閉」ボタン
- */
-function toggleAcordion(targerId) {
-    document.getElementById(targerId).classList.toggle("close");
-}
-
-/**
- * 一括チェックボックス
- */
-function bulkCheck($this) {
-    // チェック状態をリンク
-    document.querySelectorAll('#' + $this.parentElement.parentElement.id + ' .card_skill:not(.skillDisabled) > input[type="checkbox"]')
-    .forEach(target => {
-        target.checked = $this.checked;
-    });
-}
-
-/**
- * 装備のチェック
- */
-function getWeapons (data) {
-    const cnt = data.weaponNum;
-
-    if (cnt == 0) {
-        return null;
-    }
-
-    let list = [];
-
-    for (let i = 1; i <= cnt; i++) {
-        const target = [
-            data[`weapon${i}Name`],
-            data[`weapon${i}Class`],
-            data[`weapon${i}Rate`],
-            data[`weapon${i}Dmg`],
-            data[`weapon${i}Acc`],
-            data[`weapon${i}Crit`],
-            data[`weapon${i}Note`],
-            data[`weapon${i}Usage`],
-        ];
-
-        list.push(target);
-    }
-
-    return list;
-}
-
-/**
- * 戦闘特技の習得チェック
- */
-function checkBattleSkill(data, skillCategory, targetName) {
-    // 指定した戦闘特技を習得しているか
-    for (let i = 1; i <= 17; i++) {
-        const target = data[skillCategory + i];
-        if (
-            target != undefined
-            && target == targetName
-        ) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
  * チャットパレット出力
  */
-function outputChatPallet(navi = true) {
+function outputChatPallet(data, navi = true) {
+    // セッションストレージからデータを取得
+    data = data ?? JSON.parse(sessionStorage.getItem("data"));
+
+    // 出力文字列
     let text = "";
 
     // --------------------------------------------------
-    // 非戦闘用
+    // カテゴリー
     // --------------------------------------------------
+    document.querySelectorAll('[id^="area_category_"]').forEach(category => {
+        text += "─── " + category.querySelector('.acordionTitleRow > h3').textContent + " ───";
+        text += "\r";
 
-    text += "🟢非戦闘用\r";
+        // --------------------------------------------------
+        // 行為判定
+        // --------------------------------------------------
+        category.querySelectorAll(".area_roll").forEach(roll => {
+            // タイプ＝武器
+            const typeWeapon = roll.classList.contains("weapon");
 
-    document.querySelectorAll("#area_skill .card_skill").forEach(skill => {
-        // チェックボックス
-        if (skill.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
+            // タイプ＝魔法
+            const typeMagic = roll.classList.contains("magic");
 
-        // 技能
-        const nameSkill = skill.parentElement.parentElement.querySelector("span").textContent;
+            // タイプ回避
+            const typeDodge = roll.classList.contains("dodge");
 
-        // 判定
-        const nameRoll = skill.querySelector(".skillName > span").textContent;
+            // ●武器
+            if (typeWeapon) {
+                // チェックボックス
+                if (roll.querySelector('input[type="checkbox"]').checked == false) {
+                    // チェックOFFの場合、無視
+                    return;
+                }
 
-        // ボーナス
-        const nameBonus = skill.querySelector('[class^="statusBonus_"] > span').textContent;
+                // 武器
+                // - 名称
+                const weaponName = roll.querySelector(".weaponName").textContent;
+                // - 技能：名称
+                const nameSkill = roll.querySelector(".valueBlock.level  > .name").textContent;
 
-        // ●平目
-        if (skill.parentElement.parentElement.querySelector(".bonusValue.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameRoll}(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `2d6+{${nameSkill}}+{${nameBonus}}　■${nameRoll}(${nameSkill}+${nameBonus})\r`;
-        }
-    });
+                // 命中力
+                // - 能力値ボーナス：名称
+                const nameBonusHit = roll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent;
+                // - 能力値ボーナス：ボーナス修正
+                const addValue = roll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent;
 
-    // --------------------------------------------------
-    // 戦闘用：武器
-    // --------------------------------------------------
+                // ダメージ
+                // - 威力
+                const valueRate = roll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent;
+                const valueRateAdd = roll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent;
+                // - Ｃ値
+                const valueCritical = roll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent;
+                // - 能力値ボーナス：名称
+                const nameBonusDamage = roll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent;
 
-    text += "🔴戦闘用：武器\r";
+                // チャットコマンドを生成
+                // - 命中力
+                text +=
+                    "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}" + addValue
+                    + "　■" + weaponName + "／命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
+                // - ダメージ
+                text +=
+                    "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonusDamage + "}" + valueRateAdd
+                    + "　■" + weaponName + "／威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonusDamage + ")\r";
+            }
+            // ●魔法
+            else if (typeMagic) {
+                // 威力
+                const valueRate = roll.querySelector('.valueBlock.rate > .value').textContent;
 
-    document.querySelectorAll('#area_damage .acordionArea').forEach(weapon => {
-        // チェックボックス
-        if (weapon.querySelector('.categoryTitle > input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
+                // Ｃ値
+                const valueCritical = roll.querySelector('.valueBlock.critical > .value').textContent;
 
-        // 技能
-        const nameWeapon = weapon.querySelector(".acordionTitleRow > h3").textContent;
+                // --------------------------------------------------
+                // ダメージ
+                // --------------------------------------------------
+                roll.querySelectorAll(".card_skill").forEach(skill => {
+                    // チェックボックス
+                    if (skill.querySelector('input[type="checkbox"]').checked == false) {
+                        // チェックOFFの場合、無視
+                        return;
+                    }
 
-        // 判定
-        const nameSkill = weapon.querySelector(".categoryTitle > span").textContent;
+                    // 技能
+                    const nameSkill = skill.querySelector(".skillName > .name").textContent;
 
-        // 命中力：修正
-        const valueTecAdd = weapon.querySelector(".value_add > .bonusValue").textContent;
+                    // 能力値ボーナス
+                    const nameBonus = roll.querySelector('.valueBlock.bonus > .name').textContent;
 
-        // ダメージ：威力表
-        const valueRate = weapon.querySelector(".value_rate > .bonusValue").textContent;
-        const valueRateAdd = weapon.querySelector(".value_rate > .addRate").textContent;
+                    // チャットコマンドを生成
+                    text +=
+                        "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}"
+                        + "　■威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
+                });
+            }
+            // ●行為判定
+            else {
+                // 行為判定
+                const nameRoll = roll.querySelector(".rollName").textContent;
 
-        // ダメージ：Ｃ値
-        const valueCrit = weapon.querySelector(".value_crit > .bonusValue").textContent;
+                // 能力値ボーナス
+                const nameBonus = roll.querySelector('.valueBlock.bonus > .name').textContent;
 
-        // ●平目
-        if (weapon.parentElement.parentElement.querySelector(".value_rate.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameWeapon}／命中力(平目)\r`;
-            text += `k${valueRate}@${valueCrit}　■${nameWeapon}／ダメージ(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `2d6+{${nameSkill}}+{器用度}+${valueTecAdd}+{命中修正}　■${nameWeapon}／命中力\r`;
-            text += `k${valueRate}@${valueCrit}+{${nameSkill}}+{筋力}${valueRateAdd}　■${nameWeapon}／ダメージ\r`;
-        }
-    });
+                // 平目
+                const flagFlat = roll.querySelector('.valueBlock.flat');
 
+                // ●通常
+                if (!flagFlat) {
+                    // --------------------------------------------------
+                    // 技能レベル
+                    // --------------------------------------------------
+                    roll.querySelectorAll(".card_skill").forEach(skill => {
+                        // チェックボックス
+                        if (skill.querySelector('input[type="checkbox"]').checked == false) {
+                            // チェックＯＦＦの場合、無視
+                            return;
+                        }
 
-    // --------------------------------------------------
-    // 戦闘用：魔法
-    // --------------------------------------------------
+                        // 技能
+                        const nameSkill = skill.querySelector(".skillName > .name").textContent;
 
-    text += "🔴戦闘用：魔法\r";
+                        // 回避
+                        let addValue = "";
+                        if (typeDodge) {
+                            addValue = "+{回避力修正}";
+                        }
 
-    document.querySelectorAll("#area_magic .card_skill").forEach(magic => {
-        // チェックボックス
-        if (magic.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 技能
-        const nameSkill = magic.parentElement.parentElement.querySelector("span").textContent;
-
-        // 威力
-        const valueRate = magic.querySelector('.statusBonus.value_rate > .bonusValue').textContent;
-
-        // ボーナス能力名
-        const nameBonus = magic.querySelector('[class^="statusBonus_"] > span').textContent;
-
-        // ●平目
-        if (magic.parentElement.parentElement.querySelector(".bonusValue.flat")) {
-            // チャットコマンドを生成
-            text += `2d6　■${nameRoll}(平目)\r`;
-        }
-        // ●通常
-         else {
-            // チャットコマンドを生成
-            text += `k${valueRate}@10+{${nameSkill}}+{${nameBonus}}　■威力${valueRate}(${nameSkill}+${nameBonus})\r`;
-        }
-    });
-
-    // --------------------------------------------------
-    // 戦闘用：回避
-    // --------------------------------------------------
-
-    text += "🔴戦闘用：回避\r";
-
-    document.querySelectorAll('#area_dodge .card_skill').forEach(skill => {
-        // チェックボックス
-        if (skill.parentElement.parentElement.querySelector('input[type="checkbox"]').checked == false) {
-            // チェックOFFの場合、無視
-            return;
-        }
-
-        // 判定
-        const nameSkill = skill.parentElement.parentElement.querySelector(".categoryTitle > span").textContent;
-
-        // 命中力：修正
-        const valueTecAdd = skill.querySelector(".statusBonus_agi > .bonusValue").textContent;
-
-        // チャットコマンドを生成
-        text += `2d6+{${nameSkill}}+{敏捷度}+${valueTecAdd}+{回避修正}　■回避力(${nameSkill}+敏捷度)\r`;
+                        // チャットコマンドを生成
+                        text +=
+                            "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addValue
+                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")\r";
+                    });
+                }
+                // ●平目
+                else {
+                    // チャットコマンドを生成
+                    text += "2d6　■" + nameRoll + "(平目)\r";
+                }
+            }
+        });
     });
 
     // --------------------------------------------------
@@ -573,45 +800,62 @@ async function outputCharacter() {
         "data": {
             "name": data.characterName,
             "memo": null,
-            "externalUrl": document.querySelector('#input_url input').value,
+            "externalUrl": getUrl(),
             "status": [
                 {
-                    "label": "HP",
-                    "value": data.hpTotal,
-                    "max": data.hpTotal,
+                    "label": document.getElementById("status_name_1").value,
+                    "value": document.getElementById("status_value_1").value,
+                    "max": document.getElementById("status_value_1").value,
                 },
                 {
-                    "label": "MP",
-                    "value": data.mpTotal,
-                    "max": data.mpTotal,
+                    "label": document.getElementById("status_name_2").value,
+                    "value": document.getElementById("status_value_2").value,
+                    "max": document.getElementById("status_value_2").value,
                 },
                 {
-                    "label": "防護点",
-                    "value": data.defenseTotalAllDef,
-                    "max": data.defenseTotalAllDef,
+                    "label": document.getElementById("status_name_3").value,
+                    "value": document.getElementById("status_value_3").value,
+                    "max": document.getElementById("status_value_3").value,
                 },
                 {
-                    "label": "移動力",
-                    "value": data.mobilityTotal,
-                    "max": data.mobilityTotal,
+                    "label": document.getElementById("status_name_4").value,
+                    "value": document.getElementById("status_value_4").value,
+                    "max": document.getElementById("status_value_4").value,
                 },
                 {
-                    "label": "G",
-                    "value": data.moneyTotal,
+                    "label": document.getElementById("status_name_5").value,
+                    "value": document.getElementById("status_value_5").value,
+                    "max": document.getElementById("status_value_5").value,
                 },
                 {
-                    "label": "1ゾロ",
-                    "value": 0,
+                    "label": document.getElementById("status_name_6").value,
+                    "value": document.getElementById("status_value_6").value,
+                    "max": document.getElementById("status_value_6").value,
                 },
                 {
-                    "label": "命中修正",
-                    "value": 0,
-                    "max": 0,
+                    "label": document.getElementById("status_name_7").value,
+                    "value": document.getElementById("status_value_7").value,
+                    "max": document.getElementById("status_value_7").value,
                 },
                 {
-                    "label": "回避修正",
-                    "value": data.armourEva + data.shieldEva + data.defOtherEva,
-                    "max": data.armourEva + data.shieldEva + data.defOtherEva,
+                    "label": document.getElementById("status_name_8").value,
+                    "value": document.getElementById("status_value_8").value,
+                    "max": document.getElementById("status_value_8").value,
+                },
+                {
+                    "label": document.getElementById("status_name_9").value,
+                    "value": document.getElementById("status_value_9").value,
+                    "max": document.getElementById("status_value_9").value,
+                },
+                {
+                    "label": document.getElementById("status_name_10").value,
+                    "value": document.getElementById("status_value_10").value,
+                    "max": document.getElementById("status_value_10").value,
+                },
+                {
+                    "label": document.getElementById("status_name_11").value,
+                    "value": document.getElementById("status_value_11").value,
+                    "max": document.getElementById("status_value_11").value,
                 },
             ],
             "params": [
@@ -666,82 +910,7 @@ async function outputCharacter() {
         );
 
     array.forEach(target => {
-        let skillName = "";
-        switch (target.key) {
-            case "lvFig" :
-                skillName ="ファイター";
-                break;
-            case "lvGra" :
-                skillName ="グラップラー";
-                break;
-            case "lvFen" :
-                skillName ="フェンサー";
-                break;
-            case "lvSho" :
-                skillName ="シューター";
-                break;
-            case "lvBat" :
-                skillName ="バトルダンサー";
-                break;
-            case "lvSor" :
-                skillName ="ソーサラー";
-                break;
-            case "lvCon" :
-                skillName ="コンジャラー";
-                break;
-            case "lvPri" :
-                skillName ="プリースト";
-                break;
-            case "lvFai" :
-                skillName ="フェアリーテイマー";
-                break;
-            case "lvMag" :
-                skillName ="マギテック";
-                break;
-            case "lvDru" :
-                skillName ="ドルイド";
-                break;
-            case "lvDem" :
-                skillName ="デーモンルーラー";
-                break;
-            case "lvSco" :
-                skillName ="スカウト";
-                break;
-            case "lvRan" :
-                skillName ="レンジャー";
-                break;
-            case "lvSag" :
-                skillName ="セージ";
-                break;
-            case "lvEnh" :
-                skillName ="エンハンサー";
-                break;
-            case "lvBar" :
-                skillName ="バード";
-                break;
-            case "lvRid" :
-                skillName ="ライダー";
-                break;
-            case "lvAlc" :
-                skillName ="アルケミスト";
-                break;
-            case "lvGeo" :
-                skillName ="ジオマンサー";
-                break;
-            case "lvWar" :
-                skillName ="ウォーリーダー";
-                break;
-            case "lvDark" :
-                skillName ="ダークハンター";
-                break;
-            case "lvPhy" :
-                skillName ="フィジカルマスター";
-                break;
-
-            // 上記以外の場合スキップ
-            default :
-                return;
-        }
+        let skillName = listSkill[target];
 
         characterData["data"]["params"].push(
             {
@@ -762,4 +931,465 @@ async function outputCharacter() {
     // --------------------------------------------------
 
     showNaviText("navi_output");
+}
+
+// ====================================================================================================
+// ファンクション
+// ====================================================================================================
+
+/**
+ * データを取得
+ */
+function getUrl () {
+    return (
+        document.getElementById('urlPrefix').textContent
+        + document.getElementById('input_url').value
+        + "&mode=json"
+    );
+}
+
+/**
+ * データを取得
+ */
+function getData (data, prefix, suffix = "", other = []) {
+    const regExp = new RegExp("^" + prefix + "\\d+" + suffix + "$");
+
+    const evaBonus = Object.keys(data)
+        .filter(key => {
+            return (
+                regExp.test(key)
+                || other.includes(key)
+            );
+        });
+
+    let value = 0;
+    evaBonus.forEach(bonusValue => {
+        value += Number(data[bonusValue]);
+    })
+
+    return value;
+}
+
+/**
+ * 技能レベル：日本語名からkeyを取得
+ */
+function getSkillLevelForName (name) {
+    const listSkillR = Object.fromEntries(
+        Object.entries(listSkill)
+            .map(([key, value]) => [value, key])
+    );
+
+    return listSkillR[name];
+}
+
+/**
+ * 回避力修正を取得
+ */
+function getDodge (data) {
+    // 回避力トータルを取得
+    let value = data.defenseTotal1Eva;
+
+    // 回避力0の場合、0を返す
+    if (value <= 0) {
+        return 0;
+    }
+
+    // 技能レベルを引く
+    value -= data[getSkillLevelForName(data.evasionClass1)] ?? 0;
+
+    // 敏捷度ボーナスを引く
+    value -= data.bonusAgi;
+
+    return value;
+}
+
+/**
+ * 「戦闘用：攻撃」カテゴリーの生成
+ */
+ function setAttack (data, list) {
+
+    // 武器データを取得
+    let listWeapon = [];
+    for (let i = 1; i <= data.weaponNum; i++) {
+        // 技能名称
+        const className = data["weapon" + i + "Class"];
+
+        // 技能が設定されていない場合は無視
+        if (!className) {
+            continue;
+        }
+
+        // 配列の生成
+        listWeapon.push({
+            name: data["weapon" + i + "Name"],
+            skill: getSkillLevelForName(className),
+            usage: data["weapon" + i + "Usage"],
+            hit: {
+                bonusId: "Dex",
+                hitAdd : data["weapon" + i + "Acc"],
+            },
+            damage: {
+                rate : data["weapon" + i + "Rate"],
+                rateAdd : data["weapon" + i + "Dmg"],
+                critical: data["weapon" + i + "Crit"],
+                bonusId: "Str",
+            },
+        });
+    }
+
+    // 「戦闘用：攻撃」に上記を追加
+    const categoryAttack = list.find(item => item.name === "戦闘用：武器");
+    categoryAttack.roll = listWeapon;
+ }
+
+/**
+ * ステータスの描画
+ */
+function drawStatus (data) {
+    // ＨＰ
+    document.getElementById("status_value_1").value = data.hpTotal;
+
+    // ＭＰ
+    document.getElementById("status_value_2").value = data.mpTotal;
+
+    // 防護点
+    document.getElementById("status_value_3").value = data.defenseTotal1Def;
+
+    // 移動力
+    document.getElementById("status_value_4").value = data.mobilityTotal;
+
+    // ガメル
+    document.getElementById("status_value_5").value = data.moneyTotal;
+
+    // 命中力修正
+    document.getElementById("status_value_9").value = 0;
+
+    // 回避力修正
+    document.getElementById("status_value_10").value = getDodge(data);
+
+    // ダメージ修正
+    document.getElementById("status_value_11").value = 0;
+}
+
+/**
+ * カードの描画
+ */
+function drawContents (data) {
+    // テンプレートを読み込む
+    const tempCategory = document.getElementById("temp_category");
+    const tempRoll = document.getElementById("temp_roll");
+    const tempWeapon = document.getElementById("temp_roll_weapon");
+    const tempMagic = document.getElementById("temp_roll_magic");
+    const tempSkill = document.getElementById("temp_skill");
+
+    // 要素を削除
+    document.getElementById("mainContents").innerHTML = "";
+
+    // 行為判定リスト
+    let listCard = [...listRoll];
+
+    // 「戦闘用：攻撃」カテゴリーの生成
+    setAttack(data, listCard);
+
+    // ID
+    let id = 1;
+
+    // --------------------------------------------------
+    // カテゴリー
+    // --------------------------------------------------
+    listCard.forEach(category => {
+        // テンプレートをクローン
+        const cloneCategory = tempCategory.content.cloneNode(true);
+
+        // 名称
+        cloneCategory.querySelector(".acordionTitleRow > h3").textContent = category.name;
+
+        // タイプ＝武器
+        const typeWeapon = (category.type === "weapon");
+
+        // タイプ＝魔法
+        const typeMagic = (category.type === "magic");
+
+        // タイプ＝回避
+        const typeDodge = (category.type === "dodge");
+
+        // 開閉ボタン
+        let categoryId = "area_category_" + id;
+        cloneCategory.firstElementChild.id = categoryId;
+        cloneCategory.querySelector(".acordionTitleRow > button").addEventListener(
+            "click",
+            () => {
+                toggleAcordion(categoryId);
+            }
+        );
+
+        // --------------------------------------------------
+        // 行為判定／ダメージ
+        // --------------------------------------------------
+
+        // 前の武器（両手持ち用）
+        let prevWeapon;
+
+        category.roll.forEach(roll => {
+            let cloneRoll;
+
+            // ●武器
+            if (typeWeapon) {
+                // テンプレートをクローン
+                cloneRoll = tempWeapon.content.cloneNode(true);
+
+                // カテゴリー
+                // - チェックボックス
+                cloneRoll.querySelector('input[type="checkbox"]').checked = true;
+                // - 武器名称
+                let name = roll.name;
+                if (!name) {
+                    name = prevWeapon.name + "(" + roll.usage + ")";
+                }
+                cloneRoll.querySelector(".weaponName").textContent = name;
+                // - 技能：名称
+                cloneRoll.querySelector(".valueBlock.level  > .name").textContent = listSkill[roll.skill];
+                // - 技能：レベル
+                cloneRoll.querySelector(".valueBlock.level > .value").textContent = data[roll.skill];
+
+                // 命中力
+                // - 能力値ボーナス：背景色
+                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus").classList.add(roll.hit.bonusId);
+                // - 能力値ボーナス：名称
+                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent = listStatus[roll.hit.bonusId];
+                // - 能力値ボーナス：値
+                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data["bonus" + roll.hit.bonusId];
+                // - 能力値ボーナス：ボーナス修正
+                let addHit = data["bonus" + roll.hit.hitAdd];
+                if (addHit > 0) {
+                    addHit = "+" + addHit;
+                }
+                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent = addHit;
+
+                // ダメージ
+                // - 威力
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
+                let addRate = roll.damage.rateAdd;
+                if (addRate > 0) {
+                    addRate = "+" + addRate;
+                }
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
+                // - Ｃ値
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = roll.damage.critical;
+                // - 能力値ボーナス：背景色
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus").classList.add(roll.damage.bonusId);
+                // - 能力値ボーナス：名称
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent = listStatus[roll.damage.bonusId];
+                // - 能力値ボーナス：値
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .value").textContent = data["bonus" + roll.damage.bonusId];
+
+                // 前の武器として保持する
+                prevWeapon = roll;
+            }
+            // ●魔法
+            else if (typeMagic) {
+                // テンプレートをクローン
+                cloneRoll = tempMagic.content.cloneNode(true);
+
+                // 威力
+                cloneRoll.querySelector(".valueBlock.rate > .value").textContent = roll.rate;
+
+                // Ｃ値
+                cloneRoll.querySelector(".valueBlock.critical > .value").textContent = roll.critical;
+
+                // 能力値ボーナス：背景色
+                cloneRoll.querySelector(".valueBlock.bonus").classList.add(roll.bonusId);
+
+                // 能力値ボーナス：名称
+                cloneRoll.querySelector(".valueBlock.bonus > .name").textContent = listStatus[roll.bonusId];
+
+                // 能力値ボーナス：値
+                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data["bonus" + roll.bonusId];
+            }
+            // ●行為判定
+            else {
+                // テンプレートをクローン
+                cloneRoll = tempRoll.content.cloneNode(true);
+
+                // ブック
+                if (roll.book) {
+                    cloneRoll.querySelector(".book").textContent = roll.book;
+                } else {
+                    // ブック表示欄を削除
+                    cloneRoll.querySelector(".book").remove();
+                }
+
+                // 名称
+                cloneRoll.querySelector(".rollName").textContent = roll.name;
+
+                // 能力値ボーナス：背景色
+                cloneRoll.querySelector(".valueBlock.bonus").classList.add(roll.bonusId);
+
+                // 能力値ボーナス：名称
+                cloneRoll.querySelector(".valueBlock.bonus > .name").textContent = listStatus[roll.bonusId];
+
+                // 能力値ボーナス：値
+                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data["bonus" + roll.bonusId];
+
+                // // 回避
+                if (typeDodge) {
+                    // 判定用classを不可
+                    cloneRoll.firstElementChild.classList.add("dodge");
+                }
+            }
+
+            // --------------------------------------------------
+            // 技能レベル
+            // --------------------------------------------------
+
+            // タイプ＝武器以外
+            if (!typeWeapon) {
+                // 使用可能技能数
+                let usableSkill = 0;
+
+                // 対象技能
+                let targets = roll.skill;
+                if (!targets) {
+                    // 空の場合、全技能を対象
+                    targets = [];
+                    Object.keys(listSkill)
+                        .filter(key => key != "level") // 「冒険者レベル」は除く
+                        .forEach(key => {
+                            targets.push({
+                                id: key
+                            });
+                        });
+                }
+
+                // 対象技能分ループ
+                targets.forEach(skill => {
+                    // テンプレートをクローン
+                    const cloneSkill = tempSkill.content.cloneNode(true);
+
+                    // 名称
+                    cloneSkill.querySelector(".skillName > .name").textContent = listSkill[skill.id];
+
+                    // レベル
+                    cloneSkill.querySelector(".valueBlock.level > .value").textContent = (data[skill.id] ?? 0);
+
+                    // 注釈
+                    let flagUsable = true;
+                    if (skill.note) {
+                        // 要素を生成
+                        const condition = document.createElement("div");
+                        condition.classList.add("condition");
+                        condition.textContent = skill.note;
+
+                        // 条件チェック
+                        const cond = skill.cond
+                        if (cond) {
+                            // 条件用ＣＳＳ
+                            condition.classList.add("alert");
+
+                            // 条件を満たさない場合、グレーアウト
+                            if (!checkLearn(data, cond.category, cond.target)) {
+                                cloneSkill.firstElementChild.classList.add("skillDisabled");
+
+                                flagUsable = false;
+                            }
+                        }
+
+                        // 要素を追加
+                        cloneSkill.querySelector('.card_skill').appendChild(condition);
+                    }
+
+                    // - 技能なし
+                    const checkbox = cloneSkill.querySelector('input[type="checkbox"]');
+                    if (!data[skill.id] || !flagUsable) {
+                        // チェックＯＦＦ
+                        checkbox.checked = false;
+
+                        // グレーアウト
+                        cloneSkill.firstElementChild.classList.add("skillDisabled");
+                    }
+                    // - 技能あり
+                    else {
+                        // チェックＯＮ
+                        checkbox.checked = true;
+
+                        // 使用可能技能数
+                        usableSkill++;
+                    }
+
+                    // 要素を追加
+                    cloneRoll.querySelector(".skills").appendChild(cloneSkill);
+                });
+
+                // 行為判定、かつ使用可能な技能が無い場合、「平目」を追加
+                if (!typeMagic && usableSkill == 0) {
+                    const cloneSkill = tempSkill.content.cloneNode(true);
+
+                    // 名称
+                    cloneSkill.querySelector(".skillName > .name").textContent = "平目";
+
+                    // レベル
+                    cloneSkill.querySelector(".valueBlock.level > .value").textContent = 0;
+
+                    // チェックＯＮ
+                    cloneSkill.querySelector('input[type="checkbox"]').checked = true;
+
+                    // 要素を追加
+                    cloneRoll.querySelector(".skills").prepend(cloneSkill);
+
+                    // 親要素（行為判定）の能力値ボーナスをグレーアウト
+                    cloneRoll.querySelector(".valueBlock").classList.add("flat");
+                }
+            }
+
+            // --------------------------------------------------
+
+            // 要素を追加
+            cloneCategory.querySelector(".contents").appendChild(cloneRoll);
+        });
+
+        // --------------------------------------------------
+
+        // 要素を追加
+        document.getElementById("mainContents").appendChild(cloneCategory);
+
+        // IDをインクリメント
+        id++;
+    });
+}
+
+/**
+ * 習得チェック
+ */
+function checkLearn (data, skillCategory, targetName) {
+    // skillCategoryに前方一致するデータを抽出
+    const array = Object.keys(data)
+        .map(
+            k => ({
+                key: k,
+                value: data[k]
+            })
+        )
+        .filter(
+            target => target.key.indexOf(skillCategory) === 0
+        );
+
+    // 指定した戦闘特技を習得しているか
+    array.forEach(target => {
+        if (target == targetName) {
+            return true;
+        }
+    });
+
+    return false;
+}
+
+/**
+ * ナビテキストの表示
+ */
+async function showNaviText (targetId) {
+    const naviText = document.getElementById(targetId);
+    naviText.classList.add("show");
+    window.setTimeout(() => {
+        naviText.classList.remove("show");
+    }, 1000);
 }

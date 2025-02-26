@@ -1,8 +1,8 @@
 /* -------------------------------------------------- */
-/* 汎用
+/* 基本設定
 /* -------------------------------------------------- */
 
-/* 基本設定 */
+/* 色 */
 :root
 {
   --font-color: rgb(64, 32, 12);
@@ -11,7 +11,7 @@
   --sub-color: rgb(200, 100, 50);
 }
 
-/* 基本設定 */
+/* ボディ */
 body
 {
   padding: 10px;
@@ -20,11 +20,17 @@ body
   color: var(--font-color);
 }
 
+/* -------------------------------------------------- */
+/* 入力系
+/* -------------------------------------------------- */
+
 /* 入力欄 */
 input
 {
   border: solid 1px var(--font-color);
   border-radius: 4px;
+
+  padding: 8px;
 }
 
 /* チェックボックス */
@@ -40,6 +46,12 @@ input[type="checkbox"]:disabled
   cursor: default;
 }
 
+/* セレクトボックス */
+select
+{
+  padding: 8px;
+}
+
 /* ボタン */
 button
 {
@@ -51,6 +63,10 @@ button
 
   cursor: pointer;
 }
+
+/* -------------------------------------------------- */
+/* 見出し
+/* -------------------------------------------------- */
 
 h1
 {
@@ -72,6 +88,15 @@ h4
   margin: 0px;
 }
 
+/* -------------------------------------------------- */
+/* レイアウト
+/* -------------------------------------------------- */
+
+.row_input + .row_input
+{
+  margin-top: 8px;
+}
+
 /* 行 */
 [class^="row_"]
 {
@@ -87,71 +112,15 @@ h4
   margin-top: 20px;
 }
 
-/* 工事中 */
+/* 非表示 */
 .hidden
 {
   display: none !important;
 }
 
 /* -------------------------------------------------- */
-/* アコーディオン
-/* -------------------------------------------------- */
-
-/* エリア */
-.acordionArea
-{
-  border: solid 2px var(--sub-color);
-  border-radius: 4px;
-}
-
-.acordionArea h3
-{
-  color: #fff;
-  margin: 0;
-}
-
-/* エリア間隔 */
-.acordionArea + .acordionArea
-{
-  margin-top: 8px;
-}
-
-/* 閉じる */
-.acordionArea.close > [id^="category_"]
-{
-  display: none;
-}
-
-/* タイトル */
-.acordionTitleRow
-{
-  display: flex;
-
-  background: var(--sub-color);
-
-  padding: 4px 8px;
-}
-
-/* 「開閉」ボタン */
-.acordionTitleRow > button
-{
-  margin-left: auto;
-}
-
-/* 中身 */
-.acordionArea > [id^="category_"]
-{
-  padding: 8px;
-}
-
-/* -------------------------------------------------- */
 /* 設定
 /* -------------------------------------------------- */
-
-.row_input + .row_input
-{
-  margin-top: 8px;
-}
 
 /* ラベル */
 .row_input > .inputLabel
@@ -159,12 +128,15 @@ h4
   display: flex;
   background-color: var(--sub-color);
   border-radius: 4px;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  min-width: 100px;
   height: 100%;
   padding: 4px 16px;
 
   color: var(--bg-color);
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -185,72 +157,247 @@ h4
   padding: 0 8px;
 }
 
-/* 使用ルルブ */
-.settingItem
+/* -------------------------------------------------- */
+/* ステータス
+/* -------------------------------------------------- */
+
+/* キャラクター一覧に表示されるステータス */
+.list_display
+{
+  display: inline-block;
+  border: solid 1px var(--font-color);
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* キャラクター一覧に表示されないステータス */
+.list_notDisplay
+{
+  display: inline-block;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* カード */
+.card_status
 {
   display: flex;
   align-items: center;
-  height: 100%;
+  flex-wrap: wrap;
+  gap: 8px;
 
-  border: solid 1px var(--font-color);
-  border-radius: 4px;
-  box-sizing: border-box;
+  padding: 4px;
+}
 
-  padding: 0 8px;
+/* ブロック */
+.card_status > .valueBlock
+{
+  background-color: var(--sub-color);
+  min-width: 250px;
+  margin: 0 !important;
+  padding: 8px;
+}
+
+/* ステータス名 */
+.valueBlock > input.name
+{
+  margin-left: 0;
+
+  font-size: inherit;
+  text-align: left;
+}
+
+/* ※ */
+.valueBlock > span.note
+{
+  margin-left: 4px;
+
+  font-size: 10px;
+}
+
+.valueBlock > input
+{
+  width: 100px;
+  height: 25px;
+  margin-left: auto;
+
+  font-size: 20px;
+  text-align: right;
 }
 
 /* -------------------------------------------------- */
-/* 技能エリア
+/* テンプレート：カテゴリー
 /* -------------------------------------------------- */
+
+/* エリア */
+.acordionArea
+{
+  border: solid 2px var(--sub-color);
+  border-radius: 4px;
+}
 
 /* タイトル */
 .categoryTitle
 {
   display: flex;
-
-  width: 100%;
-  border-bottom: solid 2px var(--font-color);
+  border-bottom: dotted 3px var(--font-color);
 
   font-size: 20px;
   font-weight: bold;
   align-items: center;
-}
 
-/* 技能レベル／ボーナス値 */
-.bonusValue
+  padding: 4px;
+}
+.acordionArea h3
 {
-  font-size: 25px;
-  font-weight: bold;
-
-  margin-left: 10px;
+  color: #fff;
+  margin: 0;
 }
 
-/* 技能レベル */
-.categoryTitle > .bonusValue
+/* 武器チェックボックス */
+.categoryTitle > input[type="checkbox"]
+{
+  margin-right: 8px;
+}
+
+/* 能力値ボーナス：無効 */
+.valueBlock.flat > .value
+{
+  opacity: 0.5;
+}
+
+/* コンテンツ */
+.acordionArea > .contents
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  padding: 8px;
+}
+
+/* 閉じる */
+.acordionArea.close > .contents
+{
+  display: none;
+}
+
+/* タイトル */
+.acordionTitleRow
+{
+  display: flex;
+  background: var(--sub-color);
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  padding: 4px 8px;
+}
+
+/* 「開閉」ボタン */
+.acordionTitleRow > button
+{
+  margin-left: auto;
+}
+
+/* -------------------------------------------------- */
+/* テンプレート：行為判定
+/* -------------------------------------------------- */
+
+.area_roll
+{
+  min-width: calc(50% - 5px);
+  box-sizing: border-box;
+
+  padding: 8px;
+}
+
+/* -------------------------------------------------- */
+/* テンプレート：技能レベル
+/* -------------------------------------------------- */
+
+/* 技能レベル：無効 */
+.skillDisabled .value
+{
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------- */
+/* ブロック */
+/* -------------------------------------------------- */
+
+.valueBlock
 {
   color: #fff;
 
   background-color: var(--font-color);
   border-radius: 4px;
 
-  margin: 4px 10px;
   padding: 0 8px;
 }
 
+/* ブロック：値 */
+.valueBlock > .value
+{
+  font-size: 25px;
+  font-weight: bold;
+}
+.valueBlock > .name + .value
+{
+  margin-left: 10px;
+}
+
 /* 平目 */
-.flat
+.skillDisabled .valueBlock,
+.valueBlock.flat
 {
   background-color: #888 !important;
 }
 
-/* タイトル内チェックボックス */
-.categoryTitle > input[type="checkbox"] {
-  margin-left: 9px;
-  margin-right: 10px;
+/* 器用度 */
+.valueBlock.Dex
+{
+  background-color: rgb(128, 0, 128);
 }
 
+/* 敏捷度 */
+.valueBlock.Agi
+{
+  background-color: rgb(64, 64, 128);
+}
+
+/* 筋力 */
+.valueBlock.Str
+{
+  background-color: rgb(128, 64, 64);
+}
+
+/* 生命力 */
+.valueBlock.Vit
+{
+  background-color: rgb(128, 128, 0);
+}
+
+/* 知力 */
+.valueBlock.Int
+{
+  background-color: rgb(0, 128, 128);
+}
+
+/* 精神力 */
+.valueBlock.Mnd
+{
+  background-color: rgb(64, 128, 64);
+}
+
+/* -------------------------------------------------- */
+/* タイトル内チェックボックス */
+/* -------------------------------------------------- */
+
 /* サプリメントラベル */
-.labelSupplement
+.book
 {
   background-color: var(--font-color);
   border-radius: 4px;
@@ -280,11 +427,18 @@ h4
   border: solid 1px var(--font-color);
   border-radius: 4px;
 
-  padding: 8px 4px;
+  padding: 4px;
 }
 .card_skill.skillDisabled
 {
   background-color: #ccc;
+}
+
+.skillDisabled input[type="checkbox"]
+{
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* 技能名 */
@@ -296,7 +450,7 @@ h4
 }
 
 /* 能力値ボーナス */
-[class^="statusBonus"]
+.valueBlock
 {
   display: flex;
   align-items: center;
@@ -305,51 +459,20 @@ h4
   background-color: var(--font-color);
   border-radius: 4px;
 
-  margin-left: 8px;
   padding: 0 8px;
 
   color: #fff;
   font-size: 15px;
 }
-.skillDisabled [class^="statusBonus"]
+.skillDisabled .valueBlock
 {
   background-color: #888;
 }
 
-/* 能力値ボーナス：器用度 */
-.statusBonus_tec
+/* ブロック間隔 */
+* + .valueBlock
 {
-  background-color: rgb(128, 0, 128);
-}
-
-/* 能力値ボーナス：敏捷度 */
-.statusBonus_agi
-{
-  background-color: rgb(64, 64, 128);
-}
-
-/* 能力値ボーナス：筋力 */
-.statusBonus_str
-{
-  background-color: rgb(128, 64, 64);
-}
-
-/* 能力値ボーナス：生命力 */
-.statusBonus_vit
-{
-  background-color: rgb(128, 128, 0);
-}
-
-/* 能力値ボーナス：知力 */
-.statusBonus_int
-{
-  background-color: rgb(0, 128, 128);
-}
-
-/* 能力値ボーナス：精神力 */
-.statusBonus_mnd
-{
-  background-color: rgb(64, 128, 64);
+  margin-left: 8px;
 }
 
 /* 追加効果 */
@@ -374,8 +497,8 @@ h4
   background: rgb(255, 255, 128);
   border-radius: 4px;
 
-  padding: 4px 8px;
   margin-left: 8px;
+  padding: 8px;
 }
 .condition.alert
 {
@@ -384,15 +507,6 @@ h4
 .skillDisabled .condition.alert
 {
   background: rgb(255, 192, 192) !important;
-}
-
-/* -------------------------------------------------- */
-/* 攻撃
-/* -------------------------------------------------- */
-
-.attackSkills
-{
-  margin-top: 12px;
 }
 
 /* -------------------------------------------------- */
@@ -426,6 +540,7 @@ h4
 
   width: 100vw;
   height: 100vh;
+  z-index: 100;
 
   color: #fff;
   font-size: 20px;
