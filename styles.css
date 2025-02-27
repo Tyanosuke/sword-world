@@ -92,6 +92,15 @@ h4
 /* レイアウト
 /* -------------------------------------------------- */
 
+p
+{
+  margin: 0;
+}
+p + p
+{
+  margin-top: 8px;
+}
+
 .row_input + .row_input
 {
   margin-top: 8px;
@@ -194,18 +203,37 @@ h4
 .card_status > .valueBlock
 {
   background-color: var(--sub-color);
-  min-width: 250px;
+  min-width: 390px;
   margin: 0 !important;
   padding: 8px;
+}
+
+.valueBlock > input
+{
+  width: 100px;
+  height: 25px;
+
+  font-size: 20px;
+  text-align: right;
 }
 
 /* ステータス名 */
 .valueBlock > input.name
 {
   margin-left: 0;
+  margin-right: auto;
 
   font-size: inherit;
   text-align: left;
+}
+
+/* / */
+.valueBlock > span
+{
+  margin-left: 4px;
+  margin-right: 4px;
+
+  text-align: center;
 }
 
 /* ※ */
@@ -214,16 +242,6 @@ h4
   margin-left: 4px;
 
   font-size: 10px;
-}
-
-.valueBlock > input
-{
-  width: 100px;
-  height: 25px;
-  margin-left: auto;
-
-  font-size: 20px;
-  text-align: right;
 }
 
 /* -------------------------------------------------- */

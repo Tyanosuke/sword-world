@@ -28,7 +28,7 @@ const listSkill = {
     lvFen: "フェンサー",
     lvGra: "グラップラー",
     lvSho: "シューター",
-    // lvBat: "バトルダンサー",
+    lvBat: "バトルダンサー",
 
     // ●魔法使い系
     lvSor: "ソーサラー",
@@ -36,9 +36,9 @@ const listSkill = {
     lvPri: "プリースト",
     lvMag: "マギテック",
     lvFai: "フェアリーテイマー",
-    // lvDem: "デーモンルーラー",
-    // lvDru: "ドルイド",
-    // lvAby: "アビスゲイザー",
+    lvDem: "デーモンルーラー",
+    lvDru: "ドルイド",
+    lvAby: "アビスゲイザー",
 
     // ●その他系
     lvSco: "スカウト",
@@ -48,17 +48,17 @@ const listSkill = {
     lvBar: "バード",
     lvRid: "ライダー",
     lvAlc: "アルケミスト",
-    // lvGeo: "ジオマンサー",
-    // lvWar: "ウォーリーダー",
-    // lvDar: "ダークハンター",
-    // lvPhy: "フィジカルマスター",
+    lvGeo: "ジオマンサー",
+    lvWar: "ウォーリーダー",
+    lvDar: "ダークハンター",
+    lvPhy: "フィジカルマスター",
 };
 
 // 行為判定
 const listRoll = [
     // --------------------------------------------------
     {
-        name: "汎用",
+        name: "非戦闘用",
         roll: [
             // 器用度
             {
@@ -136,13 +136,6 @@ const listRoll = [
                 skill: [
                     { id: "lvSco" },
                     { id: "lvRan" },
-                ]
-            },
-            {
-                name: "先制",
-                bonusId: "Agi",
-                skill: [
-                    { id: "lvSco" },
                 ]
             },
             {
@@ -323,17 +316,6 @@ const listRoll = [
                 ]
             },
             {
-                name: "魔物知識",
-                bonusId: "Int",
-                skill: [
-                    { id: "lvSag" },
-                    {
-                        id: "lvRid",
-                        note: "弱点獲得に条件あり(Ⅲ-P.84)"
-                    },
-                ]
-            },
-            {
                 name: "薬品学",
                 bonusId: "Int",
                 skill: [
@@ -433,24 +415,34 @@ const listRoll = [
                 ]
             },
             {
-                name: "生命抵抗力",
-                bonusId: "Vit",
-                skill: [
-                    { id: "level" },
-                ]
-            },
-            {
                 name: "真偽",
                 bonusId: "Int",
                 skill: [
                     { id: "level" },
                 ]
             },
+        ]
+    },
+    // --------------------------------------------------
+    {
+        name: "戦闘用：開始時",
+        roll: [
             {
-                name: "精神抵抗力",
+                name: "魔物知識",
                 bonusId: "Int",
                 skill: [
-                    { id: "level" },
+                    { id: "lvSag" },
+                    {
+                        id: "lvRid",
+                        note: "弱点獲得に条件あり(Ⅲ-P.84)"
+                    },
+                ]
+            },
+            {
+                name: "先制",
+                bonusId: "Agi",
+                skill: [
+                    { id: "lvSco" },
                 ]
             },
         ]
@@ -541,6 +533,26 @@ const listRoll = [
         ]
     },
     // --------------------------------------------------
+    {
+        name: "戦闘用：抵抗力",
+        roll: [
+            {
+                name: "生命抵抗力",
+                bonusId: "Vit",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+            {
+                name: "精神抵抗力",
+                bonusId: "Int",
+                skill: [
+                    { id: "level" },
+                ]
+            },
+        ]
+    },
+    // --------------------------------------------------
 ];
 
 // ====================================================================================================
@@ -570,7 +582,7 @@ async function buttonRead() {
     // --------------------------------------------------
 
     // 読み込み先ＵＲＬ
-    const url = getUrl();
+    const url = getUrl(true);
 
     // 読み込み処理
     fetch(url, { method: 'GET' })
@@ -795,69 +807,29 @@ async function outputCharacter() {
     // データを生成
     // --------------------------------------------------
 
+    // ステータス
+    let listStatus = [];
+    document.querySelectorAll(".card_status > .valueBlock").forEach(target => {
+        const status = {
+            "label": target.querySelector('[id^="status_name_"]').value,
+            "value": target.querySelector('[id^="status_value_"]').value
+        }
+
+        const max = target.querySelector('[id^="status_max_"]').value;
+        if (max) {
+            status["max"] = max;
+        }
+
+        listStatus.push(status);
+    });
+
     let characterData = {
         "kind": "character",
         "data": {
             "name": data.characterName,
             "memo": null,
             "externalUrl": getUrl(),
-            "status": [
-                {
-                    "label": document.getElementById("status_name_1").value,
-                    "value": document.getElementById("status_value_1").value,
-                    "max": document.getElementById("status_value_1").value,
-                },
-                {
-                    "label": document.getElementById("status_name_2").value,
-                    "value": document.getElementById("status_value_2").value,
-                    "max": document.getElementById("status_value_2").value,
-                },
-                {
-                    "label": document.getElementById("status_name_3").value,
-                    "value": document.getElementById("status_value_3").value,
-                    "max": document.getElementById("status_value_3").value,
-                },
-                {
-                    "label": document.getElementById("status_name_4").value,
-                    "value": document.getElementById("status_value_4").value,
-                    "max": document.getElementById("status_value_4").value,
-                },
-                {
-                    "label": document.getElementById("status_name_5").value,
-                    "value": document.getElementById("status_value_5").value,
-                    "max": document.getElementById("status_value_5").value,
-                },
-                {
-                    "label": document.getElementById("status_name_6").value,
-                    "value": document.getElementById("status_value_6").value,
-                    "max": document.getElementById("status_value_6").value,
-                },
-                {
-                    "label": document.getElementById("status_name_7").value,
-                    "value": document.getElementById("status_value_7").value,
-                    "max": document.getElementById("status_value_7").value,
-                },
-                {
-                    "label": document.getElementById("status_name_8").value,
-                    "value": document.getElementById("status_value_8").value,
-                    "max": document.getElementById("status_value_8").value,
-                },
-                {
-                    "label": document.getElementById("status_name_9").value,
-                    "value": document.getElementById("status_value_9").value,
-                    "max": document.getElementById("status_value_9").value,
-                },
-                {
-                    "label": document.getElementById("status_name_10").value,
-                    "value": document.getElementById("status_value_10").value,
-                    "max": document.getElementById("status_value_10").value,
-                },
-                {
-                    "label": document.getElementById("status_name_11").value,
-                    "value": document.getElementById("status_value_11").value,
-                    "max": document.getElementById("status_value_11").value,
-                },
-            ],
+            "status": listStatus,
             "params": [
                 // ボーナス
                 {
@@ -910,14 +882,16 @@ async function outputCharacter() {
         );
 
     array.forEach(target => {
-        let skillName = listSkill[target];
+        let skillName = listSkill[target.key];
 
-        characterData["data"]["params"].push(
-            {
-                "label": skillName,
-                "value": target.value,
-            },
-        );
+        if (skillName) {
+            characterData["data"]["params"].push(
+                {
+                    "label": skillName,
+                    "value": target.value,
+                },
+            );
+        }
     })
 
     // --------------------------------------------------
@@ -938,14 +912,16 @@ async function outputCharacter() {
 // ====================================================================================================
 
 /**
- * データを取得
+ * ＵＲＬを取得
  */
-function getUrl () {
-    return (
-        document.getElementById('urlPrefix').textContent
-        + document.getElementById('input_url').value
-        + "&mode=json"
-    );
+function getUrl (json = false) {
+    let url = document.getElementById('urlPrefix').textContent + document.getElementById('input_url').value;
+
+    if (json) {
+        url += "&mode=json";
+    }
+
+    return url;
 }
 
 /**
@@ -1048,27 +1024,37 @@ function getDodge (data) {
 function drawStatus (data) {
     // ＨＰ
     document.getElementById("status_value_1").value = data.hpTotal;
+    document.getElementById("status_max_1").value = data.hpTotal;
 
     // ＭＰ
     document.getElementById("status_value_2").value = data.mpTotal;
+    document.getElementById("status_max_2").value = data.mpTotal;
 
     // 防護点
     document.getElementById("status_value_3").value = data.defenseTotal1Def;
+    document.getElementById("status_max_3").value = data.defenseTotal1Def;
 
     // 移動力
     document.getElementById("status_value_4").value = data.mobilityTotal;
+    document.getElementById("status_max_4").value = data.mobilityTotal;
 
     // ガメル
     document.getElementById("status_value_5").value = data.moneyTotal;
 
+    // 1ゾロ
+    document.getElementById("status_value_6").value = 0;
+
     // 命中力修正
     document.getElementById("status_value_9").value = 0;
+    document.getElementById("status_max_9").value = 0;
 
     // 回避力修正
     document.getElementById("status_value_10").value = getDodge(data);
+    document.getElementById("status_max_10").value = getDodge(data);
 
     // ダメージ修正
     document.getElementById("status_value_11").value = 0;
+    document.getElementById("status_max_11").value = 0;
 }
 
 /**
