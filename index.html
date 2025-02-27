@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="styles.css" />
-	  <script src="script.js"></script>
+
+	  <script src="script_common.js"></script>
+
     <title>ソードワールド2.5 ココフォリア用駒生成ツール</title>
   </head>
 
@@ -25,9 +28,9 @@
         </div>
 
         <div>
-          <select>
-            <!-- <option id="select_1">キャラクター保管所</option> -->
-            <option id="select_2">ゆとシートⅡ for SW2.5</option>
+          <select id="select_site" onchange="selectSite(this)">
+            <option id="ytsheet">ゆとシートⅡ for SW2.5</option>
+            <!-- <option id="vampire-blood">キャラクター保管所</option> -->
           </select>
         </div>
       </div>
@@ -38,8 +41,9 @@
         </div>
 
         <div>
-          <span id="urlPrefix">https://yutorize.2-d.jp/ytsheet/sw2.5/?id=</span>
+          <span id="urlPrefix"></span>
           <input id="input_url">
+          <span id="urlSuffix" class="hidden"></span>
         </div>
 
         <button onclick='buttonRead()'>
@@ -56,25 +60,6 @@
           <span class="name"></span>
         </div>
       </div>
-
-      <!-- <div class="row_input">
-        <div class="inputLabel">
-          使用ルールブック
-        </div>
-
-        <div class="card_skill">
-          <input type="checkbox" checked disalbed>
-          <span>Ⅰ</span>
-        </div>
-        <div class="card_skill">
-          <input type="checkbox" checked>
-          <span>Ⅱ</span>
-        </div>
-        <div class="card_skill">
-          <input type="checkbox" checked>
-          <span>Ⅲ</span>
-        </div>
-      </div> -->
     </div>
 
     <!------------------------------------------------------>
@@ -311,6 +296,8 @@
           <span class="value">0</span>
         </div>
       </div>
+
+      <div class="weaponNote">（備考）</div>
 
       <div class="skills">
         <!-- 命中 -->

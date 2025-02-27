@@ -285,6 +285,19 @@ p + p
   margin-right: 8px;
 }
 
+/* 武器：備考 */
+.weaponNote
+{
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 4px;
+  flex-basis: 100%;
+  margin: 2px;
+  margin-top: 8px;
+  padding: 2px 4px;
+
+  font-size: 12px;
+}
+
 /* 能力値ボーナス：無効 */
 .valueBlock.flat > .value
 {
