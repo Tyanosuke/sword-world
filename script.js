@@ -600,6 +600,10 @@ async function buttonRead() {
         // セッションストレージにデータを保存
         sessionStorage.setItem('data', JSON.stringify(data));
 
+        // キャラクター名の描画
+        document.getElementById("loadCharacter").classList.remove("hidden");
+        document.querySelector("#loadCharacter .name").textContent = data.characterName;
+
         // ステータスの描画
         drawStatus(data);
 
@@ -809,19 +813,29 @@ async function outputCharacter() {
     // ステータス
     let listStatus = [];
     document.querySelectorAll(".card_status > .valueBlock").forEach(target => {
+        // 名前を取得
+        const name = target.querySelector('[id^="status_name_"]').value;
+        if (!name) {
+            return;
+        }
+
+        // ステータス（名称・値）
         const status = {
-            "label": target.querySelector('[id^="status_name_"]').value,
+            "label": name,
             "value": target.querySelector('[id^="status_value_"]').value
         }
 
+        // ステータス（最大値）
         const max = target.querySelector('[id^="status_max_"]').value;
         if (max) {
             status["max"] = max;
         }
 
+        // ステータスを追加
         listStatus.push(status);
     });
 
+    // 駒データ
     let characterData = {
         "kind": "character",
         "data": {
@@ -879,11 +893,11 @@ async function outputCharacter() {
         .filter(
             target => target.key.indexOf("lv") === 0
         );
-
     array.forEach(target => {
+        // 技能名を取得
         let skillName = listSkill[target.key];
-
         if (skillName) {
+            // パラメータを追加
             characterData["data"]["params"].push(
                 {
                     "label": skillName,
@@ -1020,40 +1034,200 @@ function getDodge (data) {
 /**
  * ステータスの描画
  */
-function drawStatus (data) {
+function drawStatus (data, mode = 0) {
+    // --------------------------------------------------
+    // セッションストレージからデータを取得
+    // --------------------------------------------------
+
+    if (data == null) {
+        data = JSON.parse(sessionStorage.getItem("data"));
+    }
+
+    // --------------------------------------------------
+    // 各ステータスをクリア
+    // --------------------------------------------------
+
+    document.querySelectorAll('input[id^="status_"]').forEach(target => {
+        target.value = "";
+    });
+
+    // --------------------------------------------------
+    // 各ステータスを描画
+    // --------------------------------------------------
+
     // ＨＰ
+    document.getElementById("status_name_1").value = "HP";
     document.getElementById("status_value_1").value = data.hpTotal;
     document.getElementById("status_max_1").value = data.hpTotal;
 
     // ＭＰ
+    document.getElementById("status_name_2").value = "MP";
     document.getElementById("status_value_2").value = data.mpTotal;
     document.getElementById("status_max_2").value = data.mpTotal;
 
-    // 防護点
-    document.getElementById("status_value_3").value = data.defenseTotal1Def;
-    document.getElementById("status_max_3").value = data.defenseTotal1Def;
+    switch(mode) {
+        // ●マギテック
+        case 1:
+            // 防護点
+            document.getElementById("status_name_3").value = "防護点";
+            document.getElementById("status_value_3").value = data.defenseTotal1Def;
+            document.getElementById("status_max_3").value = data.defenseTotal1Def;
 
-    // 移動力
-    document.getElementById("status_value_4").value = data.mobilityTotal;
-    document.getElementById("status_max_4").value = data.mobilityTotal;
+            // 移動力
+            document.getElementById("status_name_4").value = "移動力";
+            document.getElementById("status_value_4").value = data.mobilityTotal;
+            document.getElementById("status_max_4").value = data.mobilityTotal;
 
-    // ガメル
-    document.getElementById("status_value_5").value = data.moneyTotal;
+            // 1ゾロ
+            document.getElementById("status_name_5").value = "1ゾロ";
+            document.getElementById("status_value_5").value = 0;
 
-    // 1ゾロ
-    document.getElementById("status_value_6").value = 0;
+            // ガメル
+            document.getElementById("status_name_6").value = "G";
+            document.getElementById("status_value_6").value = data.moneyTotal;
 
-    // 命中力修正
-    document.getElementById("status_value_9").value = 0;
-    document.getElementById("status_max_9").value = 0;
+            // 装填
+            document.getElementById("status_name_7").value = "装填";
+            document.getElementById("status_value_7").value = 0;
 
-    // 回避力修正
-    document.getElementById("status_value_10").value = getDodge(data);
-    document.getElementById("status_max_10").value = getDodge(data);
+            // 命中力修正
+            document.getElementById("status_name_9").value = "命中力修正";
+            document.getElementById("status_value_9").value = 0;
+            document.getElementById("status_max_9").value = 0;
 
-    // ダメージ修正
-    document.getElementById("status_value_11").value = 0;
-    document.getElementById("status_max_11").value = 0;
+            // 回避力修正
+            document.getElementById("status_name_10").value = "回避力修正";
+            document.getElementById("status_value_10").value = getDodge(data);
+            document.getElementById("status_max_10").value = getDodge(data);
+
+            // ダメージ修正
+            document.getElementById("status_name_11").value = "ダメージ修正";
+            document.getElementById("status_value_11").value = 0;
+            document.getElementById("status_max_11").value = 0;
+
+            break;
+
+        // ●バード
+        case 2:
+            // 防護点
+            document.getElementById("status_name_3").value = "防護点";
+            document.getElementById("status_value_3").value = data.defenseTotal1Def;
+            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+
+            // 楽素⤴
+            document.getElementById("status_name_4").value = "楽素⤴";
+            document.getElementById("status_value_4").value = 0;
+
+            // 移動力
+            document.getElementById("status_name_5").value = "移動力";
+            document.getElementById("status_value_5").value = data.mobilityTotal;
+            document.getElementById("status_max_5").value = data.mobilityTotal;
+
+            // 楽素⤵
+            document.getElementById("status_name_6").value = "楽素⤵";
+            document.getElementById("status_value_6").value = 0;
+
+            // 1ゾロ
+            document.getElementById("status_name_7").value = "1ゾロ";
+            document.getElementById("status_value_7").value = 0;
+
+            // 楽素♡
+            document.getElementById("status_name_8").value = "楽素♡";
+            document.getElementById("status_value_8").value = 0;
+
+            // ガメル
+            document.getElementById("status_name_9").value = "G";
+            document.getElementById("status_value_9").value = data.moneyTotal;
+
+            // 命中力修正
+            document.getElementById("status_name_10").value = "命中力修正";
+            document.getElementById("status_value_10").value = 0;
+            document.getElementById("status_max_10").value = 0;
+
+            // 回避力修正
+            document.getElementById("status_name_11").value = "回避力修正";
+            document.getElementById("status_value_11").value = getDodge(data);
+            document.getElementById("status_max_11").value = getDodge(data);
+
+            // ダメージ修正
+            document.getElementById("status_name_12").value = "ダメージ修正";
+            document.getElementById("status_value_12").value = 0;
+            document.getElementById("status_max_12").value = 0;
+
+            break;
+
+        // ●シンプル
+        case 3:
+            // 防護点
+            document.getElementById("status_name_3").value = "防護点";
+            document.getElementById("status_value_3").value = data.defenseTotal1Def;
+            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+
+            // 移動力
+            document.getElementById("status_name_4").value = "移動力";
+            document.getElementById("status_value_4").value = data.mobilityTotal;
+            document.getElementById("status_max_4").value = data.mobilityTotal;
+
+            // 1ゾロ
+            document.getElementById("status_name_9").value = "1ゾロ";
+            document.getElementById("status_value_9").value = 0;
+
+            // ガメル
+            document.getElementById("status_name_10").value = "G";
+            document.getElementById("status_value_10").value = data.moneyTotal;
+
+            // 命中力修正
+            document.getElementById("status_name_11").value = "命中力修正";
+            document.getElementById("status_value_11").value = 0;
+            document.getElementById("status_max_11").value = 0;
+
+            // 回避力修正
+            document.getElementById("status_name_12").value = "回避力修正";
+            document.getElementById("status_value_12").value = getDodge(data);
+            document.getElementById("status_max_12").value = getDodge(data);
+
+            // ダメージ修正
+            document.getElementById("status_name_13").value = "ダメージ修正";
+            document.getElementById("status_value_13").value = 0;
+            document.getElementById("status_max_13").value = 0;
+
+            break;
+
+        // ●スタンダード
+        default:
+            // 防護点
+            document.getElementById("status_name_3").value = "防護点";
+            document.getElementById("status_value_3").value = data.defenseTotal1Def;
+            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+
+            // 移動力
+            document.getElementById("status_name_4").value = "移動力";
+            document.getElementById("status_value_4").value = data.mobilityTotal;
+            document.getElementById("status_max_4").value = data.mobilityTotal;
+
+            // 1ゾロ
+            document.getElementById("status_name_5").value = "1ゾロ";
+            document.getElementById("status_value_5").value = 0;
+
+            // ガメル
+            document.getElementById("status_name_6").value = "G";
+            document.getElementById("status_value_6").value = data.moneyTotal;
+
+            // 命中力修正
+            document.getElementById("status_name_9").value = "命中力修正";
+            document.getElementById("status_value_9").value = 0;
+            document.getElementById("status_max_9").value = 0;
+
+            // 回避力修正
+            document.getElementById("status_name_10").value = "回避力修正";
+            document.getElementById("status_value_10").value = getDodge(data);
+            document.getElementById("status_max_10").value = getDodge(data);
+
+            // ダメージ修正
+            document.getElementById("status_name_11").value = "ダメージ修正";
+            document.getElementById("status_value_11").value = 0;
+            document.getElementById("status_max_11").value = 0;
+    }
 }
 
 /**

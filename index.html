@@ -39,12 +39,22 @@
 
         <div>
           <span id="urlPrefix">https://yutorize.2-d.jp/ytsheet/sw2.5/?id=</span>
-          <input id="input_url" value="">
+          <input id="input_url">
         </div>
 
         <button onclick='buttonRead()'>
-          読み取り
+          読み込み
         </button>
+      </div>
+
+      <div id="loadCharacter" class="row_input hidden">
+        <div class="inputLabel">
+          読み込んだキャラクター
+        </div>
+
+        <div>
+          <span class="name"></span>
+        </div>
       </div>
 
       <!-- <div class="row_input">
@@ -73,76 +83,80 @@
       <div>
         <h2>ステータス</h2>
 
-        <!-- <div class="row_input buttons_preset">
-          <button>スタンダード</button>
-          <button>シューター</button>
-          <button>バード</button>
-        </div> -->
+        <div class="row_input buttons_preset">
+          <div class="inputLabel">
+            プリセット
+          </div>
+          <button onclick="drawStatus(null, 0)">スタンダード</button>
+          <button onclick="drawStatus(null, 3)">シンプル</button>
+          <button onclick="drawStatus(null, 1)">マギテック</button>
+          <button onclick="drawStatus(null, 2)">バード</button>
+        </div>
 
         <div class="list_display">
           <p>キャラクター一覧に表示されます。</p>
 
           <div class="card_status">
             <div class="valueBlock">
-              <input id="status_name_1" class="name" value="HP">
-              <input id="status_value_1" type="number" value="">
+              <input id="status_name_1" class="name">
+              <input id="status_value_1" type="number">
               <span>/</span>
-              <input id="status_max_1" type="number" value="">
+              <input id="status_max_1" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_2" class="name" value="MP">
-              <input id="status_value_2" type="number" value="">
+              <input id="status_name_2" class="name">
+              <input id="status_value_2" type="number">
               <span>/</span>
-              <input id="status_max_2" type="number" value="">
-            </div>
-          </div>
-
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_3" class="name" value="防護点">
-              <input id="status_value_3" type="number" value="">
-              <span>/</span>
-              <input id="status_max_3" type="number" value="">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_4" class="name" value="移動力">
-              <input id="status_value_4" type="number" value="">
-              <span>/</span>
-              <input id="status_max_4" type="number" value="">
+              <input id="status_max_2" type="number">
             </div>
           </div>
 
           <div class="card_status">
             <div class="valueBlock">
-              <input id="status_name_5" class="name" value="ガメル">
-              <input id="status_value_5" type="number" value="">
+              <input id="status_name_3" class="name">
+              <input id="status_value_3" type="number">
               <span>/</span>
-              <input id="status_max_5" type="number" value="">
+              <input id="status_max_3" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_6" class="name" value="1ゾロ">
-              <input id="status_value_6" type="number" value="">
+              <input id="status_name_4" class="name">
+              <input id="status_value_4" type="number">
               <span>/</span>
-              <input id="status_max_6" type="number" value="">
+              <input id="status_max_4" type="number">
+            </div>
+          </div>
+
+          <div class="card_status">
+            <div class="valueBlock">
+              <input id="status_name_5" class="name">
+              <input id="status_value_5" type="number">
+              <span>/</span>
+              <input id="status_max_5" type="number">
+            </div>
+
+            <div class="valueBlock">
+              <input id="status_name_6" class="name">
+              <input id="status_value_6" type="number">
+              <span>/</span>
+              <input id="status_max_6" type="number">
             </div>
           </div>
 
           <div class="card_status">
             <div class="valueBlock">
               <input id="status_name_7" class="name">
-              <input id="status_value_7" type="number" value="">
+              <input id="status_value_7" type="number">
               <span>/</span>
-              <input id="status_max_7" type="number" value="">
+              <input id="status_max_7" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_8" class="name">
-              <input id="status_value_8" type="number" value="">
+              <input id="status_value_8" type="number">
               <span>/</span>
-              <input id="status_max_8" type="number" value="">
+              <input id="status_max_8" type="number">
             </div>
           </div>
         </div>
@@ -150,59 +164,59 @@
         <div class="list_notDisplay">
           <div class="card_status">
             <div class="valueBlock">
-              <input id="status_name_9" class="name" value="命中力修正">
-              <input id="status_value_9" type="number" value="0">
+              <input id="status_name_9" class="name">
+              <input id="status_value_9" type="number">
               <span>/</span>
-              <input id="status_max_9" type="number" value="">
+              <input id="status_max_9" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_10" class="name" value="回避力修正">
-              <input id="status_value_10" type="number" value="0">
+              <input id="status_name_10" class="name">
+              <input id="status_value_10" type="number">
               <span>/</span>
-              <input id="status_max_10" type="number" value="">
+              <input id="status_max_10" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_11" class="name" value="ダメージ修正">
-              <input id="status_value_11" type="number" value="0">
+              <input id="status_name_11" class="name">
+              <input id="status_value_11" type="number">
               <span>/</span>
-              <input id="status_max_11" type="number" value="">
+              <input id="status_max_11" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_12" class="name" value="">
-              <input id="status_value_12" type="number" value="">
+              <input id="status_name_12" class="name">
+              <input id="status_value_12" type="number">
               <span>/</span>
-              <input id="status_max_12" type="number" value="">
+              <input id="status_max_12" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_13" class="name" value="">
-              <input id="status_value_13" type="number" value="">
+              <input id="status_name_13" class="name">
+              <input id="status_value_13" type="number">
               <span>/</span>
-              <input id="status_max_13" type="number" value="">
+              <input id="status_max_13" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_14" class="name" value="">
-              <input id="status_value_14" type="number" value="">
+              <input id="status_name_14" class="name">
+              <input id="status_value_14" type="number">
               <span>/</span>
-              <input id="status_max_14" type="number" value="">
+              <input id="status_max_14" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_15" class="name" value="">
-              <input id="status_value_15" type="number" value="">
+              <input id="status_name_15" class="name">
+              <input id="status_value_15" type="number">
               <span>/</span>
-              <input id="status_max_15" type="number" value="">
+              <input id="status_max_15" type="number">
             </div>
 
             <div class="valueBlock">
-              <input id="status_name_16" class="name" value="">
-              <input id="status_value_16" type="number" value="">
+              <input id="status_name_16" class="name">
+              <input id="status_value_16" type="number">
               <span>/</span>
-              <input id="status_max_16" type="number" value="">
+              <input id="status_max_16" type="number">
             </div>
           </div>
         </div>
