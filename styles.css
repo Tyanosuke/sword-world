@@ -170,6 +170,12 @@ p + p
 /* ステータス
 /* -------------------------------------------------- */
 
+/* プリセットボタン */
+.buttons_preset
+{
+  margin-bottom: 8px;
+}
+
 /* キャラクター一覧に表示されるステータス */
 .list_display
 {
@@ -561,7 +567,7 @@ p + p
   z-index: 100;
 
   color: #fff;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
 
   background: rgba(0, 0, 0, 0.5);

@@ -545,7 +545,7 @@ const listRoll = [
             },
             {
                 name: "精神抵抗力",
-                bonusId: "Int",
+                bonusId: "Mnd",
                 skill: [
                     { id: "level" },
                 ]
@@ -614,7 +614,6 @@ async function buttonRead() {
 
         // ナビテキストの表示
         // showNaviText("navi_read");
-
     })
     .catch(error => {
         console.dir(error);
