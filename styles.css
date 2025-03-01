@@ -234,7 +234,7 @@ p + p
 }
 
 /* / */
-.valueBlock > span
+.valueBlock > span.slash
 {
   margin-left: 4px;
   margin-right: 4px;
@@ -394,37 +394,43 @@ p + p
 }
 
 /* 器用度 */
-.valueBlock.Dex
+.valueBlock.Dex,
+.valueBlock.NB1
 {
   background-color: rgb(128, 0, 128);
 }
 
 /* 敏捷度 */
-.valueBlock.Agi
+.valueBlock.Agi,
+.valueBlock.NB2
 {
   background-color: rgb(64, 64, 128);
 }
 
 /* 筋力 */
-.valueBlock.Str
+.valueBlock.Str,
+.valueBlock.NB3
 {
   background-color: rgb(128, 64, 64);
 }
 
 /* 生命力 */
-.valueBlock.Vit
+.valueBlock.Vit,
+.valueBlock.NB4
 {
   background-color: rgb(128, 128, 0);
 }
 
 /* 知力 */
-.valueBlock.Int
+.valueBlock.Int,
+.valueBlock.NB5
 {
   background-color: rgb(0, 128, 128);
 }
 
 /* 精神力 */
-.valueBlock.Mnd
+.valueBlock.Mnd,
+.valueBlock.NB6
 {
   background-color: rgb(64, 128, 64);
 }

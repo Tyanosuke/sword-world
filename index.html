@@ -30,7 +30,7 @@
         <div>
           <select id="select_site" onchange="selectSite(this)">
             <option id="ytsheet">ゆとシートⅡ for SW2.5</option>
-            <!-- <option id="vampire-blood">キャラクター保管所</option> -->
+            <option id="vampire-blood">キャラクター保管所</option>
           </select>
         </div>
       </div>
@@ -85,14 +85,14 @@
             <div class="valueBlock">
               <input id="status_name_1" class="name">
               <input id="status_value_1" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_1" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_2" class="name">
               <input id="status_value_2" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_2" type="number">
             </div>
           </div>
@@ -101,14 +101,14 @@
             <div class="valueBlock">
               <input id="status_name_3" class="name">
               <input id="status_value_3" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_3" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_4" class="name">
               <input id="status_value_4" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_4" type="number">
             </div>
           </div>
@@ -117,14 +117,14 @@
             <div class="valueBlock">
               <input id="status_name_5" class="name">
               <input id="status_value_5" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_5" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_6" class="name">
               <input id="status_value_6" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_6" type="number">
             </div>
           </div>
@@ -133,14 +133,14 @@
             <div class="valueBlock">
               <input id="status_name_7" class="name">
               <input id="status_value_7" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_7" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_8" class="name">
               <input id="status_value_8" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_8" type="number">
             </div>
           </div>
@@ -151,56 +151,56 @@
             <div class="valueBlock">
               <input id="status_name_9" class="name">
               <input id="status_value_9" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_9" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_10" class="name">
               <input id="status_value_10" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_10" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_11" class="name">
               <input id="status_value_11" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_11" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_12" class="name">
               <input id="status_value_12" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_12" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_13" class="name">
               <input id="status_value_13" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_13" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_14" class="name">
               <input id="status_value_14" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_14" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_15" class="name">
               <input id="status_value_15" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_15" type="number">
             </div>
 
             <div class="valueBlock">
               <input id="status_name_16" class="name">
               <input id="status_value_16" type="number">
-              <span>/</span>
+              <span class="slash">/</span>
               <input id="status_max_16" type="number">
             </div>
           </div>
@@ -233,7 +233,7 @@
         <h2>駒データ生成</h2>
 
         <div class="row_input">
-          <button onclick="outputCharacter()">生成</button>
+          <button onclick="module.outputCharacter()">生成</button>
           <span id="navi_output" class="navi_text">クリップボードに駒データをコピーしました。</span>
         </div>
       </div>

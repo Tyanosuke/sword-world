@@ -4,49 +4,50 @@
 
 // 能力値ボーナス
 const listStatus = {
-    Dex: "器用度",
-    Agi: "敏捷度",
-    Str: "筋力",
-    Vit: "生命力",
-    Int: "知力",
-    Mnd: "精神力",
+    NB1: "器用度",
+    NB2: "敏捷度",
+    NB3: "筋力",
+    NB4: "生命力",
+    NB5: "知力",
+    NB6: "精神力",
 }
 
 // 技能レベル
 const listSkill = {
     // ●冒険者レベル
-    level: "冒険者レベル",
+    lv: "冒険者レベル",
 
     // ●戦士系
-    lvFig: "ファイター",
-    lvFen: "フェンサー",
-    lvGra: "グラップラー",
-    lvSho: "シューター",
-    lvBat: "バトルダンサー",
+    GLv1: "ファイター",
+    GLv2: "フェンサー",
+    GLv3: "グラップラー",
+    GLv4: "シューター",
+    GLv26: "バトルダンサー",
 
     // ●魔法使い系
-    lvSor: "ソーサラー",
-    lvCon: "コンジャラー",
-    lvPri: "プリースト",
-    lvMag: "マギテック",
-    lvFai: "フェアリーテイマー",
-    lvDem: "デーモンルーラー",
-    lvDru: "ドルイド",
-    lvAby: "アビスゲイザー",
+    GLv5: "ソーサラー",
+    GLv6: "コンジャラー",
+    GLv7: "プリースト",
+    GLv9: "マギテック",
+    GLv8: "フェアリーテイマー",
+    GLv17: "デーモンルーラー",
+    GLv24: "ドルイド",
+    GLv27: "アビスゲイザー",
 
     // ●その他系
-    lvSco: "スカウト",
-    lvRan: "レンジャー",
-    lvSag: "セージ",
-    lvEnh: "エンハンサー",
-    lvBar: "バード",
-    lvRid: "ライダー",
-    lvAlc: "アルケミスト",
-    lvGeo: "ジオマンサー",
-    lvWar: "ウォーリーダー",
-    lvDar: "ダークハンター",
-    lvPhy: "フィジカルマスター",
+    GLv10: "スカウト",
+    GLv11: "レンジャー",
+    GLv12: "セージ",
+    GLv13: "エンハンサー",
+    GLv14: "バード",
+    GLv16: "ライダー",
+    GLv15: "アルケミスト",
+    GLv25: "ジオマンサー",
+    GLv18: "ウォーリーダー",
+    GLv28: "ダークハンター",
+    GLv20: "フィジカルマスター",
 };
+
 
 // 行為判定
 const listRoll = [
@@ -57,51 +58,51 @@ const listRoll = [
             // 器用度
             {
                 name: "隠蔽",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id:"lvSco" },
-                    { id:"lvRan" },
+                    { id:"GLv10" },
+                    { id:"GLv11" },
                 ]
             },
             {
                 name: "応急手当",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id: "lvRan" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "解除",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                 ]
             },
             {
                 name: "スリ",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                 ]
             },
             {
                 name: "変装",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                 ]
             },
             {
                 name: "罠設置",
-                bonusId: "Dex",
+                bonusId: "NB1",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                 ]
@@ -109,62 +110,62 @@ const listRoll = [
             // 敏捷度
             {
                 name: "受け身",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
-                    { id: "lvRid" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
+                    { id: "GLv16" },
                 ]
             },
             {
                 name: "隠密",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "軽業",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "登攀",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "尾行",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 book: "Ⅲ",
                 name: "騎乗",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvRid" },
+                    { id: "GLv16" },
                 ]
             },
             // 知力
             {
                 name: "足跡追跡",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -175,15 +176,15 @@ const listRoll = [
             },
             {
                 name: "異常感知",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然環境のみ"
                     },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -194,20 +195,20 @@ const listRoll = [
             },
             {
                 name: "聞き耳",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "危険感知",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -218,24 +219,24 @@ const listRoll = [
             },
             {
                 name: "見識",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSag" },
-                    { id: "lvBar" },
-                    { id: "lvAlc" },
+                    { id: "GLv12" },
+                    { id: "GLv14" },
+                    { id: "GLv15" },
                 ]
             },
             {
                 name: "探索",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然環境のみ"
                     },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -246,89 +247,89 @@ const listRoll = [
             },
             {
                 name: "地図作成",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然環境のみ"
                     },
-                    { id: "lvSag" },
-                    { id: "lvRid" },
+                    { id: "GLv12" },
+                    { id: "GLv16" },
                 ]
             },
             {
                 name: "天候予測",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvRan" },
+                    { id: "GLv10" },
+                    { id: "GLv11" },
                 ]
             },
             {
                 name: "病気知識",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然環境のみ"
                     },
-                    { id: "lvSag" },
+                    { id: "GLv12" },
                 ]
             },
             {
                 name: "文献",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSag" },
+                    { id: "GLv12" },
                 ]
             },
             {
                 name: "文明鑑定",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSag" },
+                    { id: "GLv12" },
                 ]
             },
             {
                 name: "宝物鑑定",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
-                    { id: "lvSag" },
+                    { id: "GLv10" },
+                    { id: "GLv12" },
                 ]
             },
             {
                 name: "魔法行使",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSor" },
-                    { id: "lvCon" },
-                    { id: "lvPri" },
-                    { id: "lvMag" },
-                    { id: "lvFai" },
+                    { id: "GLv5" },
+                    { id: "GLv6" },
+                    { id: "GLv7" },
+                    { id: "GLv9" },
+                    { id: "GLv8" },
                 ]
             },
             {
                 name: "薬品学",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvRan" },
-                    { id: "lvSag" },
-                    { id: "lvAlc" },
+                    { id: "GLv11" },
+                    { id: "GLv12" },
+                    { id: "GLv15" },
                 ]
             },
             {
                 name: "罠回避",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                     {
-                        id: "lvRan",
+                        id: "GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -340,30 +341,30 @@ const listRoll = [
             {
                 book: "Ⅱ",
                 name: "聞き込み",
-                bonusId: "Int",
+                bonusId: "NB5",
             },
             {
                 book: "Ⅲ",
                 name: "弱点隠蔽",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvRid" },
+                    { id: "GLv16" },
                 ]
             },
             {
                 book: "Ⅲ",
                 name: "賦術",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvAlc" },
+                    { id: "GLv15" },
                 ]
             },
             {
                 book: "Ⅱ",
                 name: "演奏",
-                bonusId: "Mnd",
+                bonusId: "NB6",
                 skill: [
-                    { id: "lvBar" },
+                    { id: "GLv14" },
                 ]
             },
         ]
@@ -374,45 +375,45 @@ const listRoll = [
         roll: [
             {
                 name: "跳躍",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 book: "Ⅱ",
                 name: "水泳",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 name: "登攀",
-                bonusId: "Str",
+                bonusId: "NB3",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 name: "腕力",
-                bonusId: "Str",
+                bonusId: "NB3",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 name: "生死",
-                bonusId: "Vit",
+                bonusId: "NB4",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 name: "真偽",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
         ]
@@ -423,20 +424,20 @@ const listRoll = [
         roll: [
             {
                 name: "魔物知識",
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSag" },
+                    { id: "GLv12" },
                     {
-                        id: "lvRid",
+                        id: "GLv16",
                         note: "弱点獲得に条件あり(Ⅲ-P.84)"
                     },
                 ]
             },
             {
                 name: "先制",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvSco" },
+                    { id: "GLv10" },
                 ]
             },
         ]
@@ -455,49 +456,49 @@ const listRoll = [
             {
                 rate : 0,
                 critical: 10,
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSor" },
-                    { id: "lvCon" },
-                    { id: "lvPri" },
-                    { id: "lvMag" },
-                    { id: "lvFai" },
+                    { id: "GLv5" },
+                    { id: "GLv6" },
+                    { id: "GLv7" },
+                    { id: "GLv9" },
+                    { id: "GLv8" },
                 ]
             },
             {
                 rate : 10,
                 critical: 10,
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSor" },
-                    { id: "lvCon" },
-                    { id: "lvPri" },
-                    { id: "lvMag" },
-                    { id: "lvFai" },
+                    { id: "GLv5" },
+                    { id: "GLv6" },
+                    { id: "GLv7" },
+                    { id: "GLv9" },
+                    { id: "GLv8" },
                 ]
             },
             {
                 rate : 20,
                 critical: 10,
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSor" },
-                    { id: "lvCon" },
-                    { id: "lvPri" },
-                    { id: "lvMag" },
-                    { id: "lvFai" },
+                    { id: "GLv5" },
+                    { id: "GLv6" },
+                    { id: "GLv7" },
+                    { id: "GLv9" },
+                    { id: "GLv8" },
                 ]
             },
             {
                 rate : 30,
                 critical: 10,
-                bonusId: "Int",
+                bonusId: "NB5",
                 skill: [
-                    { id: "lvSor" },
-                    { id: "lvCon" },
-                    { id: "lvPri" },
-                    { id: "lvMag" },
-                    { id: "lvFai" },
+                    { id: "GLv5" },
+                    { id: "GLv6" },
+                    { id: "GLv7" },
+                    { id: "GLv9" },
+                    { id: "GLv8" },
                 ]
             },
         ]
@@ -509,13 +510,13 @@ const listRoll = [
         roll: [
             {
                 name: "回避",
-                bonusId: "Agi",
+                bonusId: "NB2",
                 skill: [
-                    { id: "lvFig" },
-                    { id: "lvFen" },
-                    { id: "lvGra" },
+                    { id: "GLv1" },
+                    { id: "GLv2" },
+                    { id: "GLv3" },
                     {
-                        id: "lvSho",
+                        id: "GLv4",
                         note: "《射手の体術》(Ⅱ-P.227)が必要",
                         cond: {
                             category: "combatFeatsLv",
@@ -532,16 +533,16 @@ const listRoll = [
         roll: [
             {
                 name: "生命抵抗力",
-                bonusId: "Vit",
+                bonusId: "NB4",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
             {
                 name: "精神抵抗力",
-                bonusId: "Mnd",
+                bonusId: "NB6",
                 skill: [
-                    { id: "level" },
+                    { id: "lv" },
                 ]
             },
         ]
@@ -596,7 +597,7 @@ export async function outputCharacter() {
     let characterData = {
         "kind": "character",
         "data": {
-            "name": data.characterName,
+            "name": data.pc_name,
             "memo": null,
             "externalUrl": getUrl(),
             "status": listStatus,
@@ -604,27 +605,27 @@ export async function outputCharacter() {
                 // ボーナス
                 {
                     "label": "器用度",
-                    "value": data.bonusDex,
+                    "value": data.NB1,
                 },
                 {
                     "label": "敏捷度",
-                    "value": data.bonusAgi,
+                    "value": data.NB2,
                 },
                 {
                     "label": "筋力",
-                    "value": data.bonusStr,
+                    "value": data.NB3,
                 },
                 {
                     "label": "生命力",
-                    "value": data.bonusVit,
+                    "value": data.NB4,
                 },
                 {
                     "label": "知力",
-                    "value": data.bonusInt,
+                    "value": data.NB5,
                 },
                 {
                     "label": "精神力",
-                    "value": data.bonusMnd,
+                    "value": data.NB6,
                 },
             ],
             "active": true,
@@ -639,7 +640,7 @@ export async function outputCharacter() {
     // 技能レベルをセット
     // --------------------------------------------------
 
-    // lvから始まるデータを取得
+    // GLvから始まるデータを取得
     const array = Object.keys(data)
         .map(
             k => ({
@@ -648,7 +649,7 @@ export async function outputCharacter() {
             })
         )
         .filter(
-            target => target.key.indexOf("lv") === 0
+            target => target.key.indexOf("GLv") === 0
         );
     array.forEach(target => {
         // 技能名を取得
@@ -712,36 +713,15 @@ export function getSkillLevelForName (name) {
 }
 
 /**
- * 回避力修正を取得
- */
-export function getDodge (data) {
-    // 回避力トータルを取得
-    let value = data.defenseTotal1Eva;
-
-    // 回避力0の場合、0を返す
-    if (value <= 0) {
-        return 0;
-    }
-
-    // 技能レベルを引く
-    value -= data[getSkillLevelForName(data.evasionClass1)] ?? 0;
-
-    // 敏捷度ボーナスを引く
-    value -= data.bonusAgi;
-
-    return value;
-}
-
-/**
  * 「戦闘用：攻撃」カテゴリーの生成
  */
  export function setAttack (data, list) {
 
     // 武器データを取得
     let listWeapon = [];
-    for (let i = 1; i <= data.weaponNum; i++) {
+    for (let i = 0; i < data.V_arms_id.length; i++) {
         // 技能名称
-        const className = data["weapon" + i + "Class"];
+        const className = listSkill["GLv" + data.V_arms_hit_ginou[i]];
 
         // 技能が設定されていない場合は無視
         if (!className) {
@@ -750,19 +730,19 @@ export function getDodge (data) {
 
         // 配列の生成
         listWeapon.push({
-            name: data["weapon" + i + "Name"],
+            name: data.arms_name[i],
             skill: getSkillLevelForName(className),
-            usage: data["weapon" + i + "Usage"],
-            note: data["weapon" + i + "Note"],
+            usage: data.arms_yoho[i],
+            note: data.arms_memo[i],
             hit: {
-                bonusId: "Dex",
-                hitAdd : data["weapon" + i + "Acc"],
+                bonusId: "NB1",
+                hitAdd : data.arms_hit_mod[i],
             },
             damage: {
-                rate : data["weapon" + i + "Rate"],
-                rateAdd : data["weapon" + i + "Dmg"],
-                critical: data["weapon" + i + "Crit"],
-                bonusId: "Str",
+                rate : data.arms_iryoku[i],
+                rateAdd : data.arms_damage_mod[i],
+                critical: data.arms_critical[i],
+                bonusId: "NB3",
             },
         });
     }
@@ -777,7 +757,7 @@ export function getDodge (data) {
  */
 export function drawCharacterName (data) {
     document.getElementById("loadCharacter").classList.remove("hidden");
-    document.querySelector("#loadCharacter .name").textContent = data.characterName;
+    document.querySelector("#loadCharacter .name").textContent = data.pc_name;
 }
 
 /**
@@ -806,26 +786,26 @@ export function drawStatus (data, mode = 0) {
 
     // ＨＰ
     document.getElementById("status_name_1").value = "HP";
-    document.getElementById("status_value_1").value = data.hpTotal;
-    document.getElementById("status_max_1").value = data.hpTotal;
+    document.getElementById("status_value_1").value = data.HP;
+    document.getElementById("status_max_1").value = data.HP;
 
     // ＭＰ
     document.getElementById("status_name_2").value = "MP";
-    document.getElementById("status_value_2").value = data.mpTotal;
-    document.getElementById("status_max_2").value = data.mpTotal;
+    document.getElementById("status_value_2").value = data.MP;
+    document.getElementById("status_max_2").value = data.MP;
 
     switch(mode) {
         // ●マギテック
         case 1:
             // 防護点
             document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.defenseTotal1Def;
-            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+            document.getElementById("status_value_3").value = data.bougo;
+            document.getElementById("status_max_3").value = data.bougo;
 
             // 移動力
             document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.mobilityTotal;
-            document.getElementById("status_max_4").value = data.mobilityTotal;
+            document.getElementById("status_value_4").value = data.ido;
+            document.getElementById("status_max_4").value = data.ido;
 
             // 1ゾロ
             document.getElementById("status_name_5").value = "1ゾロ";
@@ -833,7 +813,7 @@ export function drawStatus (data, mode = 0) {
 
             // ガメル
             document.getElementById("status_name_6").value = "G";
-            document.getElementById("status_value_6").value = data.moneyTotal;
+            document.getElementById("status_value_6").value = data.money;
 
             // 装填
             document.getElementById("status_name_7").value = "装填";
@@ -846,8 +826,8 @@ export function drawStatus (data, mode = 0) {
 
             // 回避力修正
             document.getElementById("status_name_10").value = "回避力修正";
-            document.getElementById("status_value_10").value = getDodge(data);
-            document.getElementById("status_max_10").value = getDodge(data);
+            document.getElementById("status_value_10").value = data.kaihi;
+            document.getElementById("status_max_10").value = data.kaihi;
 
             // ダメージ修正
             document.getElementById("status_name_11").value = "ダメージ修正";
@@ -860,8 +840,8 @@ export function drawStatus (data, mode = 0) {
         case 2:
             // 防護点
             document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.defenseTotal1Def;
-            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+            document.getElementById("status_value_3").value = data.bougo;
+            document.getElementById("status_max_3").value = data.bougo;
 
             // 楽素⤴
             document.getElementById("status_name_4").value = "楽素⤴";
@@ -869,8 +849,8 @@ export function drawStatus (data, mode = 0) {
 
             // 移動力
             document.getElementById("status_name_5").value = "移動力";
-            document.getElementById("status_value_5").value = data.mobilityTotal;
-            document.getElementById("status_max_5").value = data.mobilityTotal;
+            document.getElementById("status_value_5").value = data.ido;
+            document.getElementById("status_max_5").value = data.ido;
 
             // 楽素⤵
             document.getElementById("status_name_6").value = "楽素⤵";
@@ -886,7 +866,7 @@ export function drawStatus (data, mode = 0) {
 
             // ガメル
             document.getElementById("status_name_9").value = "G";
-            document.getElementById("status_value_9").value = data.moneyTotal;
+            document.getElementById("status_value_9").value = data.money;
 
             // 命中力修正
             document.getElementById("status_name_10").value = "命中力修正";
@@ -895,8 +875,8 @@ export function drawStatus (data, mode = 0) {
 
             // 回避力修正
             document.getElementById("status_name_11").value = "回避力修正";
-            document.getElementById("status_value_11").value = getDodge(data);
-            document.getElementById("status_max_11").value = getDodge(data);
+            document.getElementById("status_value_11").value = data.kaihi;
+            document.getElementById("status_max_11").value = data.kaihi;
 
             // ダメージ修正
             document.getElementById("status_name_12").value = "ダメージ修正";
@@ -909,13 +889,13 @@ export function drawStatus (data, mode = 0) {
         case 3:
             // 防護点
             document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.defenseTotal1Def;
-            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+            document.getElementById("status_value_3").value = data.bougo;
+            document.getElementById("status_max_3").value = data.bougo;
 
             // 移動力
             document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.mobilityTotal;
-            document.getElementById("status_max_4").value = data.mobilityTotal;
+            document.getElementById("status_value_4").value = data.ido;
+            document.getElementById("status_max_4").value = data.ido;
 
             // 1ゾロ
             document.getElementById("status_name_9").value = "1ゾロ";
@@ -923,7 +903,7 @@ export function drawStatus (data, mode = 0) {
 
             // ガメル
             document.getElementById("status_name_10").value = "G";
-            document.getElementById("status_value_10").value = data.moneyTotal;
+            document.getElementById("status_value_10").value = data.money;
 
             // 命中力修正
             document.getElementById("status_name_11").value = "命中力修正";
@@ -932,8 +912,8 @@ export function drawStatus (data, mode = 0) {
 
             // 回避力修正
             document.getElementById("status_name_12").value = "回避力修正";
-            document.getElementById("status_value_12").value = getDodge(data);
-            document.getElementById("status_max_12").value = getDodge(data);
+            document.getElementById("status_value_12").value = data.kaihi;
+            document.getElementById("status_max_12").value = data.kaihi;
 
             // ダメージ修正
             document.getElementById("status_name_13").value = "ダメージ修正";
@@ -946,13 +926,13 @@ export function drawStatus (data, mode = 0) {
         default:
             // 防護点
             document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.defenseTotal1Def;
-            document.getElementById("status_max_3").value = data.defenseTotal1Def;
+            document.getElementById("status_value_3").value = data.bougo;
+            document.getElementById("status_max_3").value = data.bougo;
 
             // 移動力
             document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.mobilityTotal;
-            document.getElementById("status_max_4").value = data.mobilityTotal;
+            document.getElementById("status_value_4").value = data.ido;
+            document.getElementById("status_max_4").value = data.ido;
 
             // 1ゾロ
             document.getElementById("status_name_5").value = "1ゾロ";
@@ -960,7 +940,7 @@ export function drawStatus (data, mode = 0) {
 
             // ガメル
             document.getElementById("status_name_6").value = "G";
-            document.getElementById("status_value_6").value = data.moneyTotal;
+            document.getElementById("status_value_6").value = data.money;
 
             // 命中力修正
             document.getElementById("status_name_9").value = "命中力修正";
@@ -969,8 +949,8 @@ export function drawStatus (data, mode = 0) {
 
             // 回避力修正
             document.getElementById("status_name_10").value = "回避力修正";
-            document.getElementById("status_value_10").value = getDodge(data);
-            document.getElementById("status_max_10").value = getDodge(data);
+            document.getElementById("status_value_10").value = data.kaihi;
+            document.getElementById("status_max_10").value = data.kaihi;
 
             // ダメージ修正
             document.getElementById("status_name_11").value = "ダメージ修正";
@@ -1075,7 +1055,7 @@ export function drawContents (data) {
                 // - 能力値ボーナス：名称
                 cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent = listStatus[roll.hit.bonusId];
                 // - 能力値ボーナス：値
-                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data["bonus" + roll.hit.bonusId];
+                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data[roll.hit.bonusId];
                 // - 能力値ボーナス：ボーナス修正
                 let addHit = data["bonus" + roll.hit.hitAdd];
                 if (addHit > 0) {
@@ -1098,7 +1078,7 @@ export function drawContents (data) {
                 // - 能力値ボーナス：名称
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent = listStatus[roll.damage.bonusId];
                 // - 能力値ボーナス：値
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .value").textContent = data["bonus" + roll.damage.bonusId];
+                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .value").textContent = data[roll.damage.bonusId];
 
                 // 前の武器として保持する
                 if (!dupFlag) {
@@ -1123,7 +1103,7 @@ export function drawContents (data) {
                 cloneRoll.querySelector(".valueBlock.bonus > .name").textContent = listStatus[roll.bonusId];
 
                 // 能力値ボーナス：値
-                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data["bonus" + roll.bonusId];
+                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data[roll.bonusId];
             }
             // ●行為判定
             else {
@@ -1148,7 +1128,7 @@ export function drawContents (data) {
                 cloneRoll.querySelector(".valueBlock.bonus > .name").textContent = listStatus[roll.bonusId];
 
                 // 能力値ボーナス：値
-                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data["bonus" + roll.bonusId];
+                cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data[roll.bonusId];
 
                 // // 回避
                 if (typeDodge) {
