@@ -121,6 +121,23 @@ p + p
   margin-top: 20px;
 }
 
+/* 説明 */
+.note
+{
+  margin-left: 12px;
+}
+.note + .note
+{
+  margin-top: 12px;
+}
+.noteTitle
+{
+  color: var(--bg-color);
+  background: var(--font-color);
+  border-radius: 4px;
+  padding: 4px;
+}
+
 /* 非表示 */
 .hidden
 {

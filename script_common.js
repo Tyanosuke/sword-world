@@ -29,10 +29,11 @@ async function selectSite($this = null) {
         $this = document.getElementById("select_site");
     }
 
+    const id = $this.selectedOptions[0].id;
     let prefix = "";
     let suffix = "";
     let script = "";
-    switch($this.selectedOptions[0].id){
+    switch(id){
         // ●ゆとシート
         case "ytsheet":
             prefix = "https://yutorize.2-d.jp/ytsheet/sw2.5/?id=";
@@ -46,6 +47,20 @@ async function selectSite($this = null) {
             script= "script_vampire";
             break;
     }
+
+    // 各サイトごとの表示
+    document.querySelectorAll('[class^="displayLimit_"]').forEach(target => {
+        // ●IDが一致する場合
+        if (target.classList.contains("displayLimit_" + id)) {
+            // 表示
+            target.classList.remove("hidden");
+        }
+        // ●それ以外の場合
+         else {
+            // 非表示
+            target.classList.add("hidden");
+        }
+    });
 
     // 入力欄に反映
     document.getElementById("urlPrefix").textContent = prefix;
