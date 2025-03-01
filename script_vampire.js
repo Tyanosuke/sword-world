@@ -18,34 +18,34 @@ const listSkill = {
     lv: "冒険者レベル",
 
     // ●戦士系
-    GLv1: "ファイター",
-    GLv2: "フェンサー",
-    GLv3: "グラップラー",
-    GLv4: "シューター",
-    GLv26: "バトルダンサー",
+    V_GLv1: "ファイター",
+    V_GLv2: "フェンサー",
+    V_GLv3: "グラップラー",
+    V_GLv4: "シューター",
+    V_GLv26: "バトルダンサー",
 
     // ●魔法使い系
-    GLv5: "ソーサラー",
-    GLv6: "コンジャラー",
-    GLv7: "プリースト",
-    GLv9: "マギテック",
-    GLv8: "フェアリーテイマー",
-    GLv17: "デーモンルーラー",
-    GLv24: "ドルイド",
-    GLv27: "アビスゲイザー",
+    V_GLv5: "ソーサラー",
+    V_GLv6: "コンジャラー",
+    V_GLv7: "プリースト",
+    V_GLv9: "マギテック",
+    V_GLv8: "フェアリーテイマー",
+    V_GLv17: "デーモンルーラー",
+    V_GLv24: "ドルイド",
+    V_GLv27: "アビスゲイザー",
 
     // ●その他系
-    GLv10: "スカウト",
-    GLv11: "レンジャー",
-    GLv12: "セージ",
-    GLv13: "エンハンサー",
-    GLv14: "バード",
-    GLv16: "ライダー",
-    GLv15: "アルケミスト",
-    GLv25: "ジオマンサー",
-    GLv18: "ウォーリーダー",
-    GLv28: "ダークハンター",
-    GLv20: "フィジカルマスター",
+    V_GLv10: "スカウト",
+    V_GLv11: "レンジャー",
+    V_GLv12: "セージ",
+    V_GLv13: "エンハンサー",
+    V_GLv14: "バード",
+    V_GLv16: "ライダー",
+    V_GLv15: "アルケミスト",
+    V_GLv25: "ジオマンサー",
+    V_GLv18: "ウォーリーダー",
+    V_GLv28: "ダークハンター",
+    V_GLv20: "フィジカルマスター",
 };
 
 
@@ -60,24 +60,24 @@ const listRoll = [
                 name: "隠蔽",
                 bonusId: "NB1",
                 skill: [
-                    { id:"GLv10" },
-                    { id:"GLv11" },
+                    { id:"V_GLv10" },
+                    { id:"V_GLv11" },
                 ]
             },
             {
                 name: "応急手当",
                 bonusId: "NB1",
                 skill: [
-                    { id: "GLv11" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
                 name: "解除",
                 bonusId: "NB1",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                 ]
@@ -86,23 +86,23 @@ const listRoll = [
                 name: "スリ",
                 bonusId: "NB1",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                 ]
             },
             {
                 name: "変装",
                 bonusId: "NB1",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                 ]
             },
             {
                 name: "罠設置",
                 bonusId: "NB1",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                 ]
@@ -112,41 +112,41 @@ const listRoll = [
                 name: "受け身",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
-                    { id: "GLv16" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
+                    { id: "V_GLv16" },
                 ]
             },
             {
                 name: "隠密",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
                 name: "軽業",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
                 name: "登攀",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
                 name: "尾行",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
@@ -154,7 +154,7 @@ const listRoll = [
                 name: "騎乗",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv16" },
+                    { id: "V_GLv16" },
                 ]
             },
             // 知力
@@ -162,10 +162,10 @@ const listRoll = [
                 name: "足跡追跡",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -178,13 +178,13 @@ const listRoll = [
                 name: "異常感知",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然環境のみ"
                     },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -197,18 +197,18 @@ const listRoll = [
                 name: "聞き耳",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
                 name: "危険感知",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -221,22 +221,22 @@ const listRoll = [
                 name: "見識",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv12" },
-                    { id: "GLv14" },
-                    { id: "GLv15" },
+                    { id: "V_GLv12" },
+                    { id: "V_GLv14" },
+                    { id: "V_GLv15" },
                 ]
             },
             {
                 name: "探索",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然環境のみ"
                     },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -249,21 +249,21 @@ const listRoll = [
                 name: "地図作成",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然環境のみ"
                     },
-                    { id: "GLv12" },
-                    { id: "GLv16" },
+                    { id: "V_GLv12" },
+                    { id: "V_GLv16" },
                 ]
             },
             {
                 name: "天候予測",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv11" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
                 ]
             },
             {
@@ -271,65 +271,65 @@ const listRoll = [
                 bonusId: "NB5",
                 skill: [
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然環境のみ"
                     },
-                    { id: "GLv12" },
+                    { id: "V_GLv12" },
                 ]
             },
             {
                 name: "文献",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv12" },
+                    { id: "V_GLv12" },
                 ]
             },
             {
                 name: "文明鑑定",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv12" },
+                    { id: "V_GLv12" },
                 ]
             },
             {
                 name: "宝物鑑定",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
-                    { id: "GLv12" },
+                    { id: "V_GLv10" },
+                    { id: "V_GLv12" },
                 ]
             },
             {
                 name: "魔法行使",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv5" },
-                    { id: "GLv6" },
-                    { id: "GLv7" },
-                    { id: "GLv9" },
-                    { id: "GLv8" },
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    { id: "V_GLv8" },
                 ]
             },
             {
                 name: "薬品学",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv11" },
-                    { id: "GLv12" },
-                    { id: "GLv15" },
+                    { id: "V_GLv11" },
+                    { id: "V_GLv12" },
+                    { id: "V_GLv15" },
                 ]
             },
             {
                 name: "罠回避",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                     {
-                        id: "GLv11",
+                        id: "V_GLv11",
                         limit: "自然物を利用した罠のみ"
                     },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
                             category: "craftRiding",
@@ -348,7 +348,7 @@ const listRoll = [
                 name: "弱点隠蔽",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv16" },
+                    { id: "V_GLv16" },
                 ]
             },
             {
@@ -356,7 +356,7 @@ const listRoll = [
                 name: "賦術",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv15" },
+                    { id: "V_GLv15" },
                 ]
             },
             {
@@ -364,7 +364,7 @@ const listRoll = [
                 name: "演奏",
                 bonusId: "NB6",
                 skill: [
-                    { id: "GLv14" },
+                    { id: "V_GLv14" },
                 ]
             },
         ]
@@ -426,9 +426,9 @@ const listRoll = [
                 name: "魔物知識",
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv12" },
+                    { id: "V_GLv12" },
                     {
-                        id: "GLv16",
+                        id: "V_GLv16",
                         note: "弱点獲得に条件あり(Ⅲ-P.84)"
                     },
                 ]
@@ -437,7 +437,7 @@ const listRoll = [
                 name: "先制",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv10" },
+                    { id: "V_GLv10" },
                 ]
             },
         ]
@@ -458,11 +458,11 @@ const listRoll = [
                 critical: 10,
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv5" },
-                    { id: "GLv6" },
-                    { id: "GLv7" },
-                    { id: "GLv9" },
-                    { id: "GLv8" },
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    { id: "V_GLv8" },
                 ]
             },
             {
@@ -470,11 +470,11 @@ const listRoll = [
                 critical: 10,
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv5" },
-                    { id: "GLv6" },
-                    { id: "GLv7" },
-                    { id: "GLv9" },
-                    { id: "GLv8" },
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    { id: "V_GLv8" },
                 ]
             },
             {
@@ -482,11 +482,11 @@ const listRoll = [
                 critical: 10,
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv5" },
-                    { id: "GLv6" },
-                    { id: "GLv7" },
-                    { id: "GLv9" },
-                    { id: "GLv8" },
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    { id: "V_GLv8" },
                 ]
             },
             {
@@ -494,11 +494,11 @@ const listRoll = [
                 critical: 10,
                 bonusId: "NB5",
                 skill: [
-                    { id: "GLv5" },
-                    { id: "GLv6" },
-                    { id: "GLv7" },
-                    { id: "GLv9" },
-                    { id: "GLv8" },
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    { id: "V_GLv8" },
                 ]
             },
         ]
@@ -512,11 +512,11 @@ const listRoll = [
                 name: "回避",
                 bonusId: "NB2",
                 skill: [
-                    { id: "GLv1" },
-                    { id: "GLv2" },
-                    { id: "GLv3" },
+                    { id: "V_GLv1" },
+                    { id: "V_GLv2" },
+                    { id: "V_GLv3" },
                     {
-                        id: "GLv4",
+                        id: "V_GLv4",
                         note: "《射手の体術》(Ⅱ-P.227)が必要",
                         cond: {
                             category: "combatFeatsLv",
@@ -640,7 +640,7 @@ export async function outputCharacter() {
     // 技能レベルをセット
     // --------------------------------------------------
 
-    // GLvから始まるデータを取得
+    // V_GLvから始まるデータを取得
     const array = Object.keys(data)
         .map(
             k => ({
@@ -649,7 +649,7 @@ export async function outputCharacter() {
             })
         )
         .filter(
-            target => target.key.indexOf("GLv") === 0
+            target => target.key.indexOf("V_GLv") === 0
         );
     array.forEach(target => {
         // 技能名を取得
@@ -721,7 +721,7 @@ export function getSkillLevelForName (name) {
     let listWeapon = [];
     for (let i = 0; i < data.V_arms_id.length; i++) {
         // 技能名称
-        const className = listSkill["GLv" + data.V_arms_hit_ginou[i]];
+        const className = listSkill["V_GLv" + data.V_arms_hit_ginou[i]];
 
         // 技能が設定されていない場合は無視
         if (!className) {
@@ -1199,7 +1199,7 @@ export function drawContents (data) {
 
                     // - 技能なし
                     const checkbox = cloneSkill.querySelector('input[type="checkbox"]');
-                    if (!data[skill.id] || !flagUsable) {
+                    if (data[skill.id] == 0 || !flagUsable) {
                         // チェックＯＦＦ
                         checkbox.checked = false;
 
