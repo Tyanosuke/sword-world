@@ -247,7 +247,8 @@ function outputChatPallet(navi = true) {
                 const valueRate = roll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent;
                 const valueRateAdd = roll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent;
                 // - Ｃ値
-                const valueCritical = roll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent;
+                const valueCritical = Number(roll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent);
+                const valueCriticalAdd = Number(roll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent);
                 // - 能力値ボーナス：名称
                 const nameBonusDamage = roll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent;
 
@@ -258,7 +259,7 @@ function outputChatPallet(navi = true) {
                     + "　■" + weaponName + "／命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
                 // - ダメージ
                 text +=
-                    "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonusDamage + "}" + valueRateAdd
+                    "k" + valueRate +"@" + (valueCritical + valueCriticalAdd) + "+{" + nameSkill + "}+{" + nameBonusDamage + "}" + valueRateAdd
                     + "　■" + weaponName + "／威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonusDamage + ")\r";
             }
             // ●魔法
