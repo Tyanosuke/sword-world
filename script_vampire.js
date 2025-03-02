@@ -74,11 +74,17 @@ const listRoll = [
             {
                 name: "解除",
                 bonusId: "NB1",
+                cond: {
+                    name: "＜スカウト用ツール＞未所持",
+                    targets: "item_name",
+                    target: "スカウト用ツール",
+                    bonus: -4,
+                },
                 skill: [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                 ]
             },
@@ -103,7 +109,7 @@ const listRoll = [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                 ]
             },
@@ -181,7 +187,7 @@ const listRoll = [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     {
                         id: "V_GLv16",
@@ -233,7 +239,7 @@ const listRoll = [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     {
                         id: "V_GLv16",
@@ -252,7 +258,7 @@ const listRoll = [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     { id: "V_GLv12" },
                     { id: "V_GLv16" },
@@ -272,7 +278,7 @@ const listRoll = [
                 skill: [
                     {
                         id: "V_GLv11",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     { id: "V_GLv12" },
                 ]
@@ -326,7 +332,7 @@ const listRoll = [
                     { id: "V_GLv10" },
                     {
                         id: "V_GLv11",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                     {
                         id: "V_GLv16",
@@ -1130,6 +1136,22 @@ export function drawContents (data) {
                 if (typeDodge) {
                     // 判定用classを不可
                     cloneRoll.firstElementChild.classList.add("dodge");
+                }
+
+                // ●条件なし
+                const addCondValue = cloneRoll.querySelector(".valueBlock.add");
+                if (
+                    typeof roll.cond === "undefined"
+                    || data[roll.cond.targets].includes(roll.cond.target)
+                ) {
+                    // 要素を削除
+                    addCondValue.remove();
+                }
+                // ●条件あり
+                else {
+                    // 要素に値を入れる
+                    addCondValue.querySelector(".name").textContent = roll.cond.name;
+                    addCondValue.querySelector(".value").textContent = roll.cond.bonus;
                 }
             }
 

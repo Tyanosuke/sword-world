@@ -73,11 +73,17 @@ const listRoll = [
             {
                 name: "解除",
                 bonusId: "Dex",
+                cond: {
+                    name: "＜スカウト用ツール＞未所持",
+                    targets: "items",
+                    target: "スカウト用ツール",
+                    bonus: -4,
+                },
                 skill: [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                 ]
             },
@@ -102,7 +108,7 @@ const listRoll = [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                 ]
             },
@@ -180,7 +186,7 @@ const listRoll = [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     {
                         id: "lvRid",
@@ -232,7 +238,7 @@ const listRoll = [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     {
                         id: "lvRid",
@@ -251,7 +257,7 @@ const listRoll = [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     { id: "lvSag" },
                     { id: "lvRid" },
@@ -271,7 +277,7 @@ const listRoll = [
                 skill: [
                     {
                         id: "lvRan",
-                        limit: "自然環境のみ"
+                        note: "自然環境のみ"
                     },
                     { id: "lvSag" },
                 ]
@@ -325,7 +331,7 @@ const listRoll = [
                     { id: "lvSco" },
                     {
                         id: "lvRan",
-                        limit: "自然物を利用した罠のみ"
+                        note: "自然物を利用した罠のみ"
                     },
                     {
                         id: "lvRid",
@@ -1150,6 +1156,20 @@ export function drawContents (data) {
                 if (typeDodge) {
                     // 判定用classを不可
                     cloneRoll.firstElementChild.classList.add("dodge");
+                }
+
+                // ●条件なし
+                const addCondValue = cloneRoll.querySelector(".valueBlock.add");
+                if (
+                    typeof roll.cond === "undefined"
+                    || data[roll.cond.targets].indexOf(roll.cond.target) > -1
+                ) {
+                    addCondValue.remove();
+                }
+                // ●条件あり
+                else {
+                    addCondValue.querySelector(".name").textContent = roll.cond.name;
+                    addCondValue.querySelector(".value").textContent = roll.cond.bonus;
                 }
             }
 
