@@ -168,7 +168,7 @@ const listRoll = [
                         id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
-                            category: "craftRiding",
+                            category: "KG_name",
                             target: "探索指令"
                         }
                     },
@@ -187,7 +187,7 @@ const listRoll = [
                         id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
-                            category: "craftRiding",
+                            category: "KG_name",
                             target: "探索指令"
                         }
                     },
@@ -211,7 +211,7 @@ const listRoll = [
                         id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
-                            category: "craftRiding",
+                            category: "KG_name",
                             target: "探索指令"
                         }
                     },
@@ -239,7 +239,7 @@ const listRoll = [
                         id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
-                            category: "craftRiding",
+                            category: "KG_name",
                             target: "探索指令"
                         }
                     },
@@ -332,7 +332,7 @@ const listRoll = [
                         id: "V_GLv16",
                         note: "要：【探索指令】(Ⅲ-P.195)",
                         cond: {
-                            category: "craftRiding",
+                            category: "KG_name",
                             target: "探索指令"
                         }
                     },
@@ -519,7 +519,7 @@ const listRoll = [
                         id: "V_GLv4",
                         note: "《射手の体術》(Ⅱ-P.227)が必要",
                         cond: {
-                            category: "combatFeatsLv",
+                            category: "ST_name",
                             target: "射手の体術"
                         }
                     },
@@ -1265,24 +1265,6 @@ export function drawContents (data) {
  * 習得チェック
  */
 export function checkLearn (data, skillCategory, targetName) {
-    // skillCategoryに前方一致するデータを抽出
-    const array = Object.keys(data)
-        .map(
-            k => ({
-                key: k,
-                value: data[k]
-            })
-        )
-        .filter(
-            target => target.key.indexOf(skillCategory) === 0
-        );
-
     // 指定した戦闘特技を習得しているか
-    array.forEach(target => {
-        if (target == targetName) {
-            return true;
-        }
-    });
-
-    return false;
+    return data[skillCategory].some(target => target == targetName);
 }

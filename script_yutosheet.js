@@ -1294,11 +1294,5 @@ export function checkLearn (data, skillCategory, targetName) {
         );
 
     // 指定した戦闘特技を習得しているか
-    array.forEach(target => {
-        if (target == targetName) {
-            return true;
-        }
-    });
-
-    return false;
+    return array.some(target => target.value == targetName);
 }
