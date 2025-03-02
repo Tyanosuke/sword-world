@@ -1151,7 +1151,7 @@ export function drawContents (data) {
                     // 空の場合、全技能を対象
                     targets = [];
                     Object.keys(listSkill)
-                        .filter(key => key != "level") // 「冒険者レベル」は除く
+                        .filter(key => key != "lv") // 「冒険者レベル」は除く
                         .forEach(key => {
                             targets.push({
                                 id: key
