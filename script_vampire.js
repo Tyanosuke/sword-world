@@ -1222,24 +1222,26 @@ export function drawContents (data) {
                     cloneRoll.querySelector(".skills").appendChild(cloneSkill);
                 });
 
-                // 行為判定、かつ使用可能な技能が無い場合、「平目」を追加
-                if (!typeMagic && usableSkill == 0) {
-                    const cloneSkill = tempSkill.content.cloneNode(true);
+                // 使用可能な技能が無い場合、「平目」を追加
+                if (usableSkill == 0) {
+                    if (!typeMagic) {
+                        const cloneSkill = tempSkill.content.cloneNode(true);
 
-                    // 名称
-                    cloneSkill.querySelector(".skillName > .name").textContent = "平目";
+                        // 名称
+                        cloneSkill.querySelector(".skillName > .name").textContent = "平目";
 
-                    // レベル
-                    cloneSkill.querySelector(".valueBlock.level > .value").textContent = 0;
+                        // レベル
+                        cloneSkill.querySelector(".valueBlock.level > .value").textContent = 0;
 
-                    // チェックＯＮ
-                    cloneSkill.querySelector('input[type="checkbox"]').checked = true;
+                        // チェックＯＮ
+                        cloneSkill.querySelector('input[type="checkbox"]').checked = true;
 
-                    // 要素を追加
-                    cloneRoll.querySelector(".skills").prepend(cloneSkill);
+                        // 要素を追加
+                        cloneRoll.querySelector(".skills").prepend(cloneSkill);
+                    }
 
                     // 親要素（行為判定）の能力値ボーナスをグレーアウト
-                    cloneRoll.querySelector(".valueBlock").classList.add("flat");
+                    cloneRoll.querySelector(".valueBlock.bonus").classList.add("flat");
                 }
             }
 
