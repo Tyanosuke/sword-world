@@ -1008,6 +1008,9 @@ export function drawContents (data) {
             }
         );
 
+        // 有効な行為判定があるか
+        let flagNoSkill = true;
+
         // --------------------------------------------------
         // 行為判定／ダメージ
         // --------------------------------------------------
@@ -1081,6 +1084,9 @@ export function drawContents (data) {
                 if (!dupFlag) {
                     prevWeapon = roll;
                 }
+
+                // 有効な行為判定がある
+                flagNoSkill = false;
             }
             // ●魔法
             else if (typeMagic) {
@@ -1237,6 +1243,11 @@ export function drawContents (data) {
                     // 親要素（行為判定）の能力値ボーナスをグレーアウト
                     cloneRoll.querySelector(".valueBlock.bonus").classList.add("flat");
                 }
+                // ●それ以外の場合
+                else {
+                    // 有効な行為判定がある
+                    flagNoSkill = false;
+                }
             }
 
             // --------------------------------------------------
@@ -1246,6 +1257,9 @@ export function drawContents (data) {
         });
 
         // --------------------------------------------------
+
+        // チェックボックス状態
+        cloneCategory.querySelector(".categoryCheck").checked = !flagNoSkill;
 
         // 要素を追加
         document.getElementById("mainContents").appendChild(cloneCategory);
