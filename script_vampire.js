@@ -1224,6 +1224,9 @@ export function drawContents (data) {
 
                         // 要素を追加
                         cloneRoll.querySelector(".skills").prepend(cloneSkill);
+
+                        // 有効な行為判定がある
+                        flagNoSkill = false;
                     }
 
                     // 親要素（行為判定）の能力値ボーナスをグレーアウト
