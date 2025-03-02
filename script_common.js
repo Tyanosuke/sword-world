@@ -64,6 +64,20 @@ async function selectSite($this = null) {
 }
 
 /**
+ * カテゴリーチェックボックス
+ */
+function toggleCategoryCheck($this) {
+    // 今押したチェックボックスの状態
+    const check = $this.checked;
+
+    // 同カテゴリー内のチェックボックス（有効な行為判定のみ）を取得
+    $this.parentElement.parentElement.querySelectorAll('*:not(.skillDisabled) > input[type="checkbox"]').forEach(taget => {
+        // チェックボックス状態の同期
+        taget.checked = check;
+    });
+}
+
+/**
  * 「開閉」ボタン
  */
 function toggleAcordion(targerId) {
@@ -186,6 +200,12 @@ function outputChatPallet(navi = true) {
     // カテゴリー
     // --------------------------------------------------
     document.querySelectorAll('[id^="area_category_"]').forEach(category => {
+        // チェックされていない場合、カテゴリーごとスキップ
+        if (!category.querySelector('input[type="checkbox"]').checked) {
+            return;
+        }
+
+        // 見出し出力
         text += "─── " + category.querySelector('.acordionTitleRow > h3').textContent + " ───";
         text += "\r";
 

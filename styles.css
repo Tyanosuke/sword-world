@@ -372,18 +372,25 @@ p + p
 .acordionTitleRow
 {
   display: flex;
+  align-items: center;
   background: var(--sub-color);
-
+  padding: 4px 8px;
+  z-index: 1;
   position: sticky;
   top: 0;
-  z-index: 1;
+}
 
-  padding: 4px 8px;
+/* チェックボックス*/
+.acordionTitleRow > input[type="checkbox"]
+{
+  margin-right: 8px;
 }
 
 /* 「開閉」ボタン */
 .acordionTitleRow > button
 {
+  width: 70px;
+  height: 40px;
   margin-left: auto;
 }
 

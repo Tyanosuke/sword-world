@@ -679,28 +679,6 @@ export async function outputCharacter() {
 }
 
 /**
- * データを取得
- */
-export function getData (data, prefix, suffix = "", other = []) {
-    const regExp = new RegExp("^" + prefix + "\\d+" + suffix + "$");
-
-    const evaBonus = Object.keys(data)
-        .filter(key => {
-            return (
-                regExp.test(key)
-                || other.includes(key)
-            );
-        });
-
-    let value = 0;
-    evaBonus.forEach(bonusValue => {
-        value += Number(data[bonusValue]);
-    })
-
-    return value;
-}
-
-/**
  * 技能レベル：日本語名からkeyを取得
  */
 export function getSkillLevelForName (name) {
@@ -1010,6 +988,9 @@ export function drawContents (data) {
             }
         );
 
+        // 有効な行為判定があるか
+        let flagNoSkill = true;
+
         // --------------------------------------------------
         // 行為判定／ダメージ
         // --------------------------------------------------
@@ -1018,6 +999,7 @@ export function drawContents (data) {
         let prevWeapon;
 
         category.roll.forEach(roll => {
+            // クローン用
             let cloneRoll;
 
             // ●武器
@@ -1083,6 +1065,9 @@ export function drawContents (data) {
                 if (!dupFlag) {
                     prevWeapon = roll;
                 }
+
+                // 有効な行為判定がある
+                flagNoSkill = false;
             }
             // ●魔法
             else if (typeMagic) {
@@ -1222,8 +1207,9 @@ export function drawContents (data) {
                     cloneRoll.querySelector(".skills").appendChild(cloneSkill);
                 });
 
-                // 使用可能な技能が無い場合、「平目」を追加
+                // ●使用可能な技能が無い場合
                 if (usableSkill == 0) {
+                    // 「平目」を追加（魔法以外）
                     if (!typeMagic) {
                         const cloneSkill = tempSkill.content.cloneNode(true);
 
@@ -1243,6 +1229,11 @@ export function drawContents (data) {
                     // 親要素（行為判定）の能力値ボーナスをグレーアウト
                     cloneRoll.querySelector(".valueBlock.bonus").classList.add("flat");
                 }
+                // ●それ以外の場合
+                else {
+                    // 有効な行為判定がある
+                    flagNoSkill = false;
+                }
             }
 
             // --------------------------------------------------
@@ -1252,6 +1243,9 @@ export function drawContents (data) {
         });
 
         // --------------------------------------------------
+
+        // チェックボックス状態
+        cloneCategory.querySelector(".categoryCheck").checked = !flagNoSkill;
 
         // 要素を追加
         document.getElementById("mainContents").appendChild(cloneCategory);

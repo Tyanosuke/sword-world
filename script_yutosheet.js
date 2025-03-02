@@ -678,28 +678,6 @@ export async function outputCharacter() {
 }
 
 /**
- * データを取得
- */
-export function getData (data, prefix, suffix = "", other = []) {
-    const regExp = new RegExp("^" + prefix + "\\d+" + suffix + "$");
-
-    const evaBonus = Object.keys(data)
-        .filter(key => {
-            return (
-                regExp.test(key)
-                || other.includes(key)
-            );
-        });
-
-    let value = 0;
-    evaBonus.forEach(bonusValue => {
-        value += Number(data[bonusValue]);
-    })
-
-    return value;
-}
-
-/**
  * 技能レベル：日本語名からkeyを取得
  */
 export function getSkillLevelForName (name) {
