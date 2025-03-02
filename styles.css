@@ -24,13 +24,20 @@ body
 /* 入力系
 /* -------------------------------------------------- */
 
-/* 入力欄 */
-input
+/* インプット・セレクトボックス */
+input,
+select
 {
+  color: var(--font-color) !important;
+  background: #fff;
   border: solid 1px var(--font-color);
   border-radius: 4px;
 
   padding: 8px;
+}
+input:disabled
+{
+  border-color: transparent;
 }
 
 /* チェックボックス */
@@ -47,9 +54,11 @@ input[type="checkbox"]:disabled
 }
 
 /* セレクトボックス */
-select
+select:disabled
 {
-  padding: 8px;
+  border-color: transparent;
+  opacity: 1 !important;
+  appearance: none;
 }
 
 /* ボタン */
@@ -175,12 +184,34 @@ p + p
   box-sizing: border-box;
 }
 
+/* サイト */
+#select_site
+{
+  width: 15em;
+}
+
+/* URL */
+.input_url
+{
+  width: 20em;
+}
+.urlSuffix
+{
+  display: none;
+}
+
 /* ボタン */
 .row_input > button
 {
   min-width: 8em;
   height: 100%;
   padding: 0 8px;
+}
+
+/* エラー */
+.text_error
+{
+  color: #c00;
 }
 
 /* -------------------------------------------------- */

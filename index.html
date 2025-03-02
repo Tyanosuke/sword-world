@@ -40,24 +40,43 @@
           URL
         </div>
 
-        <div>
-          <span id="urlPrefix"></span>
-          <input id="input_url">
-          <span id="urlSuffix" class="hidden"></span>
+        <div class="displayLimit_ytsheet">
+          <span class="urlPrefix">https://yutorize.2-d.jp/ytsheet/sw2.5/?id=</span>
+          <input class="input_url">
+          <span class="urlSuffix">&mode=json</span>
+        </div>
+        <div class="displayLimit_vampire-blood hidden">
+          <span class="urlPrefix">https://charasheet.vampire-blood.net/</span>
+          <input class="input_url">
+          <span class="urlSuffix">.js</span>
         </div>
 
-        <button onclick='buttonRead()'>
+        <button id="buttonRead" onclick='buttonRead()'>
           読み込み
+        </button>
+
+        <button id="buttonClear" class="hidden" onclick='buttonClear()'>
+          クリア
         </button>
       </div>
 
       <div id="loadCharacter" class="row_input hidden">
         <div class="inputLabel">
-          読み込んだキャラクター
+          読み込みキャラクター
         </div>
 
         <div>
           <span class="name"></span>
+        </div>
+      </div>
+
+      <div id="loadError" class="row_input hidden">
+        <div class="inputLabel">
+          エラー
+        </div>
+
+        <div>
+          <span class="text_error">読み込みに失敗しました。</span>
         </div>
       </div>
     </div>

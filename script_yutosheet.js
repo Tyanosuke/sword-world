@@ -776,7 +776,6 @@ export function getDodge (data) {
  * キャラクター名の描画
  */
 export function drawCharacterName (data) {
-    document.getElementById("loadCharacter").classList.remove("hidden");
     document.querySelector("#loadCharacter .name").textContent = data.characterName;
 }
 

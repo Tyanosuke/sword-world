@@ -756,7 +756,6 @@ export function getSkillLevelForName (name) {
  * キャラクター名の描画
  */
 export function drawCharacterName (data) {
-    document.getElementById("loadCharacter").classList.remove("hidden");
     document.querySelector("#loadCharacter .name").textContent = data.pc_name;
 }
 
@@ -1199,7 +1198,11 @@ export function drawContents (data) {
 
                     // - 技能なし
                     const checkbox = cloneSkill.querySelector('input[type="checkbox"]');
-                    if (data[skill.id] == 0 || !flagUsable) {
+                    if (
+                        data[skill.id] == undefined
+                        || data[skill.id] == 0
+                        || !flagUsable
+                    ) {
                         // チェックＯＦＦ
                         checkbox.checked = false;
 

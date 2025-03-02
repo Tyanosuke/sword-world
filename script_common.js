@@ -30,20 +30,14 @@ async function selectSite($this = null) {
     }
 
     const id = $this.selectedOptions[0].id;
-    let prefix = "";
-    let suffix = "";
     let script = "";
     switch(id){
         // ●ゆとシート
         case "ytsheet":
-            prefix = "https://yutorize.2-d.jp/ytsheet/sw2.5/?id=";
-            suffix = "&mode=json";
             script = "script_yutosheet";
             break;
         // ●キャラクター保管所
         case "vampire-blood":
-            prefix = "https://charasheet.vampire-blood.net/";
-            suffix = ".js";
             script= "script_vampire";
             break;
     }
@@ -61,10 +55,6 @@ async function selectSite($this = null) {
             target.classList.add("hidden");
         }
     });
-
-    // 入力欄に反映
-    document.getElementById("urlPrefix").textContent = prefix;
-    document.getElementById("urlSuffix").textContent = suffix;
 
     // --------------------------------------------------
     // スクリプトモジュール切り替え
@@ -116,6 +106,7 @@ async function buttonRead() {
 
         // キャラクター名の描画
         module.drawCharacterName(data);
+        document.getElementById("loadCharacter").classList.remove("hidden");
 
         // ステータスの描画
         module.drawStatus(data);
@@ -123,14 +114,30 @@ async function buttonRead() {
         // カードの描画
         module.drawContents(data);
 
+        // チャットパレットの生成
+        outputChatPallet(false);
+
         // 出力エリアを表示
         document.querySelector(".output_area").classList.remove("hidden");
 
-        // チャットパレットの生成
-        outputChatPallet(false);
+        // 「サイト」・「URL」入力欄を非活性
+        document.getElementById("select_site").disabled = true;
+        document.querySelector(":not(.hidden) > .input_url").disabled = true;
+
+        // 「読み込み」ボタンを非表示
+        document.getElementById("buttonRead").classList.add("hidden");
+
+        // 「クリア」ボタンを表示
+        document.getElementById("buttonClear").classList.remove("hidden");
+
+        // エラーテキスト非表示
+        document.getElementById("loadError").classList.add("hidden");
     })
     .catch(error => {
         console.dir(error);
+
+        // エラーテキスト表示
+        document.getElementById("loadError").classList.remove("hidden");
 
         return;
     })
@@ -142,6 +149,30 @@ async function buttonRead() {
 
         loadingCaver.classList.add("hidden");
     });
+}
+
+/**
+ * 「クリア」ボタン
+ */
+function buttonClear() {
+    // セッションストレージのデータを削除
+    sessionStorage.removeItem('data');
+
+    // 「読み込みキャラクター」を非表示
+    document.getElementById("loadCharacter").classList.add("hidden");
+
+    // 出力エリアを表示
+    document.querySelector(".output_area").classList.add("hidden");
+
+    // 「サイト」・「URL」入力欄を活性
+    document.getElementById("select_site").disabled = false;
+    document.querySelector(":not(.hidden) > .input_url").disabled = false;
+
+    // 「読み込み」ボタンを表示
+    document.getElementById("buttonRead").classList.remove("hidden");
+
+    // 「クリア」ボタンを非表示
+    document.getElementById("buttonClear").classList.add("hidden");
 }
 
 /**
@@ -304,10 +335,10 @@ function outputChatPallet(navi = true) {
  * ＵＲＬを取得
  */
 function getUrl (json = false) {
-    let url = document.getElementById('urlPrefix').textContent + document.getElementById('input_url').value;
+    let url = document.querySelector(':not(.hidden) > .urlPrefix').textContent + document.querySelector(':not(.hidden) > .input_url').value;
 
     if (json) {
-        url += document.getElementById("urlSuffix").textContent;
+        url += document.querySelector(":not(.hidden) > .urlSuffix").textContent;
     }
 
     return url;
