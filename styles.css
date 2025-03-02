@@ -24,13 +24,14 @@ body
 /* 入力系
 /* -------------------------------------------------- */
 
-/* インプット・セレクトボックス */
+/* インプット・セレクトボックス・テキストエリア */
 input,
-select
+select,
+textarea
 {
   color: var(--font-color) !important;
   background: #fff;
-  border: solid 1px var(--font-color);
+  border: solid 2px var(--font-color);
   border-radius: 4px;
 
   padding: 8px;
@@ -228,7 +229,7 @@ p + p
 .list_display
 {
   display: inline-block;
-  border: solid 1px var(--font-color);
+  border: solid 2px var(--font-color);
   border-radius: 4px;
   padding: 8px;
   box-sizing: border-box;
@@ -305,7 +306,7 @@ p + p
 /* エリア */
 .acordionArea
 {
-  border: solid 2px var(--sub-color);
+  border: solid 4px var(--sub-color);
   border-radius: 4px;
 }
 
@@ -522,7 +523,7 @@ p + p
   display: flex;
   align-items: center;
 
-  border: solid 1px var(--font-color);
+  border: solid 2px var(--font-color);
   border-radius: 4px;
 
   padding: 4px;

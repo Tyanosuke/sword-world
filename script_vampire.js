@@ -1225,7 +1225,7 @@ export function drawContents (data) {
                         // 要素を追加
                         cloneRoll.querySelector(".skills").prepend(cloneSkill);
 
-                        // 有効な行為判定がある
+                        // 有効な行為判定があるＯＦＦ
                         flagNoSkill = false;
                     }
 
@@ -1234,7 +1234,7 @@ export function drawContents (data) {
                 }
                 // ●それ以外の場合
                 else {
-                    // 有効な行為判定がある
+                    // 有効な行為判定があるＯＦＦ
                     flagNoSkill = false;
                 }
             }
