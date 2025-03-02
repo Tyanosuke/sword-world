@@ -421,6 +421,7 @@ p + p
 /* ブロック */
 /* -------------------------------------------------- */
 
+/* 基本 */
 .valueBlock
 {
   color: #fff;
@@ -431,7 +432,7 @@ p + p
   padding: 0 8px;
 }
 
-/* ブロック：値 */
+/* 値 */
 .valueBlock > .value
 {
   font-size: 25px;
@@ -440,6 +441,14 @@ p + p
 .valueBlock > .name + .value
 {
   margin-left: 10px;
+}
+
+/* 修正値 */
+.valueBlock > .add:not(:empty)
+{
+  padding-left: 4px;
+
+  font-weight: bold;
 }
 
 /* 平目 */

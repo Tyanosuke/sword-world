@@ -740,6 +740,7 @@ export function getDodge (data) {
                 rate : data["weapon" + i + "Rate"],
                 rateAdd : data["weapon" + i + "Dmg"],
                 critical: data["weapon" + i + "Crit"],
+                criticalAdd: (data["weapon" + i + "Class"] == "フェンサー") ? -1 : 0,
                 bonusId: "Str",
             },
         });
@@ -1058,21 +1059,33 @@ export function drawContents (data) {
                 cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data["bonus" + roll.hit.bonusId];
                 // - 能力値ボーナス：ボーナス修正
                 let addHit = data["bonus" + roll.hit.hitAdd];
-                if (addHit > 0) {
-                    addHit = "+" + addHit;
+                if (addHit != 0) {
+                    if (addHit > 0) {
+                        addHit = "+" + addHit;
+                    }
+                    cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent = addHit;
                 }
-                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent = addHit;
 
                 // ダメージ
                 // - 威力
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
                 let addRate = roll.damage.rateAdd;
-                if (addRate > 0) {
-                    addRate = "+" + addRate;
+                if (addRate != 0) {
+                    if (addRate > 0) {
+                        addRate = "+" + addRate;
+                    }
+
+                    cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
                 }
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
                 // - Ｃ値
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = roll.damage.critical;
+                let addCritical = roll.damage.criticalAdd;
+                if (addCritical != 0) {
+                    if (addCritical > 0) {
+                        addCritical = "+" + addCritical;
+                    }
+                    cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent = addCritical;
+                }
                 // - 能力値ボーナス：背景色
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus").classList.add(roll.damage.bonusId);
                 // - 能力値ボーナス：名称
