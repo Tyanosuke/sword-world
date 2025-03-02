@@ -300,6 +300,16 @@ function outputChatPallet(navi = true) {
                 // 能力値ボーナス
                 const nameBonus = roll.querySelector('.valueBlock.bonus > .name').textContent;
 
+                // 条件付き修正
+                const targetAdd = roll.querySelector('.valueBlock.add > .value');
+                let valueAdd = "";
+                if (targetAdd) {
+                    valueAdd = targetAdd.textContent;
+                    if (valueAdd >= 1) {
+                        valueAdd = "+" + valueAdd;
+                    }
+                }
+
                 // 平目
                 const flagFlat = roll.querySelector('.valueBlock.flat');
 
@@ -319,21 +329,21 @@ function outputChatPallet(navi = true) {
                         const nameSkill = skill.querySelector(".skillName > .name").textContent;
 
                         // 回避
-                        let addValue = "";
+                        let addDodge = "";
                         if (typeDodge) {
-                            addValue = "+{回避力修正}";
+                            addDodge = "+{回避力修正}";
                         }
 
                         // チャットコマンドを生成
                         text +=
-                            "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addValue
+                            "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addDodge + valueAdd
                             + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")\r";
                     });
                 }
                 // ●平目
                 else {
                     // チャットコマンドを生成
-                    text += "2d6　■" + nameRoll + "(平目)\r";
+                    text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)\r";
                 }
             }
         });
