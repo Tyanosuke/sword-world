@@ -74,9 +74,9 @@ const listRoll = [
                 name: "解除",
                 bonusId: "Dex",
                 cond: {
-                    name: "＜スカウト用ツール＞未所持",
+                    name: "ツール未所持",
                     targets: "items",
-                    target: "スカウト用ツール",
+                    target: ["スカウト用ツール", "精密ツールセット"],
                     bonus: -4,
                 },
                 skill: [
@@ -528,6 +528,7 @@ const listRoll = [
                             target: "射手の体術"
                         }
                     },
+                    { id: "lvBat" },
                 ]
             },
         ]
@@ -739,7 +740,7 @@ export function getDodge (data) {
             usage: data["weapon" + i + "Usage"],
             note: data["weapon" + i + "Note"],
             hit: {
-                bonusId: "Dex",
+                bonusId: "Dex", // 器用度
                 hitAdd : data["weapon" + i + "Acc"],
             },
             damage: {
@@ -747,7 +748,7 @@ export function getDodge (data) {
                 rateAdd : data["weapon" + i + "Dmg"],
                 critical: data["weapon" + i + "Crit"],
                 criticalAdd: (data["weapon" + i + "Class"] == "フェンサー") ? -1 : 0,
-                bonusId: "Str",
+                bonusId: "Str", // 筋力
             },
         });
     }
@@ -1064,12 +1065,17 @@ export function drawContents (data) {
                 // - 能力値ボーナス：値
                 cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data["bonus" + roll.hit.bonusId];
                 // - 能力値ボーナス：ボーナス修正
-                let addHit = data["bonus" + roll.hit.hitAdd];
-                if (addHit != 0) {
+                let addHit = roll.hit.hitAdd;
+                if (
+                    addHit
+                    && addHit != 0
+                ) {
                     if (addHit > 0) {
                         addHit = "+" + addHit;
                     }
-                    cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent = addHit;
+                    cloneRoll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent = addHit;
+                } else {
+                    cloneRoll.querySelector(".card_skill.hit .valueBlock.add").classList.add("hidden");
                 }
 
                 // ダメージ
@@ -1164,7 +1170,7 @@ export function drawContents (data) {
                     typeof roll.cond === "undefined"
                     || (
                         data[roll.cond.targets]
-                        && data[roll.cond.targets].indexOf(roll.cond.target) > -1
+                        && roll.cond.target.some(item => data[roll.cond.targets].indexOf(item) > -1)
                     )
                 ) {
                     addCondValue.remove();

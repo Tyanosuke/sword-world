@@ -89,6 +89,12 @@ function toggleAcordion(targerId) {
  */
 async function buttonRead() {
     // --------------------------------------------------
+    // 「注意」を閉じる
+    // --------------------------------------------------
+
+    document.getElementById("acordion_caution").classList.add("close");
+
+    // --------------------------------------------------
     // ローディングON
     // --------------------------------------------------
 
@@ -240,7 +246,7 @@ function outputChatPallet(navi = true) {
                 // - 能力値ボーナス：名称
                 const nameBonusHit = roll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent;
                 // - 能力値ボーナス：ボーナス修正
-                const addValue = roll.querySelector(".card_skill.hit .valueBlock.bonus > .add").textContent;
+                const addValue = roll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent;
 
                 // ダメージ
                 // - 威力

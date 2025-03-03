@@ -8,15 +8,88 @@
 
 	  <script src="script_common.js"></script>
 
-    <title>ソードワールド2.5 ココフォリア用駒生成ツール</title>
+    <title>SW2.5 ココフォリア用駒生成ツール</title>
   </head>
 
   <body>
 
-    <h1>ソードワールド2.5 ココフォリア用駒生成ツール（仮）</h1>
+    <h1>「ソードワールド2.5」ココフォリア用駒生成ツール ver.0.1.0</h1>
 
-    <p>ルルブⅠ～Ⅲしか持ってないので、そこまでしか対応してません。</p>
+    <div class="bookList">
+      <label class="bookList_title">
+        対応ルールブック・サプリメント
+      </label>
 
+      <div class="card_skill">
+          <span class="book">Ⅰ</span>
+          ルールブックⅠ
+      </div>
+      <div class="card_skill">
+        <span class="book">Ⅱ</span>
+        ルールブックⅡ
+      </div>
+      <div class="card_skill">
+        <span class="book">Ⅲ</span>
+        ルールブックⅢ
+      </div>
+      <div class="card_skill">
+        <span class="book">ET</span>
+        エピックトレジャリー
+      </div>
+      <div class="card_skill">
+        <span class="book">BM</span>
+        バトルマスタリー
+      </div>
+    </div>
+
+    <!------------------------------------------------------>
+
+    <div class="acordionArea" id="acordion_caution">
+        <div class="acordionTitleRow">
+          <h3>注意</h3>
+          <button onclick='toggleAcordion("acordion_caution")'>開閉</button>
+        </div>
+
+        <div class="contents">
+          <ul>
+            <li>
+              本ツールは「チャットパレットの編集」に重点を置いて作成されています。
+              チャットパレットをどう作るかは個人に大きく依存するため、最終的にはユーザー自身がチャットパレットに手を加えることを前提にしています。
+              あくまで面倒な入力作業を省くことが主な機能と考えてください。また、その他機能はオマケでしかありません。
+            </li>
+            <li>
+              『解除』判定の＜スカウト用ツール＞未所持時のペナルティ修正など、一部の判定にはアイテム名を使用しています。
+              アイテム名は正確に入力してください。「スカウトツール」ではペナルティは消えません。
+            </li>
+            <li>
+              『ゆとシートⅡ for SW2.5』からデータを読み込んだ際、一部の項目は以下のように取得されます。
+              <table>
+                <tr>
+                  <th>
+                    ステータス／防護点
+                  </th>
+                  <td>
+                    防具テーブルの使用技能１行目から取得しています。
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    ステータス／回避力修正
+                  </th>
+                  <td>
+                    各装備の「回避」を集計しています。
+                  </td>
+                </tr>
+              </table>
+            </li>
+            <li>
+              バグなどあれば<a href="https://takusuki.com/@tyanosuke" target="_blank">こちら</a>（要：Misskeyアカウント）へどうぞ。
+              挨拶無しに、端的に内容を伝えるのみでも構いません。（セッションの予定が入っていなければ）多分すぐに対応します。
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <!------------------------------------------------------>
 
     <div id="area_read">
@@ -224,18 +297,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 説明：ゆとシート -->
-        <div class="displayLimit_ytsheet">
-          <div class="note">
-            <span class="noteTitle">【防護点】</span>
-            防具テーブルの使用技能１行目から取得しています。
-          </div>
-          <div class="note">
-            <span class="noteTitle">【回避力修正】</span>
-            装備の「回避」を集計しています。
-          </div>
-        </div>
       </div>
 
       <div>
@@ -341,7 +402,11 @@
           <div class="valueBlock bonus">
             <span class="name">（能力値ボーナス）</span>
             <span class="value">0</span>
-            <span class="add"></span>
+          </div>
+
+          <div class="valueBlock add">
+            <span class="name">修正</span>
+            <span class="value">0</span>
           </div>
         </div>
 

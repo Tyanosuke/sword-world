@@ -111,6 +111,22 @@ p + p
   margin-top: 8px;
 }
 
+td
+{
+  padding-left: 12px;
+}
+
+ul
+{
+  padding-inline-start: 30px;
+  margin: 0;
+}
+
+li + li
+{
+  margin-top: 8px;
+}
+
 .row_input + .row_input
 {
   margin-top: 8px;
@@ -152,6 +168,24 @@ p + p
 .hidden
 {
   display: none !important;
+}
+
+/* -------------------------------------------------- */
+/* 対応ルールブック・サプリメント
+/* -------------------------------------------------- */
+
+.bookList
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.bookList_title
+{
+  font-weight: bold;
+  flex-basis: 100%;
 }
 
 /* -------------------------------------------------- */
