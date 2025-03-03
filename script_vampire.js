@@ -1142,7 +1142,10 @@ export function drawContents (data) {
                 const addCondValue = cloneRoll.querySelector(".valueBlock.add");
                 if (
                     typeof roll.cond === "undefined"
-                    || data[roll.cond.targets].includes(roll.cond.target)
+                    || (
+                        typeof roll.cond !== "undefined"
+                        && data[roll.cond.targets].includes(roll.cond.target)
+                    )
                 ) {
                     // 要素を削除
                     addCondValue.remove();
