@@ -1143,7 +1143,7 @@ export function drawContents (data) {
                 if (
                     typeof roll.cond === "undefined"
                     || (
-                        typeof roll.cond !== "undefined"
+                        data[roll.cond.targets]
                         && data[roll.cond.targets].includes(roll.cond.target)
                     )
                 ) {
