@@ -255,12 +255,12 @@ function outputChatPallet(navi = true) {
                 // チャットコマンドを生成
                 // - 命中力
                 text +=
-                    "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}" + addValue
-                    + "　■" + weaponName + "／命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
+                    "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}+{命中力修正}" + addValue
+                    + "　■" + weaponName + " - 命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
                 // - ダメージ
                 text +=
-                    "k" + valueRate +"@" + (valueCritical + valueCriticalAdd) + "+{" + nameSkill + "}+{" + nameBonusDamage + "}" + valueRateAdd
-                    + "　■" + weaponName + "／威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonusDamage + ")\r";
+                    "k" + valueRate +"@" + (valueCritical + valueCriticalAdd) + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメージ修正}" + valueRateAdd
+                    + "　■" + weaponName + " - ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
             }
             // ●魔法
             else if (typeMagic) {
@@ -288,8 +288,8 @@ function outputChatPallet(navi = true) {
 
                     // チャットコマンドを生成
                     text +=
-                        "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}"
-                        + "　■威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
+                        "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}+{ダメージ修正}"
+                        + "　■威力:" + valueRate + "/C値:" + valueCritical +  "(" + nameSkill + "+" + nameBonus + ")\r";
                 });
             }
             // ●行為判定
@@ -301,8 +301,16 @@ function outputChatPallet(navi = true) {
                 const nameBonus = roll.querySelector('.valueBlock.bonus > .name').textContent;
 
                 // 条件付き修正
-                const targetAdd = roll.querySelector('.valueBlock.add > .value');
+                let valueAddName = "";
+                const targetAddName = roll.querySelector('.valueBlock.add > .name');
+                if (targetAddName) {
+                    if (valueAddName != "") {
+                        valueAddName += " ";
+                    }
+                    valueAddName += "※" + targetAddName.textContent;
+                }
                 let valueAdd = "";
+                const targetAdd = roll.querySelector('.valueBlock.add > .value');
                 if (targetAdd) {
                     valueAdd = targetAdd.textContent;
                     if (valueAdd >= 1) {
@@ -328,6 +336,15 @@ function outputChatPallet(navi = true) {
                         // 技能
                         const nameSkill = skill.querySelector(".skillName > .name").textContent;
 
+                        // 条件
+                        const nameCondition = skill.querySelector('.condition:not(.alert)');
+                        if (nameCondition) {
+                            if (valueAddName != "") {
+                                valueAddName += " ";
+                            }
+                            valueAddName += "※" + nameCondition.textContent;
+                        }
+
                         // 回避
                         let addDodge = "";
                         if (typeDodge) {
@@ -337,13 +354,13 @@ function outputChatPallet(navi = true) {
                         // チャットコマンドを生成
                         text +=
                             "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addDodge + valueAdd
-                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")\r";
+                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")"  + valueAddName + "\r";
                     });
                 }
                 // ●平目
                 else {
                     // チャットコマンドを生成
-                    text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)\r";
+                    text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)"  + valueAddName + "\r";
                 }
             }
         });
