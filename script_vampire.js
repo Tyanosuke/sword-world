@@ -1149,6 +1149,12 @@ export function drawContents (data) {
                 }
                 // ●条件あり
                 else {
+                    if (roll.cond.bonus < 0) {
+                        addCondValue.classList.add("minus");
+                    }
+                    else if (roll.cond.bonus > 0) {
+                        addCondValue.classList.add("plus");
+                    }
                     // 要素に値を入れる
                     addCondValue.querySelector(".name").textContent = roll.cond.name;
                     addCondValue.querySelector(".value").textContent = roll.cond.bonus;

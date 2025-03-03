@@ -432,6 +432,12 @@ p + p
   padding: 0 8px;
 }
 
+/* 名 */
+.valueBlock > .name
+{
+  opacity: 0.95;
+}
+
 /* 値 */
 .valueBlock > .value
 {
@@ -456,6 +462,18 @@ p + p
 .valueBlock.flat
 {
   background-color: #888 !important;
+}
+
+/* ボーナス修正 */
+.valueBlock.add.plus
+{
+  background-color: #080 !important;
+}
+
+/* ペナルティ修正 */
+.valueBlock.add.minus
+{
+  background-color: #800 !important;
 }
 
 /* 器用度 */
