@@ -914,7 +914,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("6", "G", data.moneyTotal);
 
             // 装填
-            setStatus("8", "装填", 0);
+            setStatus("7", "装填", 0);
 
             // 命中力修正
             setStatus("9", "命中力修正", 0, true);

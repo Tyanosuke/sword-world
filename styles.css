@@ -14,7 +14,7 @@
 /* ボディ */
 body
 {
-  padding: 10px;
+  padding: 12px;
   background: var(--bg-color);
 
   color: var(--font-color);
@@ -90,7 +90,7 @@ h2
   border-radius: 4px;
   padding: 4px 8px;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 h4
@@ -342,7 +342,7 @@ li + li
 {
   margin-left: 4px;
 
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* -------------------------------------------------- */
@@ -404,7 +404,7 @@ li + li
 {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 
   padding: 8px;
 }
@@ -492,7 +492,7 @@ li + li
 }
 .valueBlock > .name + .value
 {
-  margin-left: 10px;
+  margin-left: 12px;
 }
 
 /* 修正値 */
@@ -694,6 +694,7 @@ li + li
   width: 100%;
   min-height: 300px;
   box-sizing: border-box;
+  margin-bottom: 8px;
 }
 
 /* -------------------------------------------------- */

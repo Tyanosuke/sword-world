@@ -822,7 +822,7 @@ export function getSkillLevelForName (name) {
             },
             damage: {
                 rate : data.arms_iryoku[i],
-                rateAdd : data.arms_damage_mod[i],
+                rateAdd : Number(data.arms_damage[i]) - Number(data["V_GLv" + data.V_arms_hit_ginou[i]]) - Number(data.NB3),
                 critical: data.arms_critical[i],
                 criticalAdd: (data.V_arms_hit_ginou[i] == 3) ? -1 : 0,
                 bonusId: "NB3", // 筋力
@@ -891,7 +891,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("6", "G", data.money);
 
             // 装填
-            setStatus("8", "装填", 0);
+            setStatus("7", "装填", 0);
 
             // 命中力修正
             setStatus("9", "命中力修正", 0, true);
