@@ -236,11 +236,17 @@ li + li
 }
 
 /* ボタン */
-.row_input > button
+.row_input button
 {
   min-width: 8em;
   height: 100%;
   padding: 0 8px;
+}
+
+/* リンク */
+.row_input a
+{
+  height: 100%;
 }
 
 /* エラー */
@@ -325,6 +331,12 @@ li + li
   text-align: center;
 }
 
+/* 最大値 */
+[id^="status_max_"]:invalid
+{
+  opacity: 0.5;
+}
+
 /* ※ */
 .valueBlock > span.note
 {
@@ -369,7 +381,7 @@ li + li
 }
 
 /* 武器：備考 */
-.weaponNote
+.rollNote
 {
   background: rgba(255, 255, 255, 0.75);
   border-radius: 4px;

@@ -6,12 +6,30 @@ window.onload = function() {
     selectSite();
 }
 
-/**
- * 定数
- */
+// ====================================================================================================
+// 定数・変数
+// ====================================================================================================
 
-// スクリプトモジュール
+/**
+ * スクリプトモジュール
+ */
 let module;
+
+// ====================================================================================================
+// ファンクション
+// ====================================================================================================
+
+/**
+ * ステータスの設定
+ */
+function setStatus(id, name, value, setMax = false) {
+    document.getElementById("status_name_" + id).value = name;
+    document.getElementById("status_value_" + id).value = value;
+
+    if (setMax) {
+        document.getElementById("status_max_" + id).value = value;
+    }
+}
 
 // ====================================================================================================
 // イベント
@@ -330,50 +348,44 @@ function outputChatPallet(navi = true) {
                     }
                 }
 
-                // 平目
-                const flagFlat = roll.querySelector('.valueBlock.flat');
+                // --------------------------------------------------
+                // 技能レベル
+                // --------------------------------------------------
+                roll.querySelectorAll(".card_skill").forEach(skill => {
+                    // チェックボックス
+                    if (skill.querySelector('input[type="checkbox"]').checked == false) {
+                        // チェックＯＦＦの場合、無視
+                        return;
+                    }
 
-                // ●通常
-                if (!flagFlat) {
-                    // --------------------------------------------------
-                    // 技能レベル
-                    // --------------------------------------------------
-                    roll.querySelectorAll(".card_skill").forEach(skill => {
-                        // チェックボックス
-                        if (skill.querySelector('input[type="checkbox"]').checked == false) {
-                            // チェックＯＦＦの場合、無視
-                            return;
+                    // 技能
+                    const nameSkill = skill.querySelector(".skillName > .name").textContent;
+
+                    // 条件
+                    const nameCondition = skill.querySelector('.condition:not(.alert)');
+                    if (nameCondition) {
+                        if (valueAddName != "") {
+                            valueAddName += " ";
                         }
+                        valueAddName += "※" + nameCondition.textContent;
+                    }
 
-                        // 技能
-                        const nameSkill = skill.querySelector(".skillName > .name").textContent;
+                    // 回避
+                    let addDodge = "";
+                    if (typeDodge) {
+                        addDodge = "+{回避力修正}";
+                    }
 
-                        // 条件
-                        const nameCondition = skill.querySelector('.condition:not(.alert)');
-                        if (nameCondition) {
-                            if (valueAddName != "") {
-                                valueAddName += " ";
-                            }
-                            valueAddName += "※" + nameCondition.textContent;
-                        }
-
-                        // 回避
-                        let addDodge = "";
-                        if (typeDodge) {
-                            addDodge = "+{回避力修正}";
-                        }
-
-                        // チャットコマンドを生成
+                    // チャットコマンドを生成
+                    if (!skill.classList.contains("flat")) {
                         text +=
                             "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addDodge + valueAdd
                             + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")"  + valueAddName + "\r";
-                    });
-                }
-                // ●平目
-                else {
-                    // チャットコマンドを生成
-                    text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)"  + valueAddName + "\r";
-                }
+                    } else {
+                        // チャットコマンドを生成
+                        text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)"  + valueAddName + "\r";
+                    }
+                });
             }
         });
     });

@@ -1,8 +1,10 @@
-/**
- * 定数
- */
+// ====================================================================================================
+// 定数・変数
+// ====================================================================================================
 
-// 能力値ボーナス
+/**
+ * 能力値ボーナス
+ */
 const listStatus = {
     NB1: "器用度",
     NB2: "敏捷度",
@@ -12,7 +14,9 @@ const listStatus = {
     NB6: "精神力",
 }
 
-// 技能レベル
+/**
+ * 技能レベル
+ */
 const listSkill = {
     // ●冒険者レベル
     lv: "冒険者レベル",
@@ -50,8 +54,9 @@ const listSkill = {
     V_GLv20: "フィジカルマスター",
 };
 
-
-// 行為判定
+/**
+ * 行為判定
+ */
 const listRoll = [
     // --------------------------------------------------
     {
@@ -503,11 +508,12 @@ const listRoll = [
             {
                 name: "魔物知識",
                 bonusId: "NB5",
+                flatNote: "弱点看破不能",
                 skill: [
                     { id: "V_GLv12" },
                     {
                         id: "V_GLv16",
-                        note: "弱点獲得に条件あり(Ⅲ-P.84)"
+                        note: "弱点看破不能",
                     },
                 ]
             },
@@ -774,6 +780,8 @@ export async function outputCharacter() {
 
 /**
  * 技能レベル：日本語名からkeyを取得
+ * @param {String} name 日本語名
+ * @returns 技能レベルのkey
  */
 export function getSkillLevelForName (name) {
     const listSkillR = Object.fromEntries(
@@ -786,6 +794,8 @@ export function getSkillLevelForName (name) {
 
 /**
  * 「戦闘用：攻撃」カテゴリーの生成
+ * @param {Object} data キャラクターシートデータ
+ * @param {Object} list 行為判定リスト
  */
  export function setAttack (data, list) {
 
@@ -827,6 +837,7 @@ export function getSkillLevelForName (name) {
 
 /**
  * キャラクター名の描画
+ * @param {Object} data キャラクターシートデータ
  */
 export function drawCharacterName (data) {
     document.querySelector("#loadCharacter .name").textContent = data.pc_name;
@@ -834,6 +845,8 @@ export function drawCharacterName (data) {
 
 /**
  * ステータスの描画
+ * @param {Object} data キャラクターシートデータ
+ * @param {Number} mode モード番号
  */
 export function drawStatus (data, mode = 0) {
     // --------------------------------------------------
@@ -856,183 +869,128 @@ export function drawStatus (data, mode = 0) {
     // 各ステータスを描画
     // --------------------------------------------------
 
-    // ＨＰ
-    document.getElementById("status_name_1").value = "HP";
-    document.getElementById("status_value_1").value = data.HP;
-    document.getElementById("status_max_1").value = data.HP;
+    // HP
+    setStatus("1", "HP", data.HP, true);
 
-    // ＭＰ
-    document.getElementById("status_name_2").value = "MP";
-    document.getElementById("status_value_2").value = data.MP;
-    document.getElementById("status_max_2").value = data.MP;
+    // MP
+    setStatus("2", "MP", data.MP, true);
 
     switch(mode) {
         // ●マギテック
         case 1:
             // 防護点
-            document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.bougo;
-            document.getElementById("status_max_3").value = data.bougo;
+            setStatus("3", "防護点", data.bougo, true);
 
             // 移動力
-            document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.ido;
-            document.getElementById("status_max_4").value = data.ido;
+            setStatus("4", "移動力", data.ido, true);
 
             // 1ゾロ
-            document.getElementById("status_name_5").value = "1ゾロ";
-            document.getElementById("status_value_5").value = 0;
+            setStatus("5", "1ゾロ", 0);
 
             // ガメル
-            document.getElementById("status_name_6").value = "G";
-            document.getElementById("status_value_6").value = data.money;
+            setStatus("6", "G", data.money);
 
             // 装填
-            document.getElementById("status_name_7").value = "装填";
-            document.getElementById("status_value_7").value = 0;
+            setStatus("8", "装填", 0);
 
             // 命中力修正
-            document.getElementById("status_name_9").value = "命中力修正";
-            document.getElementById("status_value_9").value = 0;
-            document.getElementById("status_max_9").value = 0;
+            setStatus("9", "命中力修正", 0, true);
 
             // 回避力修正
-            document.getElementById("status_name_10").value = "回避力修正";
-            document.getElementById("status_value_10").value = data.kaihi;
-            document.getElementById("status_max_10").value = data.kaihi;
+            setStatus("10", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
 
             // ダメージ修正
-            document.getElementById("status_name_11").value = "ダメージ修正";
-            document.getElementById("status_value_11").value = 0;
-            document.getElementById("status_max_11").value = 0;
+            setStatus("11", "ダメージ修正", 0, true);
 
             break;
 
         // ●バード
         case 2:
             // 防護点
-            document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.bougo;
-            document.getElementById("status_max_3").value = data.bougo;
+            setStatus("3", "防護点", data.bougo, true);
 
             // 楽素⤴
-            document.getElementById("status_name_4").value = "楽素⤴";
-            document.getElementById("status_value_4").value = 0;
+            setStatus("4", "楽素⤴", 0);
 
             // 移動力
-            document.getElementById("status_name_5").value = "移動力";
-            document.getElementById("status_value_5").value = data.ido;
-            document.getElementById("status_max_5").value = data.ido;
+            setStatus("5", "移動力", data.ido, true);
 
             // 楽素⤵
-            document.getElementById("status_name_6").value = "楽素⤵";
-            document.getElementById("status_value_6").value = 0;
+            setStatus("6", "楽素⤵", 0);
 
             // 1ゾロ
-            document.getElementById("status_name_7").value = "1ゾロ";
-            document.getElementById("status_value_7").value = 0;
+            setStatus("7", "1ゾロ", 0);
 
             // 楽素♡
-            document.getElementById("status_name_8").value = "楽素♡";
-            document.getElementById("status_value_8").value = 0;
+            setStatus("8", "楽素♡", 0);
 
             // ガメル
-            document.getElementById("status_name_9").value = "G";
-            document.getElementById("status_value_9").value = data.money;
+            setStatus("9", "G", data.money);
 
             // 命中力修正
-            document.getElementById("status_name_10").value = "命中力修正";
-            document.getElementById("status_value_10").value = 0;
-            document.getElementById("status_max_10").value = 0;
+            setStatus("10", "命中力修正", 0, true);
 
             // 回避力修正
-            document.getElementById("status_name_11").value = "回避力修正";
-            document.getElementById("status_value_11").value = data.kaihi;
-            document.getElementById("status_max_11").value = data.kaihi;
+            setStatus("11", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
 
             // ダメージ修正
-            document.getElementById("status_name_12").value = "ダメージ修正";
-            document.getElementById("status_value_12").value = 0;
-            document.getElementById("status_max_12").value = 0;
+            setStatus("12", "ダメージ修正", 0, true);
 
             break;
 
-        // ●シンプル
+        // ●カスタム
         case 3:
             // 防護点
-            document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.bougo;
-            document.getElementById("status_max_3").value = data.bougo;
+            setStatus("3", "防護点", data.bougo, true);
 
             // 移動力
-            document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.ido;
-            document.getElementById("status_max_4").value = data.ido;
+            setStatus("4", "移動力", data.ido, true);
 
             // 1ゾロ
-            document.getElementById("status_name_9").value = "1ゾロ";
-            document.getElementById("status_value_9").value = 0;
+            setStatus("9", "1ゾロ", 0);
 
             // ガメル
-            document.getElementById("status_name_10").value = "G";
-            document.getElementById("status_value_10").value = data.money;
+            setStatus("10", "G", data.money);
 
             // 命中力修正
-            document.getElementById("status_name_11").value = "命中力修正";
-            document.getElementById("status_value_11").value = 0;
-            document.getElementById("status_max_11").value = 0;
+            setStatus("11", "命中力修正", 0, true);
 
             // 回避力修正
-            document.getElementById("status_name_12").value = "回避力修正";
-            document.getElementById("status_value_12").value = data.kaihi;
-            document.getElementById("status_max_12").value = data.kaihi;
+            setStatus("12", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
 
             // ダメージ修正
-            document.getElementById("status_name_13").value = "ダメージ修正";
-            document.getElementById("status_value_13").value = 0;
-            document.getElementById("status_max_13").value = 0;
+            setStatus("13", "ダメージ修正", 0, true);
 
             break;
 
         // ●スタンダード
         default:
             // 防護点
-            document.getElementById("status_name_3").value = "防護点";
-            document.getElementById("status_value_3").value = data.bougo;
-            document.getElementById("status_max_3").value = data.bougo;
+            setStatus("3", "防護点", data.bougo, true);
 
             // 移動力
-            document.getElementById("status_name_4").value = "移動力";
-            document.getElementById("status_value_4").value = data.ido;
-            document.getElementById("status_max_4").value = data.ido;
+            setStatus("4", "移動力", data.ido, true);
 
             // 1ゾロ
-            document.getElementById("status_name_5").value = "1ゾロ";
-            document.getElementById("status_value_5").value = 0;
+            setStatus("5", "1ゾロ", 0);
 
             // ガメル
-            document.getElementById("status_name_6").value = "G";
-            document.getElementById("status_value_6").value = data.money;
+            setStatus("6", "G", data.money);
 
             // 命中力修正
-            document.getElementById("status_name_9").value = "命中力修正";
-            document.getElementById("status_value_9").value = 0;
-            document.getElementById("status_max_9").value = 0;
+            setStatus("9", "命中力修正", 0, true);
 
             // 回避力修正
-            document.getElementById("status_name_10").value = "回避力修正";
-            document.getElementById("status_value_10").value = data.kaihi;
-            document.getElementById("status_max_10").value = data.kaihi;
+            setStatus("10", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
 
             // ダメージ修正
-            document.getElementById("status_name_11").value = "ダメージ修正";
-            document.getElementById("status_value_11").value = 0;
-            document.getElementById("status_max_11").value = 0;
+            setStatus("11", "ダメージ修正", 0, true);
     }
 }
 
 /**
  * カードの描画
+ * @param {Object} data キャラクターシートデータ
  */
 export function drawContents (data) {
     // テンプレートを読み込む
@@ -1116,9 +1074,9 @@ export function drawContents (data) {
                 // - 備考
                 let note = roll.note;
                 if (note) {
-                    cloneRoll.querySelector(".weaponNote").textContent = note;
+                    cloneRoll.querySelector(".rollNote").textContent = note;
                 } else {
-                    cloneRoll.querySelector(".weaponNote").remove();
+                    cloneRoll.querySelector(".rollNote").classList.add("hidden");
                 }
                 // - 技能：名称
                 cloneRoll.querySelector(".valueBlock.level  > .name").textContent = listSkill[roll.skill];
@@ -1231,6 +1189,14 @@ export function drawContents (data) {
                     cloneRoll.firstElementChild.classList.add("dodge");
                 }
 
+                // - 備考
+                let note = roll.note;
+                if (note) {
+                    cloneRoll.querySelector(".rollNote").textContent = note;
+                } else {
+                    cloneRoll.querySelector(".rollNote").classList.add("hidden");
+                }
+
                 // ●条件なし
                 const addCondValue = cloneRoll.querySelector(".valueBlock.add");
                 if (
@@ -1264,7 +1230,10 @@ export function drawContents (data) {
             // タイプ＝武器以外
             if (!typeWeapon) {
                 // 使用可能技能数
+                // - 通常
                 let usableSkill = 0;
+                // - 条件付き
+                let usableLimitSkill = 0;
 
                 // 対象技能
                 let targets = roll.skill;
@@ -1334,7 +1303,13 @@ export function drawContents (data) {
                         checkbox.checked = true;
 
                         // 使用可能技能数
-                        usableSkill++;
+                        if (skill.note) {
+                            // 条件付き
+                            usableLimitSkill++;
+                        } else {
+                            // 通常
+                            usableSkill++;
+                        }
                     }
 
                     // 要素を追加
@@ -1347,6 +1322,9 @@ export function drawContents (data) {
                     if (!typeMagic) {
                         const cloneSkill = tempSkill.content.cloneNode(true);
 
+                        // 識別用クラスを不可
+                        cloneSkill.firstElementChild.classList.add("flat");
+
                         // サプリ
                         cloneSkill.querySelector(".book").remove();
 
@@ -1355,6 +1333,14 @@ export function drawContents (data) {
 
                         // レベル
                         cloneSkill.querySelector(".valueBlock.level > .value").textContent = 0;
+
+                        // 注釈
+                        if (roll.flatNote) {
+                            const condition = document.createElement("div");
+                            condition.classList.add("condition");
+                            condition.textContent = roll.flatNote;
+                            cloneSkill.querySelector('.card_skill').appendChild(condition);
+                        }
 
                         // チェックＯＮ
                         cloneSkill.querySelector('input[type="checkbox"]').checked = true;
@@ -1366,8 +1352,11 @@ export function drawContents (data) {
                         flagNoSkill = false;
                     }
 
-                    // 親要素（行為判定）の能力値ボーナスをグレーアウト
-                    cloneRoll.querySelector(".valueBlock.bonus").classList.add("flat");
+                    // 条件付き使用可能技能も無い場合
+                    if (usableLimitSkill == 0) {
+                        // 親要素（行為判定）の能力値ボーナスをグレーアウト
+                        cloneRoll.querySelector(".valueBlock.bonus").classList.add("flat");
+                    }
                 }
                 // ●それ以外の場合
                 else {
@@ -1397,6 +1386,9 @@ export function drawContents (data) {
 
 /**
  * 習得チェック
+ * @param {Object} data キャラクターシートデータ
+ * @param {String} skillCategory カテゴリー・キー名
+ * @param {String} targetName 対象習得要素・キー名
  */
 export function checkLearn (data, skillCategory, targetName) {
     // 指定した戦闘特技を習得しているか
