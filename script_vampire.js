@@ -529,7 +529,10 @@ const listRoll = [
                             target: "射手の体術"
                         }
                     },
-                    { id: "V_GLv26" },
+                    {
+                        id: "V_GLv26",
+                        book: "BM",
+                    },
                 ]
             },
         ]
@@ -1198,6 +1201,15 @@ export function drawContents (data) {
                     // テンプレートをクローン
                     const cloneSkill = tempSkill.content.cloneNode(true);
 
+                    // サプリ
+                    const bookName = skill.book;
+                    const elemBook = cloneSkill.querySelector(".book").textContent;
+                    if (bookName) {
+                        elemBook.textContent = bookName;
+                    } else {
+                        elemBook.remove();
+                    }
+
                     // 名称
                     cloneSkill.querySelector(".skillName > .name").textContent = listSkill[skill.id];
 
@@ -1261,6 +1273,9 @@ export function drawContents (data) {
                     // 「平目」を追加（魔法以外）
                     if (!typeMagic) {
                         const cloneSkill = tempSkill.content.cloneNode(true);
+
+                        // サプリ
+                        cloneSkill.querySelector(".book").remove();
 
                         // 名称
                         cloneSkill.querySelector(".skillName > .name").textContent = "平目";

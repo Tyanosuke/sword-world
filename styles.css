@@ -601,11 +601,15 @@ li + li
   pointer-events: none;
 }
 
+/* カード */
+.card_skill > input[type="checkbox"]
+{
+  margin-right: 8px;
+}
+
 /* 技能名 */
 .skillName
 {
-  margin-left: 8px;
-
   font-weight: bold;
 }
 

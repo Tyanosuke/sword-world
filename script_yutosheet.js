@@ -528,7 +528,10 @@ const listRoll = [
                             target: "射手の体術"
                         }
                     },
-                    { id: "lvBat" },
+                    {
+                        id: "lvBat",
+                        book: "BM",
+                    },
                 ]
             },
         ]
@@ -1216,6 +1219,15 @@ export function drawContents (data) {
                     // テンプレートをクローン
                     const cloneSkill = tempSkill.content.cloneNode(true);
 
+                    // サプリ
+                    const bookName = skill.book;
+                    const elemBook = cloneSkill.querySelector(".book");
+                    if (bookName) {
+                        elemBook.textContent = bookName;
+                    } else {
+                        elemBook.remove();
+                    }
+
                     // 名称
                     cloneSkill.querySelector(".skillName > .name").textContent = listSkill[skill.id];
 
@@ -1274,6 +1286,9 @@ export function drawContents (data) {
                 if (usableSkill == 0) {
                     if (!typeMagic) {
                         const cloneSkill = tempSkill.content.cloneNode(true);
+
+                        // サプリ
+                        cloneSkill.querySelector(".book").remove();
 
                         // 名称
                         cloneSkill.querySelector(".skillName > .name").textContent = "平目";

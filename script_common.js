@@ -241,6 +241,8 @@ function outputChatPallet(navi = true) {
                 const weaponName = roll.querySelector(".weaponName").textContent;
                 // - 技能：名称
                 const nameSkill = roll.querySelector(".valueBlock.level  > .name").textContent;
+                // - 首切り刀補正
+                const bonusKubikiri = (weaponName.indexOf("首切り刀") > -1) ? "r5" : "";
 
                 // 命中力
                 // - 能力値ボーナス：名称
@@ -265,7 +267,8 @@ function outputChatPallet(navi = true) {
                     + "　■" + weaponName + " - 命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
                 // - ダメージ
                 text +=
-                    "k" + valueRate +"@" + (valueCritical + valueCriticalAdd) + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメージ修正}" + valueRateAdd
+                    "k" + valueRate + bonusKubikiri+ "@" + (valueCritical + valueCriticalAdd)
+                    + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメージ修正}" + valueRateAdd
                     + "　■" + weaponName + " - ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
             }
             // ●魔法
