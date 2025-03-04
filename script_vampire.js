@@ -1203,7 +1203,7 @@ export function drawContents (data) {
 
                     // サプリ
                     const bookName = skill.book;
-                    const elemBook = cloneSkill.querySelector(".book").textContent;
+                    const elemBook = cloneSkill.querySelector(".book");
                     if (bookName) {
                         elemBook.textContent = bookName;
                     } else {
