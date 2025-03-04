@@ -1073,7 +1073,7 @@ export function drawContents (data) {
                     addHit
                     && addHit != 0
                 ) {
-                    if (addHit > 0) {
+                    if (Number(addHit) > 0) {
                         addHit = "+" + addHit;
                     }
                     cloneRoll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent = addHit;
@@ -1086,7 +1086,7 @@ export function drawContents (data) {
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
                 let addRate = roll.damage.rateAdd;
                 if (addRate != 0) {
-                    if (addRate > 0) {
+                    if (Number(addRate) > 0) {
                         addRate = "+" + addRate;
                     }
 
@@ -1096,7 +1096,7 @@ export function drawContents (data) {
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = roll.damage.critical;
                 let addCritical = roll.damage.criticalAdd;
                 if (addCritical != 0) {
-                    if (addCritical > 0) {
+                    if (Number(addCritical) > 0) {
                         addCritical = "+" + addCritical;
                     }
                     cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent = addCritical;
@@ -1180,10 +1180,10 @@ export function drawContents (data) {
                 }
                 // ●条件あり
                 else {
-                    if (roll.cond.bonus < 0) {
+                    if (Number(roll.cond.bonus) < 0) {
                         addCondValue.classList.add("minus");
                     }
-                    else if (roll.cond.bonus > 0) {
+                    else if (Number(roll.cond.bonus) > 0) {
                         addCondValue.classList.add("plus");
                     }
                     addCondValue.querySelector(".name").textContent = roll.cond.name;

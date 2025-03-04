@@ -212,7 +212,7 @@ function outputChatPallet(navi = true) {
         }
 
         // 見出し出力
-        text += "─── " + category.querySelector('.acordionTitleRow > h3').textContent + " ───";
+        text += "◆─── " + category.querySelector('.acordionTitleRow > h3').textContent + " ───◆";
         text += "\r";
 
         // --------------------------------------------------
@@ -248,7 +248,10 @@ function outputChatPallet(navi = true) {
                 // - 能力値ボーナス：名称
                 const nameBonusHit = roll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent;
                 // - 能力値ボーナス：ボーナス修正
-                const addValue = roll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent;
+                let addValue = roll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent;
+                if (Number(addValue) == 0) {
+                    addValue = "";
+                }
 
                 // ダメージ
                 // - 威力

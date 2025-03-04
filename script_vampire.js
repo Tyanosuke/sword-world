@@ -1054,7 +1054,7 @@ export function drawContents (data) {
                     addHit
                     && addHit != 0
                 ) {
-                    if (addHit > 0) {
+                    if (Number(addHit) > 0) {
                         addHit = "+" + addHit;
                     }
                     cloneRoll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent = addHit;
@@ -1066,8 +1066,8 @@ export function drawContents (data) {
                 // - 威力
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
                 let addRate = roll.damage.rateAdd;
-                if (addRate != 0) {
-                    if (addRate > 0) {
+                if (Number(addRate) != 0) {
+                    if (Number(addRate) > 0) {
                         addRate = "+" + addRate;
                     }
                     cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
@@ -1075,8 +1075,8 @@ export function drawContents (data) {
                 // - Ｃ値
                 let addCritical = roll.damage.criticalAdd;
                 cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = Number(roll.damage.critical) - Number(addCritical);
-                if (addCritical != 0) {
-                    if (addCritical > 0) {
+                if (Number(addCritical) != 0) {
+                    if (Number(addCritical) > 0) {
                         addCritical = "+" + addCritical;
                     }
                     cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent = addCritical;
@@ -1161,10 +1161,10 @@ export function drawContents (data) {
                 }
                 // ●条件あり
                 else {
-                    if (roll.cond.bonus < 0) {
+                    if (Number(roll.cond.bonus) < 0) {
                         addCondValue.classList.add("minus");
                     }
-                    else if (roll.cond.bonus > 0) {
+                    else if (Number(roll.cond.bonus) > 0) {
                         addCondValue.classList.add("plus");
                     }
                     // 要素に値を入れる
