@@ -404,7 +404,6 @@ li + li
 {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
 
   padding: 8px;
 }
@@ -447,7 +446,7 @@ li + li
 
 .area_roll
 {
-  min-width: calc(50% - 6px);
+  min-width: 50%;
   box-sizing: border-box;
 
   padding: 8px;
