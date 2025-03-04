@@ -447,7 +447,7 @@ li + li
 
 .area_roll
 {
-  min-width: calc(50% - 5px);
+  min-width: calc(50% - 6px);
   box-sizing: border-box;
 
   padding: 8px;
