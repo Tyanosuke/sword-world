@@ -45,6 +45,8 @@ const listSkill = {
     V_GLv25: "ジオマンサー",
     V_GLv18: "ウォーリーダー",
     V_GLv28: "ダークハンター",
+
+    // [TODO]何系？
     V_GLv20: "フィジカルマスター",
 };
 
@@ -120,7 +122,10 @@ const listRoll = [
                 skill: [
                     { id: "V_GLv10" },
                     { id: "V_GLv11" },
-                    { id: "V_GLv16" },
+                    {
+                        id: "V_GLv16",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -160,7 +165,10 @@ const listRoll = [
                 name: "騎乗",
                 bonusId: "NB2",
                 skill: [
-                    { id: "V_GLv16" },
+                    {
+                        id: "V_GLv16",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             // 知力
@@ -229,7 +237,10 @@ const listRoll = [
                 skill: [
                     { id: "V_GLv12" },
                     { id: "V_GLv14" },
-                    { id: "V_GLv15" },
+                    {
+                        id: "V_GLv15",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -261,7 +272,10 @@ const listRoll = [
                         note: "自然環境のみ"
                     },
                     { id: "V_GLv12" },
-                    { id: "V_GLv16" },
+                    {
+                        id: "V_GLv16",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -313,7 +327,10 @@ const listRoll = [
                     { id: "V_GLv6" },
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
-                    { id: "V_GLv8" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -322,7 +339,10 @@ const listRoll = [
                 skill: [
                     { id: "V_GLv11" },
                     { id: "V_GLv12" },
-                    { id: "V_GLv15" },
+                    {
+                        id: "V_GLv15",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -348,13 +368,62 @@ const listRoll = [
                 book: "Ⅱ",
                 name: "聞き込み",
                 bonusId: "NB5",
+                skill: [
+                    { id: "V_GLv1" },
+                    { id: "V_GLv2" },
+                    { id: "V_GLv3" },
+                    { id: "V_GLv4" },
+                    {
+                        id: "V_GLv26",
+                        book: "BM",
+                    },
+
+                    { id: "V_GLv5" },
+                    { id: "V_GLv6" },
+                    { id: "V_GLv7" },
+                    { id: "V_GLv9" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
+                    // { id: "V_GLv17" },
+                    // { id: "V_GLv24" },
+                    // { id: "V_GLv27" },
+
+                    { id: "V_GLv10" },
+                    { id: "V_GLv11" },
+                    { id: "V_GLv12" },
+                    {
+                        id: "V_GLv13",
+                        book: "Ⅱ",
+                        },
+                    {
+                        id: "V_GLv14",
+                        book: "Ⅱ",
+                    },
+                    {
+                        id: "V_GLv16",
+                        book: "Ⅲ",
+                    },
+                    {
+                        id: "V_GLv15",
+                        book: "Ⅲ",
+                    },
+                    // { id: "V_GLv25" },
+                    // { id: "V_GLv18" },
+                    // { id: "V_GLv28" },
+                    // { id: "V_GLv20" },
+                ]
             },
             {
                 book: "Ⅲ",
                 name: "弱点隠蔽",
                 bonusId: "NB5",
                 skill: [
-                    { id: "V_GLv16" },
+                    {
+                        id: "V_GLv16",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -362,7 +431,10 @@ const listRoll = [
                 name: "賦術",
                 bonusId: "NB5",
                 skill: [
-                    { id: "V_GLv15" },
+                    {
+                        id: "V_GLv15",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -468,7 +540,10 @@ const listRoll = [
                     { id: "V_GLv6" },
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
-                    { id: "V_GLv8" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -480,7 +555,10 @@ const listRoll = [
                     { id: "V_GLv6" },
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
-                    { id: "V_GLv8" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -492,7 +570,10 @@ const listRoll = [
                     { id: "V_GLv6" },
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
-                    { id: "V_GLv8" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -504,7 +585,10 @@ const listRoll = [
                     { id: "V_GLv6" },
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
-                    { id: "V_GLv8" },
+                    {
+                        id: "V_GLv8",
+                        book: "Ⅱ",
+                    },
                 ]
             },
         ]
@@ -1184,17 +1268,6 @@ export function drawContents (data) {
 
                 // 対象技能
                 let targets = roll.skill;
-                if (!targets) {
-                    // 空の場合、全技能を対象
-                    targets = [];
-                    Object.keys(listSkill)
-                        .filter(key => key != "lv") // 「冒険者レベル」は除く
-                        .forEach(key => {
-                            targets.push({
-                                id: key
-                            });
-                        });
-                }
 
                 // 対象技能分ループ
                 targets.forEach(skill => {

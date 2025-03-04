@@ -45,6 +45,8 @@ const listSkill = {
     lvGeo: "ジオマンサー",
     lvWar: "ウォーリーダー",
     lvDar: "ダークハンター",
+
+    // [TODO]何系？
     lvPhy: "フィジカルマスター",
 };
 
@@ -119,7 +121,10 @@ const listRoll = [
                 skill: [
                     { id: "lvSco" },
                     { id: "lvRan" },
-                    { id: "lvRid" },
+                    {
+                        id: "lvRid",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -159,7 +164,10 @@ const listRoll = [
                 name: "騎乗",
                 bonusId: "Agi",
                 skill: [
-                    { id: "lvRid" },
+                    {
+                        id: "lvRid",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             // 知力
@@ -228,7 +236,10 @@ const listRoll = [
                 skill: [
                     { id: "lvSag" },
                     { id: "lvBar" },
-                    { id: "lvAlc" },
+                    {
+                        id: "lvAlc",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -260,7 +271,10 @@ const listRoll = [
                         note: "自然環境のみ"
                     },
                     { id: "lvSag" },
-                    { id: "lvRid" },
+                    {
+                        id: "lvRid",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -312,7 +326,10 @@ const listRoll = [
                     { id: "lvCon" },
                     { id: "lvPri" },
                     { id: "lvMag" },
-                    { id: "lvFai" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -321,7 +338,10 @@ const listRoll = [
                 skill: [
                     { id: "lvRan" },
                     { id: "lvSag" },
-                    { id: "lvAlc" },
+                    {
+                        id: "lvAlc",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -347,13 +367,62 @@ const listRoll = [
                 book: "Ⅱ",
                 name: "聞き込み",
                 bonusId: "Int",
+                skill: [
+                    { id: "lvFig" },
+                    { id: "lvFen" },
+                    { id: "lvGra" },
+                    { id: "lvSho" },
+                    {
+                        id: "lvBat",
+                        book: "BM",
+                    },
+
+                    { id: "lvSor" },
+                    { id: "lvCon" },
+                    { id: "lvPri" },
+                    { id: "lvMag" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
+                    // { id: "lvDem" },
+                    // { id: "lvDru" },
+                    // { id: "lvAby" },
+
+                    { id: "lvSco" },
+                    { id: "lvRan" },
+                    { id: "lvSag" },
+                    {
+                        id: "lvEnh",
+                        book: "Ⅱ",
+                        },
+                    {
+                        id: "lvBar",
+                        book: "Ⅱ",
+                    },
+                    {
+                        id: "lvRid",
+                        book: "Ⅲ",
+                    },
+                    {
+                        id: "lvAlc",
+                        book: "Ⅲ",
+                    },
+                    // { id: "lvGeo" },
+                    // { id: "lvWar" },
+                    // { id: "lvDar" },
+                    // { id: "lvPhy" },
+                ]
             },
             {
                 book: "Ⅲ",
                 name: "弱点隠蔽",
                 bonusId: "Int",
                 skill: [
-                    { id: "lvRid" },
+                    {
+                        id: "lvRid",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -361,7 +430,10 @@ const listRoll = [
                 name: "賦術",
                 bonusId: "Int",
                 skill: [
-                    { id: "lvAlc" },
+                    {
+                        id: "lvAlc",
+                        book: "Ⅲ",
+                    },
                 ]
             },
             {
@@ -467,7 +539,10 @@ const listRoll = [
                     { id: "lvCon" },
                     { id: "lvPri" },
                     { id: "lvMag" },
-                    { id: "lvFai" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -479,7 +554,10 @@ const listRoll = [
                     { id: "lvCon" },
                     { id: "lvPri" },
                     { id: "lvMag" },
-                    { id: "lvFai" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -491,7 +569,10 @@ const listRoll = [
                     { id: "lvCon" },
                     { id: "lvPri" },
                     { id: "lvMag" },
-                    { id: "lvFai" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
                 ]
             },
             {
@@ -503,7 +584,10 @@ const listRoll = [
                     { id: "lvCon" },
                     { id: "lvPri" },
                     { id: "lvMag" },
-                    { id: "lvFai" },
+                    {
+                        id: "lvFai",
+                        book: "Ⅱ",
+                    },
                 ]
             },
         ]
@@ -1202,17 +1286,6 @@ export function drawContents (data) {
 
                 // 対象技能
                 let targets = roll.skill;
-                if (!targets) {
-                    // 空の場合、全技能を対象
-                    targets = [];
-                    Object.keys(listSkill)
-                        .filter(key => key != "level") // 「冒険者レベル」は除く
-                        .forEach(key => {
-                            targets.push({
-                                id: key
-                            });
-                        });
-                }
 
                 // 対象技能分ループ
                 targets.forEach(skill => {
