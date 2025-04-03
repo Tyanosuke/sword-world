@@ -897,7 +897,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("9", "命中力修正", 0, true);
 
             // 回避力修正
-            setStatus("10", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
+            setStatus("10", "回避力修正", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
 
             // ダメージ修正
             setStatus("11", "ダメージ修正", 0, true);
@@ -931,7 +931,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("10", "命中力修正", 0, true);
 
             // 回避力修正
-            setStatus("11", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
+            setStatus("11", "回避力修正", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
 
             // ダメージ修正
             setStatus("12", "ダメージ修正", 0, true);
@@ -956,7 +956,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("11", "命中力修正", 0, true);
 
             // 回避力修正
-            setStatus("12", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
+            setStatus("12", "回避力修正", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
 
             // ダメージ修正
             setStatus("13", "ダメージ修正", 0, true);
@@ -981,7 +981,7 @@ export function drawStatus (data, mode = 0) {
             setStatus("9", "命中力修正", 0, true);
 
             // 回避力修正
-            setStatus("10", "回避力修正", data.armor_kaihi + data.bougu_kaihi_mod + data.bougu_kaihi_tokugi, true);
+            setStatus("10", "回避力修正", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
 
             // ダメージ修正
             setStatus("11", "ダメージ修正", 0, true);
