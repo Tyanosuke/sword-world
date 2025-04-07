@@ -727,6 +727,11 @@ export async function outputCharacter() {
                     "label": "精神力",
                     "value": data.bonusMnd,
                 },
+                // 冒険者レベル
+                {
+                    "label": "冒険者レベル",
+                    "value": data.level,
+                },
             ],
             "active": true,
             "secret": false,
