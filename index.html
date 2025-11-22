@@ -1,375 +1,528 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="data:,">
-    <link rel="stylesheet" href="styles.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	  <script src="script_common.js"></script>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css" />
 
-    <title>SW2.5 ココフォリア用駒生成ツール</title>
-  </head>
+  <script src="script_common.js"></script>
 
-  <body>
+  <title>SW2.5 ココフォリア用駒生成ツール</title>
+</head>
 
-    <h1>「ソードワールド2.5」ココフォリア用駒生成ツール ver.0.1.0</h1>
+<body>
 
-    <div class="bookList">
-      <label class="bookList_title">
-        対応ルールブック・サプリメント
-      </label>
+  <h1>「ソードワールド2.5」ココフォリア用駒生成ツール ver.0.2.0</h1>
 
-      <div class="card_skill">
-          <span class="book">Ⅰ</span>
-          ルールブックⅠ
-      </div>
-      <div class="card_skill">
-        <span class="book">Ⅱ</span>
-        ルールブックⅡ
-      </div>
-      <div class="card_skill">
-        <span class="book">Ⅲ</span>
-        ルールブックⅢ
-      </div>
-      <div class="card_skill">
-        <span class="book">ET</span>
-        エピックトレジャリー
-      </div>
-      <div class="card_skill">
-        <span class="book">BM</span>
-        バトルマスタリー
-      </div>
+  <!------------------------------------------------------>
+  <!-- 対応ルールブック・サプリメント -->
+  <!------------------------------------------------------>
+
+  <div class="bookList">
+
+    <div class="bookList_title">
+      対応ルールブック・サプリメント
     </div>
 
-    <!------------------------------------------------------>
-
-    <div class="acordionArea" id="acordion_caution">
-        <div class="acordionTitleRow">
-          <h3>注意</h3>
-          <button onclick='toggleAcordion("acordion_caution")'>開閉</button>
-        </div>
-
-        <div class="contents">
-          <ul>
-            <li>
-              本ツールは「チャットパレットの編集」に重点を置いて作成されています。
-              チャットパレットをどう作るかは個人に大きく依存するため、最終的にはユーザー自身がチャットパレットに手を加えることを前提にしています。
-              あくまで面倒な入力作業を省くことが主な機能と考えてください。故に、その他機能はオマケでしかありません。
-            </li>
-            <li>
-              『解除』判定の＜スカウト用ツール＞未所持時のペナルティ修正など、一部の判定にはアイテム名を使用しています。
-              アイテム名は正確に入力してください。「スカウトツール」ではペナルティは消えません。
-            </li>
-            <li>
-              『ゆとシートⅡ for SW2.5』からデータを読み込んだ際、一部の項目は以下のように取得されます。
-              <table>
-                <tr>
-                  <th>
-                    ステータス／防護点
-                  </th>
-                  <td>
-                    防具テーブルの使用技能１行目から取得しています。
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    ステータス／回避力修正
-                  </th>
-                  <td>
-                    各装備の「回避」を集計しています。
-                  </td>
-                </tr>
-              </table>
-            </li>
-            <li>
-              バグなどあれば<a href="https://takusuki.com/@tyanosuke" target="_blank">こちら</a>（要：Misskeyアカウント）へどうぞ。
-              挨拶無しに、端的に内容を伝えるのみでも構いません。（セッションの予定が入っていなければ）多分すぐに対応します。
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="card_skill">
+      <span class="book">Ⅰ</span>
+      ルールブックⅠ
     </div>
-    <!------------------------------------------------------>
 
-    <div id="area_read">
-      <h2>キャラクターシート読み込み</h2>
+    <div class="card_skill">
+      <span class="book">Ⅱ</span>
+      ルールブックⅡ
+    </div>
 
-      <div class="row_input">
-        <div class="inputLabel">
-          サイト
-        </div>
+    <div class="card_skill">
+      <span class="book">Ⅲ</span>
+      ルールブックⅢ
+    </div>
 
-        <div>
-          <select id="select_site" onchange="selectSite(this)">
-            <option id="ytsheet">ゆとシートⅡ for SW2.5</option>
-            <option id="vampire-blood">キャラクター保管所</option>
-          </select>
-        </div>
+    <div class="card_skill">
+      <span class="book">ET</span>
+      エピックトレジャリー
+    </div>
 
-        <a href="https://yutorize.2-d.jp/ytsheet/sw2.5/" target="_blank" class="displayLimit_ytsheet">
-          <button>
-            リンク
-          </button>
-        </a>
-        <a href="https://charasheet.vampire-blood.net/" target="_blank" class="displayLimit_vampire-blood hidden">
-          <button>
-            リンク
-          </button>
-        </a>
+    <div class="card_skill">
+      <span class="book">ML</span>
+      モンストラスロア
+    </div>
+
+    <div class="card_skill">
+      <span class="book">BM</span>
+      バトルマスタリー
+    </div>
+
+  </div>
+
+  <!------------------------------------------------------>
+  <!-- 注意 -->
+  <!------------------------------------------------------>
+
+  <div class="acordionArea" id="acordion_caution">
+
+    <div class="acordionTitleRow">
+
+      <h3>注意</h3>
+
+      <button onclick='toggleAcordion("acordion_caution")'>開閉</button>
+
+    </div>
+
+    <div class="contents">
+      <ul>
+
+        <li>
+          <p>
+            本ツールは「チャットパレットの編集」に重点を置いて作成されています。
+            チャットパレットをどう作るかは個人に大きく依存するため、最終的にはユーザー自身がチャットパレットに手を加えることを前提にしています。
+            あくまで面倒な入力作業を省くことが主な機能と考えてください。故に、その他機能はオマケでしかありません。
+          </p>
+        </li>
+
+        <li>
+          <p>
+            『解除』判定の＜スカウト用ツール＞未所持時のペナルティ修正など、一部の判定にはアイテム名を使用しています。
+            アイテム名は正確に入力してください。「スカウトツール」ではペナルティは消えません。
+          </p>
+        </li>
+
+        <li>
+
+          <p>
+            『ゆとシートⅡ for SW2.5』からデータを読み込んだ際、一部の項目は以下のように取得されます。
+          </p>
+
+          <table>
+            <tr>
+              <th>
+                ステータス／防護点
+              </th>
+
+              <td>
+                防具テーブルの使用技能１行目から取得しています。
+              </td>
+            </tr>
+
+            <tr>
+              <th>
+                ステータス／回避力修正
+              </th>
+
+              <td>
+                各装備の「回避」を集計しています。
+              </td>
+            </tr>
+          </table>
+
+        </li>
+
+        <li>
+          <p>
+            バグなどあれば<a href="https://takusuki.com/@tyanosuke" target="_blank">こちら</a>（要：Misskeyアカウント）へどうぞ。
+          </p>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+  <!------------------------------------------------------>
+  <!-- キャラクターシート読み込み -->
+  <!------------------------------------------------------>
+
+  <div id="area_read">
+
+    <h2>キャラクターシート読み込み</h2>
+
+    <div class="row_input">
+
+      <div class="inputLabel">
+        サイト
       </div>
 
-      <div class="row_input">
-        <div class="inputLabel">
-          URL
-        </div>
+      <div>
+        <select id="select_site" onchange="selectSite(this)">
 
-        <div class="displayLimit_ytsheet">
-          <span class="urlPrefix">https://yutorize.2-d.jp/ytsheet/sw2.5/?id=</span>
-          <input id="input_url_ytsheet" class="input_url">
-          <span class="urlSuffix">&mode=json</span>
-        </div>
-        <div class="displayLimit_vampire-blood hidden">
-          <span class="urlPrefix">https://charasheet.vampire-blood.net/</span>
-          <input id="input_url_vampire-blood" class="input_url">
-          <span class="urlSuffix">.js</span>
-        </div>
+          <option id="vampire-blood">キャラクター保管所</option>
 
-        <button id="buttonRead" onclick='buttonRead()'>
-          読み込み
+          <option id="ytsheet">ゆとシートⅡ for SW2.5</option>
+
+        </select>
+      </div>
+
+      <a href="https://charasheet.vampire-blood.net/" target="_blank" class="displayLimit_vampire-blood">
+        <button>
+          サイトを開く
         </button>
+      </a>
 
-        <button id="buttonClear" class="hidden" onclick='buttonClear()'>
-          クリア
+      <a href="https://yutorize.2-d.jp/ytsheet/sw2.5/" target="_blank" class="displayLimit_ytsheet hidden">
+        <button>
+          サイトを開く
         </button>
-      </div>
+      </a>
 
-      <div id="loadCharacter" class="row_input hidden">
-        <div class="inputLabel">
-          読み込みキャラクター
-        </div>
-
-        <div>
-          <span class="name"></span>
-        </div>
-      </div>
-
-      <div id="loadError" class="row_input hidden">
-        <div class="inputLabel">
-          エラー
-        </div>
-
-        <div>
-          <span class="text_error">読み込みに失敗しました。</span>
-        </div>
-      </div>
     </div>
 
-    <!------------------------------------------------------>
+    <div class="row_input">
 
-    <div class="output_area hidden">
-      <div>
-        <h2>ステータス</h2>
-
-        <div class="row_input buttons_preset">
-          <div class="inputLabel">
-            プリセット
-          </div>
-          <button onclick="module.drawStatus(null, 0)">スタンダード</button>
-          <button onclick="module.drawStatus(null, 3)">カスタム</button>
-          <button onclick="module.drawStatus(null, 1)">マギテック</button>
-          <button onclick="module.drawStatus(null, 2)">バード</button>
-        </div>
-
-        <div class="list_display">
-          <p>キャラクター一覧に表示されます。</p>
-
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_1" class="name">
-              <input id="status_value_1" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_1" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_2" class="name">
-              <input id="status_value_2" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_2" type="number">
-            </div>
-          </div>
-
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_3" class="name">
-              <input id="status_value_3" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_3" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_4" class="name">
-              <input id="status_value_4" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_4" type="number">
-            </div>
-          </div>
-
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_5" class="name">
-              <input id="status_value_5" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_5" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_6" class="name">
-              <input id="status_value_6" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_6" type="number">
-            </div>
-          </div>
-
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_7" class="name">
-              <input id="status_value_7" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_7" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_8" class="name">
-              <input id="status_value_8" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_8" type="number">
-            </div>
-          </div>
-        </div>
-
-        <div class="list_notDisplay">
-          <div class="card_status">
-            <div class="valueBlock">
-              <input id="status_name_9" class="name">
-              <input id="status_value_9" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_9" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_10" class="name">
-              <input id="status_value_10" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_10" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_11" class="name">
-              <input id="status_value_11" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_11" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_12" class="name">
-              <input id="status_value_12" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_12" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_13" class="name">
-              <input id="status_value_13" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_13" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_14" class="name">
-              <input id="status_value_14" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_14" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_15" class="name">
-              <input id="status_value_15" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_15" type="number">
-            </div>
-
-            <div class="valueBlock">
-              <input id="status_name_16" class="name">
-              <input id="status_value_16" type="number">
-              <span class="slash">/</span>
-              <input id="status_max_16" type="number">
-            </div>
-          </div>
-        </div>
+      <div class="inputLabel">
+        URL
       </div>
 
-      <div>
-        <h2>行為判定</h2>
-
-        <div id="mainContents"></div>
+      <div class="displayLimit_vampire-blood">
+        <span class="urlPrefix">https://charasheet.vampire-blood.net/</span>
+        <input id="input_url_vampire-blood" class="input_url">
+        <span class="urlSuffix">.js</span>
       </div>
 
-      <div>
-        <h2>チャットパレット</h2>
-
-        <textarea id="text_chatPallet"></textarea>
-
-        <div class="row_input">
-          <button onclick="outputChatPallet()">再生成</button>
-          <span id="navi_reset" class="navi_text">チャットパレットを再生成しました。</span>
-        </div>
+      <div class="displayLimit_ytsheet hidden">
+        <span class="urlPrefix">https://yutorize.2-d.jp/ytsheet/sw2.5/?id=</span>
+        <input id="input_url_ytsheet" class="input_url">
+        <span class="urlSuffix">&mode=json</span>
       </div>
 
-      <div>
-        <h2>駒データ生成</h2>
+      <button id="buttonRead" onclick='buttonRead()'>
+        読み込み
+      </button>
 
-        <div class="row_input">
-          <button onclick="module.outputCharacter()">生成</button>
-          <span id="navi_output" class="navi_text">クリップボードに駒データをコピーしました。</span>
-        </div>
-      </div>
+      <button id="buttonClear" class="hidden" onclick='buttonClear()'>
+        クリア
+      </button>
+
     </div>
 
-    <!-- ローディングカバー -->
-    <div id="loading" class="hidden">
-      <span>Loading...</span>
+    <div id="loadCharacter" class="row_input hidden">
+
+      <div class="inputLabel">
+        読み込みキャラクター
+      </div>
+
+      <div>
+        <span class="name"></span>
+      </div>
+
     </div>
 
-  </body>
+    <div id="loadError" class="row_input hidden">
+
+      <div class="inputLabel">
+        エラー
+      </div>
+
+      <div>
+        <span class="text_error">読み込みに失敗しました。</span>
+      </div>
+
+    </div>
+
+  </div>
 
   <!------------------------------------------------------>
 
-  <template id="temp_category">
-    <!-- カテゴリー -->
-    <div class="acordionArea">
-        <div class="acordionTitleRow">
-          <input type="checkbox" checked class="categoryCheck" onclick="toggleCategoryCheck(this)">
-          <h3>（カテゴリー）</h3>
-          <button>開閉</button>
+  <div class="output_area hidden">
+
+    <!-- ステータス -->
+    <div>
+
+      <h2>ステータス</h2>
+
+      <div class="row_input buttons_preset">
+
+        <div class="inputLabel">
+          プリセット
         </div>
 
-        <div class="contents">
-          <!-- temp_roll -->
+        <button onclick="module.drawStatus(null, 0)">スタンダード</button>
+
+        <button onclick="module.drawStatus(null, 3)">カスタム</button>
+
+        <button onclick="module.drawStatus(null, 4)">戦士系</button>
+
+        <button onclick="module.drawStatus(null, 1)">マギテック</button>
+
+        <button onclick="module.drawStatus(null, 2)">バード</button>
+
+      </div>
+
+      <div class="list_display">
+
+        <p>キャラクター一覧に表示されます。</p>
+
+        <div class="card_status">
+          <div class="valueBlock">
+            <input id="status_name_1" class="name">
+            <input id="status_value_1" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_1" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_2" class="name">
+            <input id="status_value_2" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_2" type="number">
+          </div>
+        </div>
+
+        <div class="card_status">
+          <div class="valueBlock">
+            <input id="status_name_3" class="name">
+            <input id="status_value_3" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_3" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_4" class="name">
+            <input id="status_value_4" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_4" type="number">
+          </div>
+        </div>
+
+        <div class="card_status">
+          <div class="valueBlock">
+            <input id="status_name_5" class="name">
+            <input id="status_value_5" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_5" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_6" class="name">
+            <input id="status_value_6" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_6" type="number">
+          </div>
+        </div>
+
+        <div class="card_status">
+          <div class="valueBlock">
+            <input id="status_name_7" class="name">
+            <input id="status_value_7" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_7" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_8" class="name">
+            <input id="status_value_8" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_8" type="number">
+          </div>
         </div>
       </div>
+
+      <div class="list_notDisplay">
+        <div class="card_status">
+          <div class="valueBlock">
+            <input id="status_name_9" class="name">
+            <input id="status_value_9" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_9" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_10" class="name">
+            <input id="status_value_10" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_10" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_11" class="name">
+            <input id="status_value_11" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_11" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_12" class="name">
+            <input id="status_value_12" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_12" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_13" class="name">
+            <input id="status_value_13" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_13" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_14" class="name">
+            <input id="status_value_14" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_14" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_15" class="name">
+            <input id="status_value_15" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_15" type="number">
+          </div>
+
+          <div class="valueBlock">
+            <input id="status_name_16" class="name">
+            <input id="status_value_16" type="number">
+            <span class="slash">/</span>
+            <input id="status_max_16" type="number">
+          </div>
+        </div>
+      </div>
+
     </div>
-  </template>
 
-  <template id="temp_roll">
     <!-- 行為判定 -->
-    <div class="area_roll">
-      <div class="categoryTitle">
-        <span class="book">（サプリ）</span>
+    <div>
 
-        <span class="rollName">（行為判定）</span>
+      <h2>行為判定</h2>
+
+      <!-- 『平目』を一括切り替え -->
+      <div class="card_skill check_option">
+
+        <input type="checkbox" onchange="toggleFlat(this)" checked>
+
+        <div class="skillName">
+          <span class="name">『平目』を一括切り替え</span>
+        </div>
+
+      </div>
+
+      <div id="mainContents"></div>
+
+    </div>
+
+    <!-- チャットパレット -->
+    <div>
+
+      <h2>チャットパレット</h2>
+
+      <textarea id="text_chatPallet"></textarea>
+
+      <div class="row_input">
+        <button onclick="outputChatPallet()">再生成</button>
+
+        <span id="navi_reset" class="navi_text">チャットパレットを再生成しました。</span>
+      </div>
+
+    </div>
+
+    <!-- 駒データ生成 -->
+    <div>
+
+      <h2>駒データ生成</h2>
+
+      <div class="row_input">
+        <button onclick="module.outputCharacter()">生成</button>
+        <span id="navi_output" class="navi_text">クリップボードに駒データをコピーしました。</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!------------------------------------------------------>
+  <!-- ローディングカバー -->
+  <!------------------------------------------------------>
+
+  <div id="loading" class="hidden">
+    <span>Loading...</span>
+  </div>
+
+</body>
+
+<!------------------------------------------------------>
+
+<template id="temp_category">
+
+  <!-- カテゴリー -->
+  <div class="acordionArea">
+
+    <div class="acordionTitleRow">
+      <input type="checkbox" checked class="categoryCheck" onclick="toggleCategoryCheck(this)">
+      <h3>（カテゴリー）</h3>
+      <button>開閉</button>
+    </div>
+
+    <div class="contents">
+      <!-- temp_roll -->
+    </div>
+
+  </div>
+
+</template>
+
+<template id="temp_roll">
+
+  <!-- 行為判定 -->
+  <div class="area_roll">
+
+    <div class="categoryTitle">
+
+      <span class="book">（サプリ）</span>
+
+      <span class="rollName">（行為判定）</span>
+
+      <div class="valueBlock bonus">
+        <span class="name">（能力値ボーナス）</span>
+        <span class="value">0</span>
+      </div>
+
+      <div class="valueBlock add">
+        <span class="name">（条件付き修正）</span>
+        <span class="value">0</span>
+      </div>
+
+    </div>
+
+    <div class="rollNote">（備考）</div>
+
+    <div class="skills">
+      <!-- temp_skill -->
+    </div>
+
+  </div>
+
+</template>
+
+<template id="temp_roll_weapon">
+
+  <!-- 武器 -->
+  <div class="area_roll weapon">
+
+    <div class="categoryTitle">
+
+      <input type="checkbox">
+
+      <span class="weaponName">（武器名）</span>
+
+      <div class="valueBlock level">
+        <span class="name">（技能レベル）</span>
+        <span class="value">0</span>
+      </div>
+
+    </div>
+
+    <div class="rollNote">（備考）</div>
+
+    <div class="skills">
+
+      <!-- 命中 -->
+      <div class="card_skill hit">
+
+        <div class="skillName">
+          <span class="name">命中力</span>
+        </div>
 
         <div class="valueBlock bonus">
           <span class="name">（能力値ボーナス）</span>
@@ -377,123 +530,99 @@
         </div>
 
         <div class="valueBlock add">
-          <span class="name">（条件付き修正）</span>
+          <span class="name">修正</span>
           <span class="value">0</span>
         </div>
+
       </div>
 
-      <div class="rollNote">（備考）</div>
+      <!-- ダメージ -->
+      <div class="card_skill damage">
 
-      <div class="skills">
-        <!-- temp_skill -->
-      </div>
-    </div>
-  </template>
-
-  <template id="temp_roll_weapon">
-    <!-- 武器 -->
-    <div class="area_roll weapon">
-      <div class="categoryTitle">
-        <input type="checkbox">
-
-        <span class="weaponName">（武器名）</span>
-
-        <div class="valueBlock level">
-          <span class="name">（技能レベル）</span>
-          <span class="value">0</span>
-        </div>
-      </div>
-
-      <div class="rollNote">（備考）</div>
-
-      <div class="skills">
-        <!-- 命中 -->
-        <div class="card_skill hit">
-          <div class="skillName">
-            <span class="name">命中力</span>
-          </div>
-
-          <div class="valueBlock bonus">
-            <span class="name">（能力値ボーナス）</span>
-            <span class="value">0</span>
-          </div>
-
-          <div class="valueBlock add">
-            <span class="name">修正</span>
-            <span class="value">0</span>
-          </div>
+        <div class="skillName">
+          <span class="name">ダメージ</span>
         </div>
 
-        <!-- ダメージ -->
-        <div class="card_skill damage">
-          <div class="skillName">
-            <span class="name">ダメージ</span>
-          </div>
-
-          <div class="valueBlock rate">
-            <span class="name">威力</span>
-            <span class="value">0</span>
-            <span class="add"></span>
-          </div>
-
-          <div class="valueBlock critical">
-            <span class="name">C値</span>
-            <span class="value">0</span>
-            <span class="add"></span>
-          </div>
-
-          <div class="valueBlock bonus">
-            <span class="name">（能力値ボーナス）</span>
-            <span class="value">0</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="temp_roll_magic">
-    <!-- 魔法 -->
-    <div class="area_roll magic">
-      <div class="categoryTitle">
         <div class="valueBlock rate">
           <span class="name">威力</span>
           <span class="value">0</span>
+          <span class="add"></span>
         </div>
 
         <div class="valueBlock critical">
           <span class="name">C値</span>
           <span class="value">0</span>
+          <span class="add"></span>
         </div>
 
         <div class="valueBlock bonus">
           <span class="name">（能力値ボーナス）</span>
           <span class="value">0</span>
         </div>
+
       </div>
 
-      <div class="skills">
-        <!-- temp_skill -->
+    </div>
+
+  </div>
+
+</template>
+
+<template id="temp_roll_magic">
+
+  <!-- 魔法 -->
+  <div class="area_roll magic">
+
+    <div class="categoryTitle">
+
+      <span class="magicName">（魔法名）</span>
+
+      <div class="valueBlock rate">
+        <span class="name">威力</span>
+        <span class="value">0</span>
       </div>
+
+      <div class="valueBlock critical">
+        <span class="name">C値</span>
+        <span class="value">0</span>
+      </div>
+
+      <div class="valueBlock bonus">
+        <span class="name">（能力値ボーナス）</span>
+        <span class="value">0</span>
+      </div>
+
     </div>
-  </template>
 
-  <template id="temp_skill">
-    <!-- 技能レベル -->
-    <div class="card_skill">
-        <input type="checkbox">
-
-        <span class="book">（サプリ）</span>
-
-        <div class="skillName">
-          <span class="name">（技能）</span>
-        </div>
-
-        <div class="valueBlock level">
-          <span class="value">0</span>
-        </div>
+    <div class="skills">
+      <!-- temp_skill -->
     </div>
-  </template>
 
-  <!------------------------------------------------------>
+  </div>
+
+</template>
+
+<template id="temp_skill">
+
+  <!-- 技能レベル -->
+  <div class="card_skill">
+
+    <input type="checkbox">
+
+    <span class="book">（サプリ）</span>
+
+    <div class="skillName">
+      <span class="name">（技能）</span>
+    </div>
+
+    <div class="valueBlock level">
+      <span class="value">0</span>
+    </div>
+
+  </div>
+
+</template>
+
+<!------------------------------------------------------>
 
 </html>

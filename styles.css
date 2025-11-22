@@ -3,17 +3,16 @@
 /* -------------------------------------------------- */
 
 /* 色 */
-:root
-{
+:root {
   --font-color: rgb(64, 32, 12);
   --bg-color: rgb(255, 240, 220);
   --strong-color: rgb(50, 100, 200);
+  --caution-color: rgb(200, 75, 75);
   --sub-color: rgb(200, 100, 50);
 }
 
 /* ボディ */
-body
-{
+body {
   padding: 12px;
   background: var(--bg-color);
 
@@ -27,8 +26,7 @@ body
 /* インプット・セレクトボックス・テキストエリア */
 input,
 select,
-textarea
-{
+textarea {
   color: var(--font-color) !important;
   background: #fff;
   border: solid 2px var(--font-color);
@@ -36,55 +34,60 @@ textarea
 
   padding: 8px;
 }
-input:disabled
-{
+
+input:disabled {
   border-color: transparent;
 }
 
 /* チェックボックス */
-input[type="checkbox"]
-{
+input[type="checkbox"] {
   width: 30px;
   height: 30px;
 
   cursor: pointer;
 }
-input[type="checkbox"]:disabled
-{
+
+input[type="checkbox"]:disabled {
   cursor: default;
 }
 
 /* セレクトボックス */
-select:disabled
-{
+select:disabled {
   border-color: transparent;
   opacity: 1 !important;
   appearance: none;
 }
 
 /* ボタン */
-button
-{
-  color: #fff;
-
+button {
   background: var(--strong-color);
-  border: none;
+  border: solid 2px var(--strong-color);
   border-radius: 30px;
+  padding: 0 16px;
+
+  color: #fff;
+  font-weight: bold;
 
   cursor: pointer;
+
+  transition: all 0.25s;
+}
+
+/* ボタン：ホバー */
+button:hover {
+  background-color: #fff;
+  color: var(--strong-color);
 }
 
 /* -------------------------------------------------- */
 /* 見出し
 /* -------------------------------------------------- */
 
-h1
-{
+h1 {
   margin: 0;
 }
 
-h2
-{
+h2 {
   color: var(--bg-color);
   background: var(--font-color);
   border-radius: 4px;
@@ -93,8 +96,7 @@ h2
   margin-bottom: 12px;
 }
 
-h4
-{
+h4 {
   margin: 0px;
 }
 
@@ -102,39 +104,33 @@ h4
 /* レイアウト
 /* -------------------------------------------------- */
 
-p
-{
+p {
   margin: 0;
 }
-p + p
-{
+
+p+p {
   margin-top: 8px;
 }
 
-td
-{
+td {
   padding-left: 12px;
 }
 
-ul
-{
+ul {
   padding-inline-start: 30px;
   margin: 0;
 }
 
-li + li
-{
+li+li {
   margin-top: 8px;
 }
 
-.row_input + .row_input
-{
+.row_input+.row_input {
   margin-top: 8px;
 }
 
 /* 行 */
-[class^="row_"]
-{
+[class^="row_"] {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -142,31 +138,42 @@ li + li
 }
 
 /* エリア間隔 */
-[id^="area"] + [id^="area"]
-{
+[id^="area"]+[id^="area"] {
   margin-top: 20px;
 }
 
+/* -------------------------------------------------- */
+/* テーブル */
+/* -------------------------------------------------- */
+
+th {
+  text-align: right;
+}
+
+/* -------------------------------------------------- */
 /* 説明 */
-.note
-{
+/* -------------------------------------------------- */
+
+.note {
   margin-left: 12px;
 }
-.note + .note
-{
+
+.note+.note {
   margin-top: 12px;
 }
-.noteTitle
-{
+
+.noteTitle {
   color: var(--bg-color);
   background: var(--font-color);
   border-radius: 4px;
   padding: 4px;
 }
 
+/* -------------------------------------------------- */
 /* 非表示 */
-.hidden
-{
+/* -------------------------------------------------- */
+
+.hidden {
   display: none !important;
 }
 
@@ -174,16 +181,14 @@ li + li
 /* 対応ルールブック・サプリメント
 /* -------------------------------------------------- */
 
-.bookList
-{
+.bookList {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   margin-bottom: 12px;
 }
 
-.bookList_title
-{
+.bookList_title {
   font-weight: bold;
   flex-basis: 100%;
 }
@@ -193,8 +198,7 @@ li + li
 /* -------------------------------------------------- */
 
 /* ラベル */
-.row_input > .inputLabel
-{
+.row_input>.inputLabel {
   display: flex;
   background-color: var(--sub-color);
   border-radius: 4px;
@@ -211,8 +215,7 @@ li + li
 }
 
 /* インプット */
-.row_input > input
-{
+.row_input>input {
   width: 100%;
   height: 100%;
   padding: 8px;
@@ -220,39 +223,46 @@ li + li
 }
 
 /* サイト */
-#select_site
-{
+#select_site {
   width: 15em;
 }
 
 /* URL */
-.input_url
-{
+.input_url {
   width: 20em;
 }
-.urlSuffix
-{
+
+.urlSuffix {
   display: none;
 }
 
 /* ボタン */
-.row_input button
-{
+.row_input button {
   min-width: 8em;
   height: 100%;
-  padding: 0 8px;
 }
 
 /* リンク */
-.row_input a
-{
+.row_input a {
   height: 100%;
 }
 
 /* エラー */
-.text_error
-{
+.text_error {
   color: #c00;
+}
+
+/* 「クリア」ボタン */
+button#buttonClear {
+  background: var(--caution-color);
+  border-color: var(--caution-color);
+  border-color: var(--caution-color);
+}
+
+/* 「クリア」ボタン：ホバー */
+button#buttonClear:hover {
+  background-color: #fff;
+  color: var(--caution-color);
 }
 
 /* -------------------------------------------------- */
@@ -260,14 +270,12 @@ li + li
 /* -------------------------------------------------- */
 
 /* プリセットボタン */
-.buttons_preset
-{
+.buttons_preset {
   margin-bottom: 8px;
 }
 
 /* キャラクター一覧に表示されるステータス */
-.list_display
-{
+.list_display {
   display: inline-block;
   border: solid 2px var(--font-color);
   border-radius: 4px;
@@ -276,16 +284,14 @@ li + li
 }
 
 /* キャラクター一覧に表示されないステータス */
-.list_notDisplay
-{
+.list_notDisplay {
   display: inline-block;
   padding: 8px;
   box-sizing: border-box;
 }
 
 /* カード */
-.card_status
-{
+.card_status {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -295,16 +301,14 @@ li + li
 }
 
 /* ブロック */
-.card_status > .valueBlock
-{
+.card_status>.valueBlock {
   background-color: var(--sub-color);
   min-width: 390px;
   margin: 0 !important;
   padding: 8px;
 }
 
-.valueBlock > input
-{
+.valueBlock>input {
   width: 100px;
   height: 25px;
 
@@ -313,8 +317,7 @@ li + li
 }
 
 /* ステータス名 */
-.valueBlock > input.name
-{
+.valueBlock>input.name {
   margin-left: 0;
   margin-right: auto;
 
@@ -323,8 +326,7 @@ li + li
 }
 
 /* / */
-.valueBlock > span.slash
-{
+.valueBlock>span.slash {
   margin-left: 4px;
   margin-right: 4px;
 
@@ -332,14 +334,12 @@ li + li
 }
 
 /* 最大値 */
-[id^="status_max_"]:invalid
-{
+[id^="status_max_"]:invalid {
   opacity: 0.5;
 }
 
 /* ※ */
-.valueBlock > span.note
-{
+.valueBlock>span.note {
   margin-left: 4px;
 
   font-size: 12px;
@@ -350,15 +350,13 @@ li + li
 /* -------------------------------------------------- */
 
 /* エリア */
-.acordionArea
-{
+.acordionArea {
   border: solid 4px var(--sub-color);
   border-radius: 4px;
 }
 
 /* タイトル */
-.categoryTitle
-{
+.categoryTitle {
   display: flex;
   border-bottom: dotted 3px var(--font-color);
 
@@ -368,21 +366,19 @@ li + li
 
   padding: 4px;
 }
-.acordionArea h3
-{
+
+.acordionArea h3 {
   color: #fff;
   margin: 0;
 }
 
 /* 武器チェックボックス */
-.categoryTitle > input[type="checkbox"]
-{
+.categoryTitle>input[type="checkbox"] {
   margin-right: 8px;
 }
 
 /* 武器：備考 */
-.rollNote
-{
+.rollNote {
   background: rgba(255, 255, 255, 0.75);
   border-radius: 4px;
   flex-basis: 100%;
@@ -394,14 +390,12 @@ li + li
 }
 
 /* 能力値ボーナス：無効 */
-.valueBlock.flat > .value
-{
+.valueBlock.flat>.value {
   opacity: 0.5;
 }
 
 /* コンテンツ */
-.acordionArea > .contents
-{
+.acordionArea>.contents {
   display: flex;
   flex-wrap: wrap;
 
@@ -409,14 +403,12 @@ li + li
 }
 
 /* 閉じる */
-.acordionArea.close > .contents
-{
+.acordionArea.close>.contents {
   display: none;
 }
 
 /* タイトル */
-.acordionTitleRow
-{
+.acordionTitleRow {
   display: flex;
   align-items: center;
   background: var(--sub-color);
@@ -427,14 +419,12 @@ li + li
 }
 
 /* チェックボックス*/
-.acordionTitleRow > input[type="checkbox"]
-{
+.acordionTitleRow>input[type="checkbox"] {
   margin-right: 8px;
 }
 
 /* 「開閉」ボタン */
-.acordionTitleRow > button
-{
+.acordionTitleRow>button {
   width: 70px;
   height: 40px;
   margin-left: auto;
@@ -444,12 +434,18 @@ li + li
 /* テンプレート：行為判定
 /* -------------------------------------------------- */
 
-.area_roll
-{
+/* コンテナ */
+.area_roll {
   min-width: 50%;
   box-sizing: border-box;
 
   padding: 8px;
+}
+
+/* 『平目』を一括切り替え */
+.check_option {
+  width: fit-content;
+  margin-bottom: 16px;
 }
 
 /* -------------------------------------------------- */
@@ -457,8 +453,7 @@ li + li
 /* -------------------------------------------------- */
 
 /* 技能レベル：無効 */
-.skillDisabled .value
-{
+.skillDisabled .value {
   opacity: 0.5;
 }
 
@@ -467,8 +462,7 @@ li + li
 /* -------------------------------------------------- */
 
 /* 基本 */
-.valueBlock
-{
+.valueBlock {
   color: #fff;
 
   background-color: var(--font-color);
@@ -478,25 +472,22 @@ li + li
 }
 
 /* 名 */
-.valueBlock > .name
-{
+.valueBlock>.name {
   opacity: 0.95;
 }
 
 /* 値 */
-.valueBlock > .value
-{
+.valueBlock>.value {
   font-size: 25px;
   font-weight: bold;
 }
-.valueBlock > .name + .value
-{
+
+.valueBlock>.name+.value {
   margin-left: 12px;
 }
 
 /* 修正値 */
-.valueBlock > .add:not(:empty)
-{
+.valueBlock>.add:not(:empty) {
   padding-left: 4px;
 
   font-weight: bold;
@@ -504,62 +495,53 @@ li + li
 
 /* 平目 */
 .skillDisabled .valueBlock,
-.valueBlock.flat
-{
+.valueBlock.flat {
   background-color: #888 !important;
 }
 
 /* ボーナス修正 */
-.valueBlock.add.plus
-{
+.valueBlock.add.plus {
   background-color: #080 !important;
 }
 
 /* ペナルティ修正 */
-.valueBlock.add.minus
-{
+.valueBlock.add.minus {
   background-color: #800 !important;
 }
 
 /* 器用度 */
 .valueBlock.Dex,
-.valueBlock.NB1
-{
+.valueBlock.NB1 {
   background-color: rgb(128, 0, 128);
 }
 
 /* 敏捷度 */
 .valueBlock.Agi,
-.valueBlock.NB2
-{
+.valueBlock.NB2 {
   background-color: rgb(64, 64, 128);
 }
 
 /* 筋力 */
 .valueBlock.Str,
-.valueBlock.NB3
-{
+.valueBlock.NB3 {
   background-color: rgb(128, 64, 64);
 }
 
 /* 生命力 */
 .valueBlock.Vit,
-.valueBlock.NB4
-{
+.valueBlock.NB4 {
   background-color: rgb(128, 128, 0);
 }
 
 /* 知力 */
 .valueBlock.Int,
-.valueBlock.NB5
-{
+.valueBlock.NB5 {
   background-color: rgb(0, 128, 128);
 }
 
 /* 精神力 */
 .valueBlock.Mnd,
-.valueBlock.NB6
-{
+.valueBlock.NB6 {
   background-color: rgb(64, 128, 64);
 }
 
@@ -568,8 +550,7 @@ li + li
 /* -------------------------------------------------- */
 
 /* サプリメントラベル */
-.book
-{
+.book {
   background-color: var(--font-color);
   border-radius: 4px;
 
@@ -581,8 +562,7 @@ li + li
 }
 
 /* カード置き場 */
-.skills
-{
+.skills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -590,8 +570,7 @@ li + li
 }
 
 /* カード */
-.card_skill
-{
+.card_skill {
   display: flex;
   align-items: center;
 
@@ -600,33 +579,29 @@ li + li
 
   padding: 4px;
 }
-.card_skill.skillDisabled
-{
+
+.card_skill.skillDisabled {
   background-color: #ccc;
 }
 
-.skillDisabled input[type="checkbox"]
-{
+.skillDisabled input[type="checkbox"] {
   opacity: 0.25;
   cursor: default;
   pointer-events: none;
 }
 
 /* カード */
-.card_skill > input[type="checkbox"]
-{
+.card_skill>input[type="checkbox"] {
   margin-right: 8px;
 }
 
 /* 技能名 */
-.skillName
-{
+.skillName {
   font-weight: bold;
 }
 
 /* 能力値ボーナス */
-.valueBlock
-{
+.valueBlock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -639,28 +614,25 @@ li + li
   color: #fff;
   font-size: 15px;
 }
-.skillDisabled .valueBlock
-{
+
+.skillDisabled .valueBlock {
   background-color: #888;
 }
 
 /* ブロック間隔 */
-* + .valueBlock
-{
+*+.valueBlock {
   margin-left: 8px;
 }
 
 /* 追加効果 */
-.extraEffect
-{
+.extraEffect {
   font-size: 15px;
 
   margin-left: 4px;
 }
 
 /* 条件付き */
-.condition
-{
+.condition {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -675,12 +647,12 @@ li + li
   margin-left: 8px;
   padding: 8px;
 }
-.condition.alert
-{
+
+.condition.alert {
   background: rgb(192, 192, 255);
 }
-.skillDisabled .condition.alert
-{
+
+.skillDisabled .condition.alert {
   background: rgb(255, 192, 192) !important;
 }
 
@@ -688,8 +660,7 @@ li + li
 /* チャットパレット
 /* -------------------------------------------------- */
 
-#text_chatPallet
-{
+#text_chatPallet {
   width: 100%;
   min-height: 300px;
   box-sizing: border-box;
@@ -700,14 +671,12 @@ li + li
 /* ナビテキスト
 /* -------------------------------------------------- */
 
-.navi_text
-{
+.navi_text {
   opacity: 0;
   transition: opacity 1s;
 }
 
-.navi_text.show
-{
+.navi_text.show {
   opacity: 1;
 }
 
@@ -715,8 +684,7 @@ li + li
 /* ローディング
 /* -------------------------------------------------- */
 
-#loading
-{
+#loading {
   position: fixed;
   top: 0;
   left: 0;

@@ -1,7 +1,7 @@
 /**
  * 初期化
  */
-window.onload = function() {
+window.onload = function () {
     // サイト選択
     selectSite();
 }
@@ -49,14 +49,14 @@ async function selectSite($this = null) {
 
     const id = $this.selectedOptions[0].id;
     let script = "";
-    switch(id){
+    switch (id) {
         // ●ゆとシート
         case "ytsheet":
             script = "script_yutosheet";
             break;
         // ●キャラクター保管所
         case "vampire-blood":
-            script= "script_vampire";
+            script = "script_vampire";
             break;
     }
 
@@ -68,7 +68,7 @@ async function selectSite($this = null) {
             target.classList.remove("hidden");
         }
         // ●それ以外の場合
-         else {
+        else {
             // 非表示
             target.classList.add("hidden");
         }
@@ -128,65 +128,65 @@ async function buttonRead() {
 
     // 読み込み処理
     fetch(url, { method: 'GET' })
-    .then(response => {
-        // 失敗時
-        if (!response.ok) {
-            console.error('サーバーエラー');
+        .then(response => {
+            // 失敗時
+            if (!response.ok) {
+                console.error('サーバーエラー');
+                return;
+            }
+
+            // データを取得
+            return response.json();
+        })
+        .then(data => {
+            // セッションストレージにデータを保存
+            sessionStorage.setItem('data', JSON.stringify(data));
+
+            // キャラクター名の描画
+            module.drawCharacterName(data);
+            document.getElementById("loadCharacter").classList.remove("hidden");
+
+            // ステータスの描画
+            module.drawStatus(data);
+
+            // カードの描画
+            module.drawContents(data);
+
+            // チャットパレットの生成
+            outputChatPallet(false);
+
+            // 出力エリアを表示
+            document.querySelector(".output_area").classList.remove("hidden");
+
+            // 「サイト」・「URL」入力欄を非活性
+            document.getElementById("select_site").disabled = true;
+            document.querySelector(":not(.hidden) > .input_url").disabled = true;
+
+            // 「読み込み」ボタンを非表示
+            document.getElementById("buttonRead").classList.add("hidden");
+
+            // 「クリア」ボタンを表示
+            document.getElementById("buttonClear").classList.remove("hidden");
+
+            // エラーテキスト非表示
+            document.getElementById("loadError").classList.add("hidden");
+        })
+        .catch(error => {
+            console.dir(error);
+
+            // エラーテキスト表示
+            document.getElementById("loadError").classList.remove("hidden");
+
             return;
-        }
+        })
 
-        // データを取得
-        return response.json();
-    })
-    .then(data => {
-        // セッションストレージにデータを保存
-        sessionStorage.setItem('data', JSON.stringify(data));
+        .finally(() => {
+            // --------------------------------------------------
+            // ローディングOFF
+            // --------------------------------------------------
 
-        // キャラクター名の描画
-        module.drawCharacterName(data);
-        document.getElementById("loadCharacter").classList.remove("hidden");
-
-        // ステータスの描画
-        module.drawStatus(data);
-
-        // カードの描画
-        module.drawContents(data);
-
-        // チャットパレットの生成
-        outputChatPallet(false);
-
-        // 出力エリアを表示
-        document.querySelector(".output_area").classList.remove("hidden");
-
-        // 「サイト」・「URL」入力欄を非活性
-        document.getElementById("select_site").disabled = true;
-        document.querySelector(":not(.hidden) > .input_url").disabled = true;
-
-        // 「読み込み」ボタンを非表示
-        document.getElementById("buttonRead").classList.add("hidden");
-
-        // 「クリア」ボタンを表示
-        document.getElementById("buttonClear").classList.remove("hidden");
-
-        // エラーテキスト非表示
-        document.getElementById("loadError").classList.add("hidden");
-    })
-    .catch(error => {
-        console.dir(error);
-
-        // エラーテキスト表示
-        document.getElementById("loadError").classList.remove("hidden");
-
-        return;
-    })
-
-    .finally(() => {
-        // --------------------------------------------------
-        // ローディングOFF
-        // --------------------------------------------------
-
-        loadingCaver.classList.add("hidden");
-    });
+            loadingCaver.classList.add("hidden");
+        });
 }
 
 /**
@@ -284,13 +284,13 @@ function outputChatPallet(navi = true) {
                 // チャットコマンドを生成
                 // - 命中力
                 text +=
-                    "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}+{命中力修正}" + addValue
-                    + "　■" + weaponName + " - 命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
+                    "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}+{命中＋}" + addValue
+                    + "　■" + weaponName + " / 命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
                 // - ダメージ
                 text +=
-                    "k" + valueRate + bonusKubikiri+ "@" + (valueCritical + valueCriticalAdd)
-                    + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメージ修正}" + valueRateAdd
-                    + "　■" + weaponName + " - ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
+                    "k" + valueRate + bonusKubikiri + "@" + (valueCritical + valueCriticalAdd)
+                    + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメ＋}" + valueRateAdd
+                    + "　■" + weaponName + " / ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
             }
             // ●魔法
             else if (typeMagic) {
@@ -318,8 +318,8 @@ function outputChatPallet(navi = true) {
 
                     // チャットコマンドを生成
                     text +=
-                        "k" + valueRate +"@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}+{ダメージ修正}"
-                        + "　■威力:" + valueRate + "/C値:" + valueCritical +  "(" + nameSkill + "+" + nameBonus + ")\r";
+                        "k" + valueRate + "@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}+{ダメ＋}"
+                        + "　■威力:" + valueRate + " / C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
                 });
             }
             // ●行為判定
@@ -373,17 +373,17 @@ function outputChatPallet(navi = true) {
                     // 回避
                     let addDodge = "";
                     if (typeDodge) {
-                        addDodge = "+{回避力修正}";
+                        addDodge = "+{回避＋}";
                     }
 
                     // チャットコマンドを生成
                     if (!skill.classList.contains("flat")) {
                         text +=
                             "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addDodge + valueAdd
-                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")"  + valueAddName + "\r";
+                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")" + valueAddName + "\r";
                     } else {
                         // チャットコマンドを生成
-                        text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)"  + valueAddName + "\r";
+                        text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)" + valueAddName + "\r";
                     }
                 });
             }
@@ -406,7 +406,7 @@ function outputChatPallet(navi = true) {
 /**
  * ＵＲＬを取得
  */
-function getUrl (json = false) {
+function getUrl(json = false) {
     let url = document.querySelector(':not(.hidden) > .urlPrefix').textContent + document.querySelector(':not(.hidden) > .input_url').value;
 
     if (json) {
@@ -419,10 +419,21 @@ function getUrl (json = false) {
 /**
  * ナビテキストの表示
  */
-async function showNaviText (targetId) {
+async function showNaviText(targetId) {
     const naviText = document.getElementById(targetId);
     naviText.classList.add("show");
     window.setTimeout(() => {
         naviText.classList.remove("show");
     }, 1000);
+}
+
+/**
+ * 『平目』を一括切り替え
+ */
+function toggleFlat(thisElement) {
+    // 全ての平目チェックボックスを操作
+    const targets = document.querySelectorAll('.flat>input[type="checkbox"]');
+    targets.forEach(target => {
+        target.checked = thisElement.checked;
+    })
 }
