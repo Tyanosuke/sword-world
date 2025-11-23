@@ -333,7 +333,7 @@ button.button_logDelete:hover {
 /* カード */
 .card_status {
   display: grid;
-  grid-template-columns: repeat(2, 480px);
+  grid-template-columns: repeat(2, 500px);
   grid-gap: 8px;
   width: fit-content;
   padding: 4px;
@@ -345,12 +345,20 @@ button.button_logDelete:hover {
   background-color: var(--sub-color);
   margin: 0 !important;
   padding: 8px;
-  cursor: grab;
 }
 
 /* ブロック：一覧非表示 */
 .card_status>.valueBlock:nth-child(n + 9) {
   background-color: #888;
+}
+
+/* ドラッグアイコン */
+.drag-handle {
+  object-fit: contain;
+  width: 24px;
+  opacity: 0.5;
+  user-select: none;
+  cursor: grab;
 }
 
 /* 削除ボタン */

@@ -5,12 +5,20 @@ window.onload = function () {
     // サイト選択
     selectSite();
 
+    // ステータス入力欄
+    const statusInput = this.document.querySelector('.valueBlock');
+    let inputArea = this.document.querySelector('.card_status');
+    for (let i = 0; i < 15; i++) {
+        inputArea.appendChild(statusInput.cloneNode(true));
+    }
+
     // ステータス並び替え
     document.querySelectorAll('.card_status').forEach(card => {
         new Sortable(card, {
             group: 'statuses',
             animation: 150,
             swapThreshold: 0.65,
+            handle: '.drag-handle',
             ghostClass: 'sortable-ghost',
         });
     });
