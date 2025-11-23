@@ -5,10 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="img/web_icon.png">
   <link rel="stylesheet" href="styles.css" />
 
   <script src="script_common.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 
   <title>SW2.5 ココフォリア用駒生成ツール</title>
 </head>
@@ -140,6 +141,7 @@
 
     <h2>キャラクターシート読み込み</h2>
 
+    <!-- サイト -->
     <div class="row_input">
 
       <div class="inputLabel">
@@ -170,7 +172,8 @@
 
     </div>
 
-    <div class="row_input">
+    <!-- URL -->
+    <div id="loadUrl" class="row_input">
 
       <div class="inputLabel">
         URL
@@ -192,12 +195,21 @@
         読み込み
       </button>
 
-      <button id="buttonClear" class="hidden" onclick='buttonClear()'>
-        クリア
-      </button>
+    </div>
+
+    <!-- 読み込み履歴 -->
+    <div id="loadLog" class="row_input hidden">
+
+      <div class="inputLabel">
+        読み込み履歴
+      </div>
+
+      <div class="logList">
+      </div>
 
     </div>
 
+    <!-- 読み込みキャラクター -->
     <div id="loadCharacter" class="row_input hidden">
 
       <div class="inputLabel">
@@ -208,8 +220,13 @@
         <span class="name"></span>
       </div>
 
+      <button id="buttonClear" class="hidden" onclick='buttonClear()'>
+        クリア
+      </button>
+
     </div>
 
+    <!-- エラー -->
     <div id="loadError" class="row_input hidden">
 
       <div class="inputLabel">
@@ -233,6 +250,7 @@
 
       <h2>ステータス</h2>
 
+      <!-- プリセット -->
       <div class="row_input buttons_preset">
 
         <div class="inputLabel">
@@ -251,133 +269,245 @@
 
       </div>
 
-      <div class="list_display">
+      <!-- 入力欄 -->
+      <div class="card_status">
 
-        <p>キャラクター一覧に表示されます。</p>
+        <div class="valueBlock">
+          <input class="status_name" class="name">
 
-        <div class="card_status">
-          <div class="valueBlock">
-            <input id="status_name_1" class="name">
-            <input id="status_value_1" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_1" type="number">
-          </div>
+          <input class="status_value" type="number">
 
-          <div class="valueBlock">
-            <input id="status_name_2" class="name">
-            <input id="status_value_2" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_2" type="number">
-          </div>
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number" required>
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
         </div>
 
-        <div class="card_status">
-          <div class="valueBlock">
-            <input id="status_name_3" class="name">
-            <input id="status_value_3" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_3" type="number">
-          </div>
+        <div class="valueBlock">
+          <input class="status_name" class="name">
 
-          <div class="valueBlock">
-            <input id="status_name_4" class="name">
-            <input id="status_value_4" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_4" type="number">
-          </div>
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
         </div>
 
-        <div class="card_status">
-          <div class="valueBlock">
-            <input id="status_name_5" class="name">
-            <input id="status_value_5" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_5" type="number">
-          </div>
+        <div class="valueBlock">
+          <input class="status_name" class="name">
 
-          <div class="valueBlock">
-            <input id="status_name_6" class="name">
-            <input id="status_value_6" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_6" type="number">
-          </div>
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
         </div>
 
-        <div class="card_status">
-          <div class="valueBlock">
-            <input id="status_name_7" class="name">
-            <input id="status_value_7" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_7" type="number">
-          </div>
+        <div class="valueBlock">
+          <input class="status_name" class="name">
 
-          <div class="valueBlock">
-            <input id="status_name_8" class="name">
-            <input id="status_value_8" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_8" type="number">
-          </div>
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
         </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
+        <div class="valueBlock">
+          <input class="status_name" class="name">
+
+          <input class="status_value" type="number">
+
+          <span class="slash">/</span>
+
+          <input class="status_max" type="number">
+
+          <button class="button_statusDelete" onclick="statusReset(this)">
+            ×
+          </button>
+        </div>
+
       </div>
 
-      <div class="list_notDisplay">
-        <div class="card_status">
-          <div class="valueBlock">
-            <input id="status_name_9" class="name">
-            <input id="status_value_9" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_9" type="number">
-          </div>
+      <div class="area_note">
 
-          <div class="valueBlock">
-            <input id="status_name_10" class="name">
-            <input id="status_value_10" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_10" type="number">
-          </div>
+        <p>
+          ※ドラッグ＆ドロップで移動できます。
+        </p>
 
-          <div class="valueBlock">
-            <input id="status_name_11" class="name">
-            <input id="status_value_11" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_11" type="number">
-          </div>
+        <p>
+          ※背景がグレーのステータスは、盤面キャラクター一覧に表示されません。
+        </p>
 
-          <div class="valueBlock">
-            <input id="status_name_12" class="name">
-            <input id="status_value_12" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_12" type="number">
-          </div>
-
-          <div class="valueBlock">
-            <input id="status_name_13" class="name">
-            <input id="status_value_13" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_13" type="number">
-          </div>
-
-          <div class="valueBlock">
-            <input id="status_name_14" class="name">
-            <input id="status_value_14" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_14" type="number">
-          </div>
-
-          <div class="valueBlock">
-            <input id="status_name_15" class="name">
-            <input id="status_value_15" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_15" type="number">
-          </div>
-
-          <div class="valueBlock">
-            <input id="status_name_16" class="name">
-            <input id="status_value_16" type="number">
-            <span class="slash">/</span>
-            <input id="status_max_16" type="number">
-          </div>
-        </div>
       </div>
 
     </div>
@@ -442,10 +572,12 @@
 </body>
 
 <!------------------------------------------------------>
+<!-- テンプレート -->
+<!------------------------------------------------------>
 
+<!-- カテゴリー -->
 <template id="temp_category">
 
-  <!-- カテゴリー -->
   <div class="acordionArea">
 
     <div class="acordionTitleRow">
@@ -462,9 +594,9 @@
 
 </template>
 
+<!-- 行為判定 -->
 <template id="temp_roll">
 
-  <!-- 行為判定 -->
   <div class="area_roll">
 
     <div class="categoryTitle">
@@ -495,9 +627,9 @@
 
 </template>
 
+<!-- 武器 -->
 <template id="temp_roll_weapon">
 
-  <!-- 武器 -->
   <div class="area_roll weapon">
 
     <div class="categoryTitle">
@@ -568,9 +700,9 @@
 
 </template>
 
+<!-- 魔法 -->
 <template id="temp_roll_magic">
 
-  <!-- 魔法 -->
   <div class="area_roll magic">
 
     <div class="categoryTitle">
@@ -602,9 +734,9 @@
 
 </template>
 
+<!-- 技能レベル -->
 <template id="temp_skill">
 
-  <!-- 技能レベル -->
   <div class="card_skill">
 
     <input type="checkbox">
@@ -618,6 +750,23 @@
     <div class="valueBlock level">
       <span class="value">0</span>
     </div>
+
+  </div>
+
+</template>
+
+<!-- 読み込み履歴 -->
+<template id="temp_log">
+
+  <div class="card_log">
+
+    <button class="button_logLoad" onclick="logLoad(this)">
+      （ＰＣ名）
+    </button>
+
+    <button class="button_logDelete" onclick="logDelete(this)">
+      ×
+    </button>
 
   </div>
 

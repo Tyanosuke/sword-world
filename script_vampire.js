@@ -261,7 +261,10 @@ const listRoll = [
                 bonusId: "NB5",
                 skill: [
                     { id: getClassId("セージ") },
-                    { id: "V_GLv14" },
+                    {
+                        id: getClassId("バード"),
+                        book: "Ⅱ",
+                    },
                     {
                         id: getClassId("アルケミスト"),
                         book: "Ⅲ",
@@ -353,7 +356,7 @@ const listRoll = [
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
                     {
-                        id: "V_GLv8",
+                        id: getClassId("フェアリーテイマー"),
                         book: "Ⅱ",
                     },
                     {
@@ -416,7 +419,7 @@ const listRoll = [
                     { id: "V_GLv7" },
                     { id: "V_GLv9" },
                     {
-                        id: "V_GLv8",
+                        id: getClassId("フェアリーテイマー"),
                         book: "Ⅱ",
                     },
                     {
@@ -437,7 +440,7 @@ const listRoll = [
                         book: "Ⅱ",
                     },
                     {
-                        id: "V_GLv14",
+                        id: getClassId("バード"),
                         book: "Ⅱ",
                     },
                     {
@@ -492,7 +495,10 @@ const listRoll = [
                 name: "演奏",
                 bonusId: "NB6",
                 skill: [
-                    { id: "V_GLv14" },
+                    {
+                        id: getClassId("バード"),
+                        book: "Ⅱ",
+                    },
                 ]
             },
         ]
@@ -991,7 +997,7 @@ export async function outputCharacter() {
  * @param {String} name 日本語名
  * @returns 技能レベルのkey
  */
-export function getSkillLevelForName(name) {
+function getSkillLevelForName(name) {
     const listSkillR = Object.fromEntries(
         Object.entries(listSkill)
             .map(([key, value]) => [value, key])
@@ -1005,7 +1011,7 @@ export function getSkillLevelForName(name) {
  * @param {Object} data キャラクターシートデータ
  * @param {Object} list 行為判定リスト
  */
-export function setAttack(data, list) {
+function setAttack(data, list) {
 
     // 武器データを取得
     let listWeapon = [];
@@ -1069,7 +1075,7 @@ export function drawStatus(data, mode = 0) {
     // 各ステータスをクリア
     // --------------------------------------------------
 
-    document.querySelectorAll('input[id^="status_"]').forEach(target => {
+    document.querySelectorAll('.valueBlock>input[class^="status_"]').forEach(target => {
         target.value = "";
     });
 
@@ -1078,32 +1084,32 @@ export function drawStatus(data, mode = 0) {
     // --------------------------------------------------
 
     // HP
-    setStatus("1", "HP", data.HP, true);
+    setStatus(1, "HP", data.HP, true);
 
     // MP
-    setStatus("2", "MP", data.MP, true);
+    setStatus(2, "MP", data.MP, true);
 
     switch (mode) {
 
         // ●マギテック
         case 1:
             // 防護点
-            setStatus("3", "防護点", data.bougo, true);
+            setStatus(3, "防護点", data.bougo, true);
 
             // 移動力
-            setStatus("4", "移動力", data.ido, true);
+            setStatus(4, "移動力", data.ido, true);
 
             // 1ゾロ
-            setStatus("5", "1ゾロ", 0);
+            setStatus(5, "1ゾロ", 0);
 
             // ガメル
-            setStatus("6", "G", data.money);
+            setStatus(6, "G", data.money);
 
             // 装填
-            setStatus("7", "装填", 0);
+            setStatus(7, "装填", 0);
 
             // 命中＋
-            setStatus("9", "命中＋", 0, true);
+            setStatus(9, "命中＋", 0, true);
 
             // 回避＋
             setStatus("10", "回避＋", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
@@ -1116,25 +1122,25 @@ export function drawStatus(data, mode = 0) {
         // ●バード
         case 2:
             // 防護点
-            setStatus("3", "防護点", data.bougo, true);
+            setStatus(3, "防護点", data.bougo, true);
 
             // 楽素⤴
-            setStatus("4", "楽素⤴", 0);
+            setStatus(4, "楽素⤴", 0);
 
             // 移動力
-            setStatus("5", "移動力", data.ido, true);
+            setStatus(5, "移動力", data.ido, true);
 
             // 楽素⤵
-            setStatus("6", "楽素⤵", 0);
+            setStatus(6, "楽素⤵", 0);
 
             // 1ゾロ
-            setStatus("7", "1ゾロ", 0);
+            setStatus(7, "1ゾロ", 0);
 
             // 楽素♡
-            setStatus("8", "楽素♡", 0);
+            setStatus(8, "楽素♡", 0);
 
             // ガメル
-            setStatus("9", "G", data.money);
+            setStatus(9, "G", data.money);
 
             // 命中＋
             setStatus("10", "命中＋", 0, true);
@@ -1150,13 +1156,13 @@ export function drawStatus(data, mode = 0) {
         // ●カスタム
         case 3:
             // 防護点
-            setStatus("3", "防護点", data.bougo, true);
+            setStatus(3, "防護点", data.bougo, true);
 
             // 移動力
-            setStatus("4", "移動力", data.ido, true);
+            setStatus(4, "移動力", data.ido, true);
 
             // 1ゾロ
-            setStatus("9", "1ゾロ", 0);
+            setStatus(9, "1ゾロ", 0);
 
             // ガメル
             setStatus("10", "G", data.money);
@@ -1175,44 +1181,44 @@ export function drawStatus(data, mode = 0) {
         // ●戦士系
         case 4:
             // 命中＋
-            setStatus("3", "命中＋", 0, true);
+            setStatus(3, "命中＋", 0, true);
 
             // 防護点
-            setStatus("4", "防護点", data.bougo, true);
+            setStatus(4, "防護点", data.bougo, true);
 
             // 回避＋
-            setStatus("5", "回避＋", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
+            setStatus(5, "回避＋", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
 
             // 移動力
-            setStatus("6", "移動力", data.ido, true);
+            setStatus(6, "移動力", data.ido, true);
 
             // ダメ＋
-            setStatus("7", "ダメ＋", 0, true);
+            setStatus(7, "ダメ＋", 0, true);
 
             // 1ゾロ
-            setStatus("8", "1ゾロ", 0);
+            setStatus(8, "1ゾロ", 0);
 
             // ガメル
-            setStatus("9", "G", data.money);
+            setStatus(9, "G", data.money);
 
             break;
 
         // ●スタンダード
         default:
             // 防護点
-            setStatus("3", "防護点", data.bougo, true);
+            setStatus(3, "防護点", data.bougo, true);
 
             // 移動力
-            setStatus("4", "移動力", data.ido, true);
+            setStatus(4, "移動力", data.ido, true);
 
             // 1ゾロ
-            setStatus("5", "1ゾロ", 0);
+            setStatus(5, "1ゾロ", 0);
 
             // ガメル
-            setStatus("6", "G", data.money);
+            setStatus(6, "G", data.money);
 
             // 命中＋
-            setStatus("9", "命中＋", 0, true);
+            setStatus(9, "命中＋", 0, true);
 
             // 回避＋
             setStatus("10", "回避＋", Number(data.armor_kaihi) + Number(data.bougu_kaihi_mod) + Number(data.bougu_kaihi_tokugi), true);
@@ -1627,7 +1633,52 @@ export function drawContents(data) {
  * @param {String} skillCategory カテゴリー・キー名
  * @param {String} targetName 対象習得要素・キー名
  */
-export function checkLearn(data, skillCategory, targetName) {
+function checkLearn(data, skillCategory, targetName) {
     // 指定した戦闘特技を習得しているか
     return data[skillCategory].some(target => target == targetName);
+}
+
+/**
+ * 「読み込み履歴」の表示
+ */
+export function showLoadLog() {
+    // コンテナ表示
+    document.getElementById("loadLog").classList.remove("hidden");
+
+    // 読み込み履歴を取得
+    const loadListValue = getLoadLog();
+
+    // リスト要素の取得
+    let target = document.querySelector("#loadLog>.logList");
+
+    // 一旦中身を空にする
+    target.innerHTML = "";
+
+    // テンプレートを取得
+    const tempLog = document.getElementById("temp_log");
+
+    // リストの作成
+    Object.keys(loadListValue).forEach(key => {
+        // 違うサイトの場合、スキップ
+        const targetKey = document.querySelector('.displayLimit_vampire-blood>.urlPrefix').innerText;
+        if (key.indexOf(targetKey) == -1) {
+            return;
+        }
+
+        // 対象データを取得
+        let jsonData = JSON.parse(loadListValue[key]);
+
+        // テンプレートをクローン
+        let listItem = tempLog.content.cloneNode(true);
+
+        // IDを付与
+        listItem.firstElementChild.id = key;
+
+        // ＰＣ名ボタンを作成
+        let buttonLoad = listItem.querySelector('.button_logLoad');
+        buttonLoad.innerText = jsonData.pc_name;
+
+        // リスト要素を追加
+        target.appendChild(listItem);
+    })
 }

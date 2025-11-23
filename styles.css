@@ -91,7 +91,7 @@ h2 {
   color: var(--bg-color);
   background: var(--font-color);
   border-radius: 4px;
-  padding: 4px 8px;
+  padding: 16px;
   margin-top: 20px;
   margin-bottom: 12px;
 }
@@ -256,11 +256,51 @@ th {
 button#buttonClear {
   background: var(--caution-color);
   border-color: var(--caution-color);
-  border-color: var(--caution-color);
 }
 
 /* 「クリア」ボタン：ホバー */
 button#buttonClear:hover {
+  background-color: #fff;
+  color: var(--caution-color);
+}
+
+/* -------------------------------------------------- */
+/* 読み込み履歴
+/* -------------------------------------------------- */
+
+/* コンテナ */
+.logList {
+  display: flex;
+  gap: 8px;
+  height: 100%;
+}
+
+/* カード */
+.card_log {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* 読み込みボタン */
+button.button_logLoad {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* 削除ボタン */
+button.button_logDelete {
+  min-width: 0;
+  margin-left: 4px;
+  background: var(--caution-color);
+  border-color: var(--caution-color);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* 削除ボタン：ホバー */
+button.button_logDelete:hover {
   background-color: #fff;
   color: var(--caution-color);
 }
@@ -292,22 +332,46 @@ button#buttonClear:hover {
 
 /* カード */
 .card_status {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-
+  display: grid;
+  grid-template-columns: repeat(2, 480px);
+  grid-gap: 8px;
+  width: fit-content;
   padding: 4px;
 }
 
 /* ブロック */
 .card_status>.valueBlock {
+  justify-content: space-between;
   background-color: var(--sub-color);
-  min-width: 390px;
   margin: 0 !important;
   padding: 8px;
+  cursor: grab;
 }
 
+/* ブロック：一覧非表示 */
+.card_status>.valueBlock:nth-child(n + 9) {
+  background-color: #888;
+}
+
+/* 削除ボタン */
+button.button_statusDelete {
+  height: 100%;
+  background: var(--caution-color);
+  border-color: #fff;
+}
+
+/* 削除ボタン：ホバー */
+button.button_statusDelete:hover {
+  background-color: #fff;
+  color: var(--caution-color);
+}
+
+/* ソート元を半透明化 */
+.sortable-ghost {
+  opacity: 0.4;
+}
+
+/* 入力欄 */
 .valueBlock>input {
   width: 100px;
   height: 25px;
@@ -317,32 +381,17 @@ button#buttonClear:hover {
 }
 
 /* ステータス名 */
-.valueBlock>input.name {
+.valueBlock>input.status_name {
   margin-left: 0;
-  margin-right: auto;
+  margin-right: 16px;
 
   font-size: inherit;
   text-align: left;
 }
 
-/* / */
-.valueBlock>span.slash {
-  margin-left: 4px;
-  margin-right: 4px;
-
-  text-align: center;
-}
-
-/* 最大値 */
-[id^="status_max_"]:invalid {
-  opacity: 0.5;
-}
-
-/* ※ */
-.valueBlock>span.note {
-  margin-left: 4px;
-
-  font-size: 12px;
+/* 注釈エリア */
+.area_note {
+  margin-top: 16px;
 }
 
 /* -------------------------------------------------- */

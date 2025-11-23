@@ -4,6 +4,16 @@
 window.onload = function () {
     // サイト選択
     selectSite();
+
+    // ステータス並び替え
+    document.querySelectorAll('.card_status').forEach(card => {
+        new Sortable(card, {
+            group: 'statuses',
+            animation: 150,
+            swapThreshold: 0.65,
+            ghostClass: 'sortable-ghost',
+        });
+    });
 }
 
 // ====================================================================================================
@@ -21,14 +31,61 @@ let module;
 
 /**
  * ステータスの設定
+ *
+ * @param {number} id ステータス欄番号
+ * @param {string} name 名称
+ * @param {string} value 現在値
+ * @param {string} setMax 最大値
  */
 function setStatus(id, name, value, setMax = false) {
-    document.getElementById("status_name_" + id).value = name;
-    document.getElementById("status_value_" + id).value = value;
+    // 対象の取得
+    let target = document.querySelector('.card_status>.valueBlock:nth-child(' + id + ')');
+
+    target.querySelector('.status_name').value = name;
+    target.querySelector('.status_value').value = value;
 
     if (setMax) {
-        document.getElementById("status_max_" + id).value = value;
+        document.querySelector('.status_max').value = value;
     }
+}
+
+// ====================================================================================================
+// 読み込み履歴
+// ====================================================================================================
+
+/**
+ * [SET]読み込み履歴
+ *
+ * @param {object} value セットするデータ
+ */
+function setLoadLog(value) {
+    window.localStorage.setItem('loadLog', JSON.stringify(value));
+}
+
+/**
+ * [GET]読み込み履歴
+ *
+ * @returns {object} 読み込み履歴
+ */
+function getLoadLog() {
+    return JSON.parse(window.localStorage.getItem('loadLog'));
+}
+
+// ====================================================================================================
+// ステータス
+// ====================================================================================================
+
+/**
+ * ステータスの削除
+ * @param {HTMLElement} thisElement クリックされたボタン
+ */
+function statusReset(thisElement) {
+    const target = thisElement.parentElement;
+
+    target.querySelector('.status_name').value = "";
+    target.querySelector('.status_value').value = "";
+
+    target.querySelector('.status_max').value = "";
 }
 
 // ====================================================================================================
@@ -79,6 +136,12 @@ async function selectSite($this = null) {
     // --------------------------------------------------
 
     module = await import(`./${script}.js`);
+
+    // --------------------------------------------------
+    // 「読み込み履歴」表示
+    // --------------------------------------------------
+
+    module.showLoadLog();
 }
 
 /**
@@ -105,7 +168,7 @@ function toggleAcordion(targerId) {
 /**
  * 「読み込み」ボタン
  */
-async function buttonRead() {
+async function buttonRead(url = null) {
     // --------------------------------------------------
     // 「注意」を閉じる
     // --------------------------------------------------
@@ -124,23 +187,30 @@ async function buttonRead() {
     // --------------------------------------------------
 
     // 読み込み先ＵＲＬ
-    const url = getUrl(true);
+    if (url == null) {
+        url = getUrl(true);
+    }
 
     // 読み込み処理
     fetch(url, { method: 'GET' })
-        .then(response => {
-            // 失敗時
-            if (!response.ok) {
-                console.error('サーバーエラー');
-                return;
-            }
+        .then(
+            response => {
+                // 失敗時
+                if (!response.ok) {
+                    console.error('サーバーエラー');
+                    return;
+                }
 
-            // データを取得
-            return response.json();
-        })
+                // データを取得
+                return response.json();
+            }
+        )
         .then(data => {
+            // データをjson形式に変換
+            const dataJson = JSON.stringify(data);
+
             // セッションストレージにデータを保存
-            sessionStorage.setItem('data', JSON.stringify(data));
+            sessionStorage.setItem('data', dataJson);
 
             // キャラクター名の描画
             module.drawCharacterName(data);
@@ -170,6 +240,25 @@ async function buttonRead() {
 
             // エラーテキスト非表示
             document.getElementById("loadError").classList.add("hidden");
+
+            // 読み込み履歴の非表示
+            document.getElementById("loadLog").classList.add("hidden");
+
+            // --------------------------------------------------
+            // ログの保持
+            // --------------------------------------------------
+
+            // 既に保存されているログデータを取得
+            let loadListValue = getLoadLog();
+
+            // 取得できなかったら作る
+            if (!loadListValue) {
+                loadListValue = {};
+            }
+
+            // 今読み込んだデータをセット
+            loadListValue[url] = dataJson;
+            setLoadLog(loadListValue);
         })
         .catch(error => {
             console.dir(error);
@@ -179,7 +268,6 @@ async function buttonRead() {
 
             return;
         })
-
         .finally(() => {
             // --------------------------------------------------
             // ローディングOFF
@@ -211,6 +299,12 @@ function buttonClear() {
 
     // 「クリア」ボタンを非表示
     document.getElementById("buttonClear").classList.add("hidden");
+
+    // --------------------------------------------------
+    // 「読み込み履歴」を表示
+    // --------------------------------------------------
+
+    module.showLoadLog();
 }
 
 /**
@@ -429,6 +523,7 @@ async function showNaviText(targetId) {
 
 /**
  * 『平目』を一括切り替え
+ * @param {HTMLElement} thisElement 変更されたチェックボックス
  */
 function toggleFlat(thisElement) {
     // 全ての平目チェックボックスを操作
@@ -436,4 +531,45 @@ function toggleFlat(thisElement) {
     targets.forEach(target => {
         target.checked = thisElement.checked;
     })
+}
+
+/**
+ * 読み込み履歴から読み込み
+ * @param {HTMLElement} thisElement クリックされたボタン
+ */
+function logLoad(thisElement) {
+    // ＵＲＬの取得
+    const url = thisElement.parentElement.id;
+
+    // 読み込み処理
+    buttonRead(url);
+
+    // ＵＲＬの表示
+    let id = url;
+    id = id.replace(document.querySelector('[class^="displayLimit_"]:not(.hidden)>.urlPrefix').innerText, "")
+    id = id.replace(document.querySelector('[class^="displayLimit_"]:not(.hidden)>.urlSuffix').innerText, "")
+    document.querySelector('[class^="displayLimit_"]:not(.hidden)>.input_url').value = id;
+}
+
+/**
+ * 読み込み履歴の削除
+ * @param {HTMLElement} thisElement クリックされたボタン
+ */
+function logDelete(thisElement) {
+    // 既に保存されているログデータを取得
+    let loadListValue = getLoadLog();
+
+    // ありえないけど、取得できなかったら処理中断
+    if (!loadListValue) {
+        return;
+    }
+
+    // 対象を削除
+    delete loadListValue[thisElement.parentElement.id];
+
+    // ローカルストレージに保存し直す
+    setLoadLog(loadListValue);
+
+    // 要素を削除
+    thisElement.parentElement.remove();
 }
