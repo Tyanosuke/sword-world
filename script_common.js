@@ -34,18 +34,19 @@ let module;
  *
  * @param {number} id ステータス欄番号
  * @param {string} name 名称
- * @param {string} value 現在値
- * @param {string} setMax 最大値
+ * @param {number} value 現在値
+ * @param {boolean} setMax 最大値を表示するか
  */
 function setStatus(id, name, value, setMax = false) {
     // 対象の取得
     let target = document.querySelector('.card_status>.valueBlock:nth-child(' + id + ')');
 
     target.querySelector('.status_name').value = name;
+
     target.querySelector('.status_value').value = value;
 
     if (setMax) {
-        document.querySelector('.status_max').value = value;
+        target.querySelector('.status_max').value = value;
     }
 }
 
