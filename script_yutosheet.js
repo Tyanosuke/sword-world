@@ -849,7 +849,7 @@ export async function outputCharacter() {
     let listStatus = [];
     document.querySelectorAll(".card_status > .valueBlock").forEach(target => {
         // 名前を取得
-        const name = target.querySelector('[id^="status_name_"]').value;
+        const name = target.querySelector('.status_name').value;
         if (!name) {
             return;
         }
@@ -857,11 +857,11 @@ export async function outputCharacter() {
         // ステータス（名称・値）
         const status = {
             "label": name,
-            "value": target.querySelector('[id^="status_value_"]').value
+            "value": target.querySelector('.status_value').value
         }
 
         // ステータス（最大値）
-        const max = target.querySelector('[id^="status_max_"]').value;
+        const max = target.querySelector('.status_max').value;
         if (max) {
             status["max"] = max;
         }
