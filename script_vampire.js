@@ -549,21 +549,21 @@ const listRoll = [
             },
             {
                 name: "スカウト観察",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     { id: getClassId("スカウト") },
                 ]
             },
             {
                 name: "レンジャー観察",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     { id: getClassId("レンジャー") },
                 ]
             },
             {
                 name: "ライダー観察",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     {
                         id: getClassId("ライダー"),
@@ -578,14 +578,14 @@ const listRoll = [
             },
             {
                 name: "セージ知識",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     { id: getClassId("セージ") },
                 ]
             },
             {
                 name: "ライダー知識",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     {
                         id: getClassId("ライダー"),
@@ -595,7 +595,7 @@ const listRoll = [
             },
             {
                 name: "アルケミスト知識",
-                bonusId: "NB3",
+                bonusId: "NB5",
                 skill: [
                     {
                         id: getClassId("アルケミスト"),
