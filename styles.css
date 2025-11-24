@@ -297,6 +297,7 @@ button.button_logDelete {
   border-color: var(--caution-color);
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  font-size: 2em;
 }
 
 /* 削除ボタン：ホバー */
@@ -363,9 +364,13 @@ button.button_logDelete:hover {
 
 /* 削除ボタン */
 button.button_statusDelete {
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   background: var(--caution-color);
   border-color: #fff;
+  font-size: 2em;
 }
 
 /* 削除ボタン：ホバー */

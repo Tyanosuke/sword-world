@@ -388,12 +388,12 @@ function outputChatPallet(navi = true) {
                 // - 命中力
                 text +=
                     "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}+{命中＋}" + addValue
-                    + "　■" + weaponName + " / 命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
+                    + "　■" + weaponName + "/命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
                 // - ダメージ
                 text +=
                     "k" + valueRate + bonusKubikiri + "@" + (valueCritical + valueCriticalAdd)
                     + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメ＋}" + valueRateAdd
-                    + "　■" + weaponName + " / ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
+                    + "　■" + weaponName + "/ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
             }
             // ●魔法
             else if (typeMagic) {
@@ -422,7 +422,7 @@ function outputChatPallet(navi = true) {
                     // チャットコマンドを生成
                     text +=
                         "k" + valueRate + "@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}+{ダメ＋}"
-                        + "　■威力:" + valueRate + " / C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
+                        + "　■威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
                 });
             }
             // ●行為判定
