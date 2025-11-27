@@ -291,13 +291,15 @@ button.button_logLoad {
 
 /* 削除ボタン */
 button.button_logDelete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-width: 0;
   margin-left: 4px;
   background: var(--caution-color);
   border-color: var(--caution-color);
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  font-size: 2em;
 }
 
 /* 削除ボタン：ホバー */
@@ -366,6 +368,7 @@ button.button_logDelete:hover {
 button.button_statusDelete {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 36px;
   height: 36px;
   background: var(--caution-color);
