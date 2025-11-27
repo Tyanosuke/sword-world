@@ -370,7 +370,7 @@ button.button_statusDelete {
   height: 36px;
   background: var(--caution-color);
   border-color: #fff;
-  font-size: 2em;
+  font-size: 1em;
 }
 
 /* 削除ボタン：ホバー */
