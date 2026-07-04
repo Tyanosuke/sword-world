@@ -113,7 +113,6 @@ async function selectSite($this = null) {
         $this = document.getElementById("select_site");
     }
 
-    const id = $this.selectedOptions[0].id;
     let script = "script_vampire";
 
     // 各サイトごとの表示
