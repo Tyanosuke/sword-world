@@ -212,9 +212,6 @@ async function buttonRead(url = null) {
             // 出力エリアを表示
             document.querySelector(".output_area").classList.remove("hidden");
 
-            // 「読み込み」ボタンを非表示
-            document.getElementById("buttonRead").classList.add("hidden");
-
             // 「クリア」ボタンを表示
             document.getElementById("buttonClear").classList.remove("hidden");
 
@@ -269,10 +266,6 @@ function buttonClear() {
 
     // 出力エリアを表示
     document.querySelector(".output_area").classList.add("hidden");
-
-    // 「サイト」・「URL」入力欄を活性
-    document.getElementById("select_site").disabled = false;
-    document.querySelector(":not(.hidden) > .input_url").disabled = false;
 
     // 「読み込み」ボタンを表示
     document.getElementById("buttonRead").classList.remove("hidden");
