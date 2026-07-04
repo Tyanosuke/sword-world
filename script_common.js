@@ -115,20 +115,6 @@ async function selectSite($this = null) {
 
     let script = "script_vampire";
 
-    // 各サイトごとの表示
-    document.querySelectorAll('[class^="displayLimit_"]').forEach(target => {
-        // ●IDが一致する場合
-        if (target.classList.contains("displayLimit_" + id)) {
-            // 表示
-            target.classList.remove("hidden");
-        }
-        // ●それ以外の場合
-        else {
-            // 非表示
-            target.classList.add("hidden");
-        }
-    });
-
     // --------------------------------------------------
     // スクリプトモジュール切り替え
     // --------------------------------------------------
@@ -225,10 +211,6 @@ async function buttonRead(url = null) {
 
             // 出力エリアを表示
             document.querySelector(".output_area").classList.remove("hidden");
-
-            // 「サイト」・「URL」入力欄を非活性
-            document.getElementById("select_site").disabled = true;
-            document.querySelector(":not(.hidden) > .input_url").disabled = true;
 
             // 「読み込み」ボタンを非表示
             document.getElementById("buttonRead").classList.add("hidden");
