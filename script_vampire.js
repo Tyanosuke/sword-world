@@ -1301,74 +1301,13 @@ export function drawContents(data) {
                 cloneRoll = tempWeapon.content.cloneNode(true);
 
                 // カテゴリー
-                // - チェックボックス
-                cloneRoll.querySelector('input[type="checkbox"]').checked = true;
-                // - 武器名称
-                let dupFlag = false;
-                let name = roll.name;
-                if (!name) {
-                    dupFlag = true;
-                    name = prevWeapon.name + "(" + roll.usage + ")";
-                }
-                cloneRoll.querySelector(".weaponName").textContent = name;
-                // - 備考
-                let note = roll.note;
-                if (note) {
-                    cloneRoll.querySelector(".rollNote").textContent = note;
-                } else {
-                    cloneRoll.querySelector(".rollNote").classList.add("hidden");
-                }
-                // - 技能：名称
-                cloneRoll.querySelector(".valueBlock.level  > .name").textContent = listSkill[roll.skill];
-                // - 技能：レベル
-                cloneRoll.querySelector(".valueBlock.level > .value").textContent = data[roll.skill];
+                const dupFlag = drawCategory(cloneRoll, roll, data);
 
                 // 命中力
-                // - 能力値ボーナス：背景色
-                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus").classList.add(roll.hit.bonusId);
-                // - 能力値ボーナス：名称
-                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent = listStatus[roll.hit.bonusId];
-                // - 能力値ボーナス：値
-                cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data[roll.hit.bonusId];
-                // - 能力値ボーナス：ボーナス修正
-                let addHit = roll.hit.hitAdd;
-                if (
-                    addHit
-                    && addHit != 0
-                ) {
-                    if (Number(addHit) > 0) {
-                        addHit = "+" + addHit;
-                    }
-                    cloneRoll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent = addHit;
-                } else {
-                    cloneRoll.querySelector(".card_skill.hit .valueBlock.add").classList.add("hidden");
-                }
+                drawHit(cloneRoll, roll, data);
 
                 // ダメージ
-                // - 威力
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
-                let addRate = roll.damage.rateAdd;
-                if (Number(addRate) != 0) {
-                    if (Number(addRate) > 0) {
-                        addRate = "+" + addRate;
-                    }
-                    cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
-                }
-                // - Ｃ値
-                let addCritical = roll.damage.criticalAdd;
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = Number(roll.damage.critical) - Number(addCritical);
-                if (Number(addCritical) != 0) {
-                    if (Number(addCritical) > 0) {
-                        addCritical = "+" + addCritical;
-                    }
-                    cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent = addCritical;
-                }
-                // - 能力値ボーナス：背景色
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus").classList.add(roll.damage.bonusId);
-                // - 能力値ボーナス：名称
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent = listStatus[roll.damage.bonusId];
-                // - 能力値ボーナス：値
-                cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .value").textContent = data[roll.damage.bonusId];
+                drawDamage(cloneRoll, roll, data);
 
                 // 前の武器として保持する
                 if (!dupFlag) {
@@ -1426,13 +1365,13 @@ export function drawContents(data) {
                 // 能力値ボーナス：値
                 cloneRoll.querySelector(".valueBlock.bonus > .value").textContent = data[roll.bonusId];
 
-                // // 回避
+                // 回避
                 if (typeDodge) {
                     // 判定用classを不可
                     cloneRoll.firstElementChild.classList.add("dodge");
                 }
 
-                // - 備考
+                // 備考
                 let note = roll.note;
                 if (note) {
                     cloneRoll.querySelector(".rollNote").textContent = note;
@@ -1625,6 +1564,184 @@ export function drawContents(data) {
         // IDをインクリメント
         id++;
     });
+}
+
+/**
+ * 描画：カテゴリー
+ * @param {HTMLElement} cloneRoll テンプレートのクローン
+ * @param {Object} roll 判定情報
+ * @param {Object} data キャラクターシートデータ
+ * @param {Boolean} dupFlag 重複フラグ
+ */
+function drawCategory(cloneRoll, roll, data, dupFlag) {
+    // --------------------------------------------------
+    // チェックボックス
+    // --------------------------------------------------
+
+    // チェックを入れる
+    cloneRoll.querySelector('input[type="checkbox"]').checked = true;
+
+    // --------------------------------------------------
+    // 武器名称
+    // --------------------------------------------------
+
+    // 値を取得
+    let name = roll.name;
+
+    // ●値が無い
+    if (!name) {
+        // 重複フラグＯＮ
+        dupFlag = true;
+
+        // 名称に使用方法を付加
+        name = prevWeapon.name + "(" + roll.usage + ")";
+    }
+
+    // 描画
+    cloneRoll.querySelector(".weaponName").textContent = name;
+
+    // --------------------------------------------------
+    // 備考
+    // --------------------------------------------------
+
+    // 値を取得
+    let note = roll.note;
+
+    if (note) {
+        cloneRoll.querySelector(".rollNote").textContent = note;
+    } else {
+        cloneRoll.querySelector(".rollNote").classList.add("hidden");
+    }
+
+    // --------------------------------------------------
+    // 技能
+    // --------------------------------------------------
+
+    // 名称
+    cloneRoll.querySelector(".valueBlock.level  > .name").textContent = listSkill[roll.skill];
+
+    // レベル
+    cloneRoll.querySelector(".valueBlock.level > .value").textContent = data[roll.skill];
+
+    // --------------------------------------------------
+    // 戻り値
+    // --------------------------------------------------
+
+    // 重複フラグ
+    return dupFlag;
+}
+
+/**
+ * 描画：命中力
+ * @param {HTMLElement} cloneRoll テンプレートのクローン
+ * @param {Object} roll 判定情報
+ * @param {Object} data キャラクターシートデータ
+ */
+function drawHit(cloneRoll, roll, data) {
+    // --------------------------------------------------
+    // 能力値ボーナス
+    // --------------------------------------------------
+
+    // 背景色
+    cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus").classList.add(roll.hit.bonusId);
+
+    // 名称
+    cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .name").textContent = listStatus[roll.hit.bonusId];
+
+    // 値
+    cloneRoll.querySelector(".card_skill.hit .valueBlock.bonus > .value").textContent = data[roll.hit.bonusId];
+
+    // --------------------------------------------------
+    // ボーナス修正
+    // --------------------------------------------------
+
+    // 値を取得
+    let addHit = roll.hit.hitAdd;
+
+    // ●補正あり
+    if (
+        addHit
+        && addHit != 0
+    ) {
+        // 「+」を付加
+        if (Number(addHit) > 0) {
+            addHit = "+" + addHit;
+        }
+
+        // 描画
+        cloneRoll.querySelector(".card_skill.hit .valueBlock.add > .value").textContent = addHit;
+    }
+    // ●補正なし
+    else {
+        // 非表示
+        cloneRoll.querySelector(".card_skill.hit .valueBlock.add").classList.add("hidden");
+    }
+}
+
+/**
+ * 描画：ダメージ
+ * @param {HTMLElement} cloneRoll テンプレートのクローン
+ * @param {Object} roll 判定情報
+ * @param {Object} data キャラクターシートデータ
+ */
+function drawDamage(cloneRoll, roll, data) {
+    // --------------------------------------------------
+    // 威力
+    // --------------------------------------------------
+
+    // 描画
+    cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .value").textContent = roll.damage.rate;
+
+    // 補正値の描画
+    let addRate = roll.damage.rateAdd;
+    if (Number(addRate) != 0) {
+        // 「+」を付加
+        if (Number(addRate) > 0) {
+            addRate = "+" + addRate;
+        }
+
+        // 描画
+        cloneRoll.querySelector(".card_skill.damage .valueBlock.rate > .add").textContent = addRate;
+    }
+
+    // --------------------------------------------------
+    // Ｃ値
+    // --------------------------------------------------
+
+    // 値を取得
+    let addCritical = roll.damage.criticalAdd;
+
+    // 描画
+    cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .value").textContent = Number(roll.damage.critical) - Number(addCritical);
+
+    // 補正値の描画
+    if (Number(addCritical) != 0) {
+        // 「+」を付加
+        if (Number(addCritical) > 0) {
+            addCritical = "+" + addCritical;
+        }
+
+        // 描画
+        cloneRoll.querySelector(".card_skill.damage .valueBlock.critical > .add").textContent = addCritical;
+    }
+
+    // --------------------------------------------------
+    // 能力値ボーナス：背景色
+    // --------------------------------------------------
+
+    cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus").classList.add(roll.damage.bonusId);
+
+    // --------------------------------------------------
+    // 能力値ボーナス：名称
+    // --------------------------------------------------
+
+    cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .name").textContent = listStatus[roll.damage.bonusId];
+
+    // --------------------------------------------------
+    // 能力値ボーナス：値
+    // --------------------------------------------------
+
+    cloneRoll.querySelector(".card_skill.damage .valueBlock.bonus > .value").textContent = data[roll.damage.bonusId];
 }
 
 /**
