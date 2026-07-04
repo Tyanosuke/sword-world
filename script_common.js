@@ -114,17 +114,7 @@ async function selectSite($this = null) {
     }
 
     const id = $this.selectedOptions[0].id;
-    let script = "";
-    switch (id) {
-        // ●ゆとシート
-        case "ytsheet":
-            script = "script_yutosheet";
-            break;
-        // ●キャラクター保管所
-        case "vampire-blood":
-            script = "script_vampire";
-            break;
-    }
+    let script = "script_vampire";
 
     // 各サイトごとの表示
     document.querySelectorAll('[class^="displayLimit_"]').forEach(target => {
@@ -388,12 +378,12 @@ function outputChatPallet(navi = true) {
                 // - 命中力
                 text +=
                     "2d6+{" + nameSkill + "}+{" + nameBonusHit + "}+{命中＋}" + addValue
-                    + "　■" + weaponName + "/命中力(" + nameSkill + "+" + nameBonusHit + ")\r";
+                    + "　【" + weaponName + "】命中力\\n→" + nameSkill + "+" + nameBonusHit + "\r";
                 // - ダメージ
                 text +=
                     "k" + valueRate + bonusKubikiri + "@" + (valueCritical + valueCriticalAdd)
                     + "+{" + nameSkill + "}+{" + nameBonusDamage + "}+{ダメ＋}" + valueRateAdd
-                    + "　■" + weaponName + "/ダメージ(" + nameSkill + "+" + nameBonusDamage + ")\r";
+                    + "　【" + weaponName + "】ダメージ\\n→" + nameSkill + "+" + nameBonusDamage + "\r";
             }
             // ●魔法
             else if (typeMagic) {
@@ -422,7 +412,7 @@ function outputChatPallet(navi = true) {
                     // チャットコマンドを生成
                     text +=
                         "k" + valueRate + "@" + valueCritical + "+{" + nameSkill + "}+{" + nameBonus + "}+{ダメ＋}"
-                        + "　■威力:" + valueRate + "/C値:" + valueCritical + "(" + nameSkill + "+" + nameBonus + ")\r";
+                        + "　【威力:" + valueRate + "/C値:" + valueCritical + "】\\n→" + nameSkill + "+" + nameBonus + "\r";
                 });
             }
             // ●行為判定
@@ -440,7 +430,7 @@ function outputChatPallet(navi = true) {
                     if (valueAddName != "") {
                         valueAddName += " ";
                     }
-                    valueAddName += "※" + targetAddName.textContent;
+                    valueAddName += targetAddName.textContent;
                 }
                 let valueAdd = "";
                 const targetAdd = roll.querySelector('.valueBlock.add > .value');
@@ -470,7 +460,7 @@ function outputChatPallet(navi = true) {
                         if (valueAddName != "") {
                             valueAddName += " ";
                         }
-                        valueAddName += "※" + nameCondition.textContent;
+                        valueAddName += nameCondition.textContent;
                     }
 
                     // 回避
@@ -483,10 +473,9 @@ function outputChatPallet(navi = true) {
                     if (!skill.classList.contains("flat")) {
                         text +=
                             "2d6+{" + nameSkill + "}+{" + nameBonus + "}" + addDodge + valueAdd
-                            + "　■" + nameRoll + "(" + nameSkill + "+" + nameBonus + ")" + valueAddName + "\r";
+                            + "　【" + nameRoll + "】" + valueAddName + "\\n→" + nameSkill + "+" + nameBonus + "\r";
                     } else {
-                        // チャットコマンドを生成
-                        text += "2d6" + valueAdd + "　■" + nameRoll + "(平目)" + valueAddName + "\r";
+                        text += "2d6" + valueAdd + "　【" + nameRoll + "】" + valueAddName + "\\n→平目\r";
                     }
                 });
             }
